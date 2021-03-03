@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<body>
+            <div layout:fragment="titleOfThePage"
+                class="c-navbar__title u-mr-auto">
+                Liste des utilisateurs
+            </div>
+    
+            <div layout:fragment="content"
+                class="container u-mb-large">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="c-table-responsive@desktop">
+                                <table class="c-table">
+                                    <div class="c-table__title">
+                                        Total <small>32 Utilisateurs</small>
+                                        <a class="c-btn c-btn--success" href="#">
+                                            <i class="fa fa-plus u-text-small u-opacity-medium u-mr-xsmall"></i>Nouvel utilisateur
+                                        </a>
+                                    </div>
+                                    <thead class="c-table__head c-table__head--slim">
+                                        <tr class="c-table__row">
+                                            <th class="c-table__cell c-table__cell--head">Nom & prénom</th>
+                                            <th class="c-table__cell c-table__cell--head">Identifiant</th>
+                                            <th class="c-table__cell c-table__cell--head">Da de création</th>
+                                            <th class="c-table__cell c-table__cell--head">Email</th>
+                                            <th class="c-table__cell c-table__cell--head">Status</th>
+                                            <th class="c-table__cell c-table__cell--head">Actions</th>
+                                        </tr>
+                                    </thead>
+        
+                                    <tbody>
+                                        <tr th:each="user: ${listUsers}"
+                                            class="c-table__row">
+                                            <td class="c-table__cell c-table__cell--img o-media">
+        
+                                                <div class="o-media__img u-mr-xsmall">
+                                                    <img src="img/user.png" style="width:56px;" alt="Confide's App Icon">
+                                                </div>
+        
+                                                <div class="o-media__body" th:inline="text" >
+                                                    [[${user.lastName}]]
+                                                    <span class="u-block u-text-mute u-text-xsmall" th:text="${user.firstName}">Prénom</span>
+                                                </div>
+                                            </td>
+        
+                                            <td class="c-table__cell">
+                                                <span class="u-block u-text-mute u-text-xsmall" th:text="${user.id}">ID</span>
+                                            </td>
+                                            <td class="c-table__cell">
+                                                <span class="u-block u-text-mute u-text-xsmall"th:text="${user.createdAt}" >Création</span>
+                                            </td>
+                                            <td class="c-table__cell" th:text="${user.email}">Email</td>
+                                            <td class="c-table__cell"><span class="c-badge c-badge--success">Actif</span></td>
+        
+                                            <td class="c-table__cell">
+                                                <ul class="u-flex u-justify-between">
+                                                    <li class="u-text-large">
+                                                        <a class="u-text-mute" href="#"><i class="fa fa-edit"></i></a>
+                                                    </li>
+                                                    <li class="u-text-large">
+                                                        <a class="u-text-mute" href="#"><i class="fa fa-trash"></i></a>
+                                                    </li>
+                                                    <li class="u-text-large">
+                                                        <a class="u-text-mute" href="#"><i class="fa fa-share-square-o"></i></a>
+                                                    </li>
+                                                    <li class="u-text-large">
+                                                        <a class="u-text-mute" href="#"><i class="fa fa-repeat"></i></a>
+                                                    </li>
+                                                    <li class="u-text-large">
+                                                        <a class="u-text-mute" href="#"><i class="fa fa-bar-chart"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table><!-- // .c-table -->
+                            </div>
+                        </div>
+                    </div><!-- // .row -->
+                </div><!-- // .container -->
+
+
+</body>
+</html>

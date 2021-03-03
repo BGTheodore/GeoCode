@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SpringBoot AdminLTE2</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+ </head>
+    <body >
+      <h1>Layout is there tonton</h1>
+
+      <header class="main-header">
+        <div th:replace="~{fragments/header :: header}"></div>
+       </header>
+       
+       <section class="content-header" layout:fragment="header"></section>
+        <!-- <div th:replace="fragments/header"></div> -->
+
+        <!-- <section class="content-header" layout:fragment="header"></section> -->
+        <!-- <div layout:fragment="content"></div> -->
+        <div layout:fragment="content"></div>
+        <div th:replace="fragments/footer"></div>
+    </body>
+</html>
