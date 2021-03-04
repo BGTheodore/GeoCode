@@ -2,7 +2,7 @@
     class="o-page__sidebar js-page-sidebar">
     <div class="c-sidebar">
         <a class="c-sidebar__brand" href="#">
-            <img class="c-sidebar__brand-img" src="img/logo.png" alt="Logo"> Dashboard
+            <img class="c-sidebar__brand-img" th:src="@{/img/logo.png}" alt="Logo"> Dashboard
         </a>
         
         <h4 class="c-sidebar__title">Dashboards</h4>
@@ -164,20 +164,25 @@
         <h4 class="c-sidebar__title">Account</h4>
         <ul class="c-sidebar__list">
             <li class="c-sidebar__item">
-                <a class="c-sidebar__link" target="_blank" href="account-details.html">
+                <a class="c-sidebar__link" href="candidates.html"  >
                     <i class="fa fa-user-circle u-mr-xsmall"></i>Account Details
+                </a>
+            </li>
+            <li class="c-sidebar__item">
+                <a class="c-sidebar__link" th:href="@{/list_users}">
+                    <i class="fa fa-users u-mr-xsmall"></i>Utilisateurs
+                </a>
+            </li>
+
+            <li class="c-sidebar__item">
+                <a class="c-sidebar__link"  th:href="@{/register}">
+                    <i class="fa fa-user-plus u-mr-xsmall"></i>Register
                 </a>
             </li>
 
             <li class="c-sidebar__item">
                 <a class="c-sidebar__link is-active" href="account-settings.html">
                     <i class="fa fa-cog u-mr-xsmall"></i>Account Settings
-                </a>
-            </li>
-
-            <li class="c-sidebar__item">
-                <a class="c-sidebar__link" target="_blank" href="register.html">
-                    <i class="fa fa-user-plus u-mr-xsmall"></i>Register
                 </a>
             </li>
 

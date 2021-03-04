@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -47,8 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // ------ A DELETE FOR SECURITY REASON -------------
         // http.csrf().disable();
         // ------ FIN A DELETE FOR SECURITY REASON -------------
+
+        //lè gen plus ke 27KB data wap render e ki pat nan sessio
+        http.sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        
         http.authorizeRequests()
         .antMatchers("/list_users").authenticated()
+        .antMatchers("/register").authenticated()
         .anyRequest().permitAll()
         .and()
         .formLogin()

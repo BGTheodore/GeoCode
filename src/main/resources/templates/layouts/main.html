@@ -12,15 +12,16 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
 
         <!-- Favicon -->
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" th:href="@{/apple-touch-icon.png}">
+        <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
 
         <!-- Stylesheet -->
-        <link rel="stylesheet" href="css/main.min.css">
+        <link rel="stylesheet" th:href="@{/css/main.min.css}">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-       <!-- Main javascsript -->
-       <script src="js/main.min.js"></script>
+     <!-- --DATATABLE -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
+
     <title>Geotech</title>
 </head>
 <body class="o-page">
@@ -30,5 +31,12 @@
         <div layout:fragment="content"></div>
     </main>
     <div th:replace="fragments/footer"></div>
+
+    <!-- Main javascsript -->
+    <script th:src="@{/js/main.min.js}"></script>
+    <!-- --DATATABLE -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+
 </body>
 </html>

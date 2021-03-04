@@ -31,7 +31,7 @@
                                             <div class="col-lg-5">
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="firstName">Prénom</label> 
-                                                    <input class="c-input" type="text" id="firstName" placeholder="Jason" required th:field="*{firstName}"> 
+                                                    <input class="c-input" type="text" id="firstName" placeholder="Jason"  th:field="*{firstName}"> 
                                                 </div>
 
                                                 <div class="c-field u-mb-small">
@@ -43,10 +43,10 @@
                                                     <label class="c-field__label" for="select1">Sexe</label>
                             
                                                     <!-- Select2 jquery plugin is used -->
-                                                    <select class="c-select" id="select1">
-                                                        <option>Homme</option>
-                                                        <option>Femme</option>
-                                                        <option>Autre</option>
+                                                    <select class="c-select" id="select1" th:field="*{sexe}">
+                                                        <option th:value="1">Homme</option>
+                                                        <option th:value="2">Femme</option>
+                                                        <option th:value="3">Autre</option>
                                                     </select>
                                                 </div>
                             
@@ -60,18 +60,18 @@
                                                     <label class="c-field__label" for="tel">Téléphone</label>
                                                     <input class="c-input" id="tel" type="text" placeholder="+509 36870473" required >
                                                 </div>
-
-                                                <div class="c-field u-mb-medium">
-                                                    <label class="c-field__label" for="select2">Niveau d'accès</label>
-                                                    <!-- Select2 jquery plugin is used -->
-                                                    <select class="c-select has-search" id="select">
-                                                        <option>Administrateur</option>
-                                                        <option>Super Administrateur</option>
-                                                    </select>
-                                                </div>
                                             </div>
 
                                             <div class="col-lg-5">
+                                                <div class="c-field u-mb-medium">
+                                                    <label class="c-field__label" for="select2">Niveau d'accès</label>
+                                                    <!-- Select2 jquery plugin is used -->
+                                                    <select class="c-select has-search" id="select" th:field="*{role}">
+                                                        <option th:value="1">Administrateur</option>
+                                                        <option th:value="0">Super Administrateur</option>
+                                                    </select>
+                                                </div>
+                                                
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="password">Mot de passe</label>
                                                     <input class="c-input" id="password" type="password" th:field="*{password}">

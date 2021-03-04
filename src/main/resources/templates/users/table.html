@@ -12,10 +12,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="c-table-responsive@desktop">
-                                <table class="c-table">
+                                <table id='myTable'  class="c-table">
                                     <div class="c-table__title">
                                         Total <small>32 Utilisateurs</small>
-                                        <a class="c-btn c-btn--success" href="#">
+                                        <a class="c-btn c-btn--success" th:href="@{/register}">
                                             <i class="fa fa-plus u-text-small u-opacity-medium u-mr-xsmall"></i>Nouvel utilisateur
                                         </a>
                                     </div>
@@ -57,13 +57,10 @@
                                             <td class="c-table__cell">
                                                 <ul class="u-flex u-justify-between">
                                                     <li class="u-text-large">
-                                                        <a class="u-text-mute" href="#"><i class="fa fa-edit"></i></a>
+                                                        <a class="u-text-mute" th:href="@{/edit/{id}(id=${user.id})}"><i class="fa fa-edit"></i></a>
                                                     </li>
                                                     <li class="u-text-large">
-                                                        <a class="u-text-mute" href="#"><i class="fa fa-trash"></i></a>
-                                                    </li>
-                                                    <li class="u-text-large">
-                                                        <a class="u-text-mute" href="#"><i class="fa fa-share-square-o"></i></a>
+                                                        <a class="u-text-mute" th:href="@{/delete/{id}(id=${user.id})}"><i class="fa fa-trash" onclick="return confirm('Confirmer la suppression ')"></i></a>
                                                     </li>
                                                     <li class="u-text-large">
                                                         <a class="u-text-mute" href="#"><i class="fa fa-repeat"></i></a>
@@ -81,6 +78,31 @@
                     </div><!-- // .row -->
                 </div><!-- // .container -->
 
-
+                <script>
+                    $(document).ready(function()
+                    {
+                        $('#myTable').DataTable({  
+                            // alert('okokok');
+                            select:true,
+                            "language": {
+                            "lengthMenu": "Voir _MENU_ lignes par page",
+                            "zeroRecords": "Aucune information",
+                            "info": "_PAGE_ sur _PAGES_",
+                            "infoEmpty": "Aucun résultat trouvé",
+                            "infoFiltered": "(filtre de _MAX_ total résultats)",
+                            "search": "Rechercher",
+                            "paginate":{
+                            "previous":"Précedent",
+                            "next":"Suivant"
+                            }
+                
+                
+                        },
+                        buttons:['selectRows']
+                    }
+                
+                        );
+                    });
+                </script>
 </body>
 </html>

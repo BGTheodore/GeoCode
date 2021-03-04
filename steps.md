@@ -52,17 +52,20 @@ https://www.youtube.com/watch?v=hxiWXe5oMrI
 13. [] Test with Postman
 14. [] Create CustomUserDetails, CustomUserDetailsServices, WebSecurityConfig
 
-<<<<<<<Spring Boot Database Migrations with Flyway>>>>>>>
+<<<<<<<Validation request boby>>>>>>>
 1.  []
 2.  []
 3.  []
-<<<<<<<Create User Login & Registration with Spring Security>>>>>>>
-1.  []
-2.  []
-3.  []
-
+https://www.youtube.com/watch?v=pjA9Pc7aTic
 
 
 
 
 https://medium.com/@tariqul.islam.rony/spring-boot-with-visual-studio-code-visual-studio-code-part-2-7943febb52f8
+
+
+Logic conception:
+https://medium.com/sprang/validation-and-exception-handling-with-spring-ba44b3ee0723
+
+image logik la:
+https://www.toptal.com/java/spring-boot-rest-api-error-handling
