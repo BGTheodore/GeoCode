@@ -6,10 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import com.example.geotech.Entities.User;
+import com.example.geotech.Exception.ResourceNotFoundException;
 import com.example.geotech.Repositories.UserRepositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,25 +17,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private UserRepositories userRepository;
 
-    @GetMapping("")
-    public String viewHomePAge() {
-        return "users/index";
-    }
-
-    @GetMapping(value = "/users/{id}")
-    ResponseEntity<User> getById(@PathVariable("id") @Min(1) Long id) {
-
-        User user = userRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+    @GetMapping("/{id}")
+    public User getById(@PathVariable("id") @Min(1) Long id) {
+        return this.userRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User not found with id :" + id));
         
-        return ResponseEntity.ok().body(user);
     }
 
     @GetMapping("/register")
@@ -44,7 +39,8 @@ public class UserController {
         return "users/create";
     }
 
-    @PostMapping("/process_register")
+    //Create a user
+    @PostMapping
     public String processRegistration(@Valid User user, RedirectAttributes redirAttrs,
     BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -93,7 +89,7 @@ public class UserController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
         redirAttrs.addFlashAttribute("success", "Opération réussie !");
-        return "redirect:/list_users";
+        return "redirect:/api/users/list_users";
     }
 
 }

@@ -19,87 +19,87 @@
 
                             <div class="c-tabs__content tab-content" id="nav-tabContent">
                                 <div class="c-tabs__pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                    <form  th:action="@{/update/{id}(id=${user.id})}"  method="POST"
+                                    <form  th:action="@{/api/users/update/{id}(id=${user.id})}"  method="POST"
                                     th:object="${user}" class="row">
-                                            <div class="col-lg-2 u-text-center">
-                                                <div class="c-avatar c-avatar--xlarge u-inline-block">
-                                                    <img class="c-avatar__img" th:src="@{/img/avatar-200.jpg}" alt="Avatar">
-                                                </div>
-
-                                                <a class="u-block u-color-primary" href="#">Avatar</a>
-                                            </div>
-                                            <div class="col-lg-5">
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="firstName">Prénom</label> 
-                                                    <input class="c-input" type="text" id="firstName" placeholder="Jason" required th:field="*{firstName}"> 
-                                                </div>
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="lastName">Nom</label> 
-                                                    <input class="c-input" type="text" id="lastName" placeholder="Clark" required th:field="*{lastName}"> 
-                                                </div>
-
-                                                <div class="c-field u-mb-medium">
-                                                    <label class="c-field__label" for="select1">Sexe</label>
-                            
-                                                    <!-- Select2 jquery plugin is used -->
-                                                    <select class="c-select" id="select1">
-                                                        <option>Homme</option>
-                                                        <option>Femme</option>
-                                                        <option>Autre</option>
-                                                    </select>
-                                                </div>
-                            
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="email">Email</label>
-                                                    <input class="c-input" id="email" type="email" placeholder="jason@clark.com" required th:field="*{email}">
-                                                </div>
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="tel">Téléphone</label>
-                                                    <input class="c-input" id="tel" type="text" placeholder="+509 36870473" required >
-                                                </div>
+                                        <div class="col-lg-2 u-text-center">
+                                            <div class="c-avatar c-avatar--xlarge u-inline-block">
+                                                <img class="c-avatar__img" src="img/avatar-200.jpg" alt="Avatar">
                                             </div>
 
-                                            <div class="col-lg-5">
-                                                <div class="c-field u-mb-medium">
-                                                    <label class="c-field__label" for="select2">Niveau d'accès</label>
-                                                    <!-- Select2 jquery plugin is used -->
-                                                    <select class="c-select has-search" id="select">
-                                                        <option>Administrateur</option>
-                                                        <option>Super Administrateur</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="password">Mot de passe</label>
-                                                    <input class="c-input" id="password" type="password" th:field="*{password}">
-                                                </div>
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="adresse">Adresse</label>
-                                                    <input class="c-input" id="adresse" type="text" placeholder="41, Rue du Gouvernement">
-                                                </div>
-
-                                                <div class="c-field u-mb-small">
-                                                    <label class="c-field__label" for="website">Website</label>
-                                                    <input class="c-input" id="website" type="text" placeholder="zawiastudio.com">
-                                                </div>  
-
-                                                <label class="c-field__label" for="socialProfile">Nom de la compagnie</label>
-
-                                                <div class="c-field has-addon-left u-mb-small">
-                                                    <span class="c-field__addon u-bg-twitter">
-                                                        <i class="fa fa-plus u-color-white"></i>
-                                                    </span>
-                                                    <input class="c-input" id="socialProfile" type="text" placeholder="URgéo">
-                                                </div>
-
-                                                <div class="c-field has-addon-left">
-                                                    <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Ajouter</button>
-                                                </div>
+                                            <a class="u-block u-color-primary" href="#">Avatar</a>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="firstName">Prénom</label> 
+                                                <input class="c-input" type="text" id="firstName" placeholder="Jason"  th:field="*{firstName}"> 
                                             </div>
+
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="lastName">Nom</label> 
+                                                <input class="c-input" type="text" id="lastName" placeholder="Clark" required th:field="*{lastName}"> 
+                                            </div>
+
+                                            <div class="c-field u-mb-medium">
+                                                <label class="c-field__label" for="select1">Sexe</label>
+                        
+                                                <!-- Select2 jquery plugin is used -->
+                                                <select class="c-select" id="select1" th:field="*{sexe}">
+                                                    <option th:value="1">Homme</option>
+                                                    <option th:value="2">Femme</option>
+                                                    <option th:value="3">Autre</option>
+                                                </select>
+                                            </div>
+                        
+
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="email">Email</label>
+                                                <input class="c-input" id="email" type="email" placeholder="jason@clark.com" required th:field="*{email}">
+                                            </div>
+
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="tel">Téléphone</label>
+                                                <input class="c-input" id="tel" type="text" placeholder="+509 36870473" required >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5">
+                                            <div class="c-field u-mb-medium">
+                                                <label class="c-field__label" for="select2">Niveau d'accès</label>
+                                                <!-- Select2 jquery plugin is used -->
+                                                <select class="c-select has-search" id="select" th:field="*{role}">
+                                                    <option th:value="1">Administrateur</option>
+                                                    <option th:value="0">Super Administrateur</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="password">Mot de passe</label>
+                                                <input class="c-input" id="password" type="password" th:field="*{password}">
+                                            </div>
+
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="adresse">Adresse</label>
+                                                <input class="c-input" id="adresse" type="text" placeholder="41, Rue du Gouvernement">
+                                            </div>
+
+                                            <div class="c-field u-mb-small">
+                                                <label class="c-field__label" for="website">Website</label>
+                                                <input class="c-input" id="website" type="text" placeholder="zawiastudio.com">
+                                            </div>  
+
+                                            <label class="c-field__label" for="socialProfile">Nom de la compagnie</label>
+
+                                            <div class="c-field has-addon-left u-mb-small">
+                                                <span class="c-field__addon u-bg-twitter">
+                                                    <i class="fa fa-plus u-color-white"></i>
+                                                </span>
+                                                <input class="c-input" id="socialProfile" type="text" placeholder="URgéo">
+                                            </div>
+
+                                            <div class="c-field has-addon-left">
+                                                <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Ajouter</button>
+                                            </div>
+                                        </div>
                                     </form>
                                   
                                 </div>

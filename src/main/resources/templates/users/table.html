@@ -36,7 +36,7 @@
                                             <td class="c-table__cell c-table__cell--img o-media">
         
                                                 <div class="o-media__img u-mr-xsmall">
-                                                    <img src="img/user.png" style="width:56px;" alt="Confide's App Icon">
+                                                    <img th:src="@{/img/user.png}" style="width:56px;" alt="User">
                                                 </div>
         
                                                 <div class="o-media__body" th:inline="text" >
@@ -57,10 +57,10 @@
                                             <td class="c-table__cell">
                                                 <ul class="u-flex u-justify-between">
                                                     <li class="u-text-large">
-                                                        <a class="u-text-mute" th:href="@{/edit/{id}(id=${user.id})}"><i class="fa fa-edit"></i></a>
+                                                        <a class="u-text-mute" th:href="@{/api/users/edit/{id}(id=${user.id})}"><i class="fa fa-edit"></i></a>
                                                     </li>
                                                     <li class="u-text-large">
-                                                        <a class="u-text-mute" th:href="@{/delete/{id}(id=${user.id})}"><i class="fa fa-trash" onclick="return confirm('Confirmer la suppression ')"></i></a>
+                                                        <a class="u-text-mute" th:href="@{/api/users/delete/{id}(id=${user.id})}"><i class="fa fa-trash" onclick="return confirm('Confirmer la suppression ')"></i></a>
                                                     </li>
                                                     <li class="u-text-large">
                                                         <a class="u-text-mute" href="#"><i class="fa fa-repeat"></i></a>

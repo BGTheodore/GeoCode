@@ -19,7 +19,7 @@
 
                             <div class="c-tabs__content tab-content" id="nav-tabContent">
                                 <div class="c-tabs__pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                    <form th:action="@{/process_register}" method="POST"
+                                    <form th:action="@{/api/users}" method="POST"
                                     th:object="${user}" class="row">
                                             <div class="col-lg-2 u-text-center">
                                                 <div class="c-avatar c-avatar--xlarge u-inline-block">
