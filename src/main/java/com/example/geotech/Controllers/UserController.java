@@ -41,18 +41,22 @@ public class UserController {
 
     //Create a user
     @PostMapping
-    public String processRegistration(@Valid User user, RedirectAttributes redirAttrs,
-    BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
-            return "redirect:/users/create";
-        }
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
-        redirAttrs.addFlashAttribute("success", "Opération réussie !");
-        return "redirect:/list_users";
+    public String processRegistration(@Valid User user, BindingResult result, RedirectAttributes redirAttrs) {
+        if (result.hasErrors()) {
+			redirAttrs.addFlashAttribute("error", "Opération échoué !");
+            return "redirect:/api/users/list_users";
+		}
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodedPassword = encoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+            redirAttrs.addFlashAttribute("success", "Opération réussie !");
+            return "redirect:/api/users/list_users";
+    
+            // System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+            // return "redirect:/users/create";
+        
+       
     }
 
     @GetMapping("list_users")

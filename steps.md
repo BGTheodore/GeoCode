@@ -69,3 +69,6 @@ https://medium.com/sprang/validation-and-exception-handling-with-spring-ba44b3ee
 
 image logik la:
 https://www.toptal.com/java/spring-boot-rest-api-error-handling
+
+exemple prog:
+https://github.com/RameshMF/todo-management-spring-boot/blob/master/src/main/java/net/guides/springboot/todomanagement/controller/TodoController.java
