@@ -3,7 +3,7 @@ package com.example.geotech;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.geotech.Entities.User;
-import com.example.geotech.Repositories.UserRepositories;
+import com.example.geotech.Repositories.UserRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.test.annotation.Rollback;
 @Rollback(false)
 public class UserRepositoryTests {
     @Autowired
-    private UserRepositories userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private TestEntityManager testEntityManager;

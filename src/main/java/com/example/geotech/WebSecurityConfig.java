@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         // ------ A DELETE FOR SECURITY REASON -------------
-        // http.csrf().disable();
+        http.csrf().disable();
         // ------ FIN A DELETE FOR SECURITY REASON -------------
 
         //lè gen plus ke 27KB data wap render e ki pat nan sessio

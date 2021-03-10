@@ -23,7 +23,7 @@
                                     th:object="${user}" class="row">
                                             <div class="col-lg-2 u-text-center">
                                                 <div class="c-avatar c-avatar--xlarge u-inline-block">
-                                                    <img class="c-avatar__img" src="img/avatar-200.jpg" alt="Avatar">
+                                                    <img class="c-avatar__img" th:src="@{/img/avatar-200.jpg}"  alt="Avatar">
                                                 </div>
 
                                                 <a class="u-block u-color-primary" href="#">Avatar</a>
@@ -31,12 +31,14 @@
                                             <div class="col-lg-5">
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="firstName">Prénom</label> 
-                                                    <input class="c-input" type="text" id="firstName" placeholder="Jason"  th:field="*{firstName}"> 
+                                                    <input class="c-input" type="text" id="firstName" placeholder="Jason"  required th:field="*{firstName}"> 
+                                                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"></div>
                                                 </div>
 
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="lastName">Nom</label> 
                                                     <input class="c-input" type="text" id="lastName" placeholder="Clark" required th:field="*{lastName}"> 
+                                                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></div>
                                                 </div>
 
                                                 <div class="c-field u-mb-medium">
@@ -48,17 +50,20 @@
                                                         <option th:value="2">Femme</option>
                                                         <option th:value="3">Autre</option>
                                                     </select>
+                                                    <div th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}" class="alert alert-danger"></div>
                                                 </div>
                             
 
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="email">Email</label>
                                                     <input class="c-input" id="email" type="email" placeholder="jason@clark.com" required th:field="*{email}">
+                                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></div>
                                                 </div>
 
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="tel">Téléphone</label>
-                                                    <input class="c-input" id="tel" type="text" placeholder="+509 36870473" required >
+                                                    <input class="c-input" id="tel" type="text" placeholder="+509 36870473" required th:field="*{phone}">
+                                                    <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="alert alert-danger"></div>
                                                 </div>
                                             </div>
 
@@ -70,16 +75,19 @@
                                                         <option th:value="1">Administrateur</option>
                                                         <option th:value="0">Super Administrateur</option>
                                                     </select>
+                                                    <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="alert alert-danger"></div>
                                                 </div>
                                                 
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="password">Mot de passe</label>
                                                     <input class="c-input" id="password" type="password" th:field="*{password}">
+                                                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></div>
                                                 </div>
 
                                                 <div class="c-field u-mb-small">
                                                     <label class="c-field__label" for="adresse">Adresse</label>
-                                                    <input class="c-input" id="adresse" type="text" placeholder="41, Rue du Gouvernement">
+                                                    <input class="c-input" id="adresse" type="text" placeholder="41, Rue du Gouvernement" th:field="*{address}">
+                                                    <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></div>
                                                 </div>
 
                                                 <div class="c-field u-mb-small">
