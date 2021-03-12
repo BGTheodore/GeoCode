@@ -1,6 +1,9 @@
 package com.example.geotech.Controllers;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import com.example.geotech.Entities.User;
 import com.example.geotech.Repositories.UserRepository;
@@ -30,7 +33,7 @@ public class UserController {
     //Create a user
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> createNewUser(@RequestBody User user) {
+    public ResponseEntity<User> createNewUser(@Valid @RequestBody User user) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(user.getPassword());
             user.setPassword(encodedPassword);            
@@ -44,11 +47,15 @@ public class UserController {
         return ResponseEntity.ok().body(userService.listAllUsers());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<User>> getUser(@PathVariable Long id){
+        return ResponseEntity.ok().body(userService.getUser(id));
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long id) {
-        System.out.println("{{{{{{{{{{");
-    return ResponseEntity.ok().body(userService.updateUser(id, user));
+        return ResponseEntity.ok().body(userService.updateUser(id, user));
     }
 
     @DeleteMapping("/{id}")

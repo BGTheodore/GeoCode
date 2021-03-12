@@ -39,5 +39,14 @@ public class UserService {
         userRepository.deleteById(id);
         }
         }
+
+    public Optional<User> getUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (!userOptional.isPresent()) {
+        throw new ResourceNotFoundException("User not found with id :" + id);
+        } else {
+        return userOptional;
+        }
+    }
 }
 

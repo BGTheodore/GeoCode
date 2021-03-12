@@ -34,6 +34,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
+    // @Pattern(regexp = "^[ABC]$", message = "Must be either A, B or C")
     @Column(nullable = false, length = 100)
     private String password;
 
