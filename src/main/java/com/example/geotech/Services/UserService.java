@@ -27,7 +27,8 @@ public class UserService {
         if (!userOptional.isPresent()) {
         throw new ResourceNotFoundException("User not found with id :" + id);
         } else {
-        return userRepository.save(user);
+            user.setId(id);
+            return userRepository.save(user);
         }
         }
 

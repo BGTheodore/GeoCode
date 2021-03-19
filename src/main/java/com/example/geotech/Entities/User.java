@@ -11,17 +11,23 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at is NULL")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,23 +43,23 @@ public class User {
     // @Pattern(regexp = "^[ABC]$", message = "Must be either A, B or C")
     @Column(nullable = false, length = 100)
     private String password;
-
+    @NotNull(message = "Rôle obligatoire")
     @Column(nullable = false, length = 100)
     private Integer role;
 
-    @NotNull
+    @NotNull(message = "Prénom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
     @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;
 
-    @NotNull
-    @NotEmpty(message = "Champs obligatoire")
+    @NotNull(message = "Nom obligatoire")
+    @NotEmpty(message = "Nom obligatoire")
     @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Sexe obligatoire")
     @Column(nullable = false)
     private Integer sexe;
 
@@ -70,5 +76,8 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
 }
 

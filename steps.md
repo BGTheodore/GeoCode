@@ -72,3 +72,17 @@ https://www.toptal.com/java/spring-boot-rest-api-error-handling
 
 exemple prog:
 https://github.com/RameshMF/todo-management-spring-boot/blob/master/src/main/java/net/guides/springboot/todomanagement/controller/TodoController.java
+
+
+<<<<<Frontend>>>>>
+# 1.  [] Download Coreui admin template
+>>>https://coreui.io/react/demo/3.1.0/dark/#/dashboard
+>>>https://coreui.io/react/?affChecked=1#compare
+# 2.  [] install app's dependencies
+$ npm install
+# 3.  [] serve with hot reload at localhost:3000.
+$ npm start    
+OR
+$ npm run serve
+# 4.  [] build for production with minification
+$ npm run build
