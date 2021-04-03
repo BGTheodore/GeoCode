@@ -15,6 +15,7 @@ import CIcon from '@coreui/icons-react'
 
 // routes config
 import routes from '../routes'
+import UserService from "../services/UserService";
 
 import { 
   TheHeaderDropdown,
@@ -63,6 +64,12 @@ const TheHeader = () => {
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink>Settings</CHeaderNavLink>
         </CHeaderNavItem>
+        <button className="btn btn-success navbar-btn navbar-right" style={{ marginRight: 0 }} onClick={() => UserService.doLogout()}>
+          Logout
+        </button>
+        <p className="navbar-text navbar-right" style={{ marginRight: 15 }}>
+          Signed in as {UserService.getUsername()}
+        </p>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
