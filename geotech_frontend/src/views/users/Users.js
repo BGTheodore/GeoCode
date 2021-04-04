@@ -99,7 +99,7 @@ import User from "./User";
 
   return (
     <div>
-          <a href="/#/base/forms" >   
+          <a href="/#/users/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
           </a>
             
@@ -153,7 +153,7 @@ import User from "./User";
               <CCollapse show={details.includes(index)}>
                 <User user = {item} />
                 <CCardBody>
-                  <a href={`/#/userforms/${item.id}`}> 
+                  <a href={`/#/users/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-import usersData from './UsersData'
-
 const User = (props) => {
   return (
     <CRow>

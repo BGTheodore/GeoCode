@@ -9,6 +9,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+import UserService from "../services/UserService";
+
+
 const TheHeaderDropdown = () => {
   return (
     <CDropdown
@@ -19,9 +22,9 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={'avatars/9.png'}
             className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
+            alt="user image"
           />
         </div>
       </CDropdownToggle>
@@ -60,7 +63,7 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Settings</strong>
+          <strong>Réglages</strong>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-user" className="mfe-2" />Profile
@@ -80,9 +83,10 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+        <CDropdownItem onClick={() => UserService.doLogout()}>
+          <CIcon name="cil-lock-locked" className="mfe-2"/>
+         <h6 >Log out</h6>
+      
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

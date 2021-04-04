@@ -20,8 +20,7 @@ const store = StoreService.setup();
 const renderApp = () => 
   ReactDOM.render(
     <Provider store={store}>
-       <App/>
-     
+       <App/>   
     </Provider>,
     document.getElementById('root')
   );

@@ -18,15 +18,12 @@ import routes from '../routes'
 import UserService from "../services/UserService";
 
 import { 
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  TheHeaderDropdown
 }  from './index'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.changeState.sidebarShow)
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
@@ -55,27 +52,12 @@ const TheHeader = () => {
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
-        </CHeaderNavItem>
-        <button className="btn btn-success navbar-btn navbar-right" style={{ marginRight: 0 }} onClick={() => UserService.doLogout()}>
-          Logout
-        </button>
-        <p className="navbar-text navbar-right" style={{ marginRight: 15 }}>
-          Signed in as {UserService.getUsername()}
-        </p>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
+      <CHeaderNavItem className="px-3">
+          <CHeaderNavLink>{UserService.getUsername()}</CHeaderNavLink>
+        </CHeaderNavItem>
         <TheHeaderDropdown/>
       </CHeaderNav>
 
@@ -85,9 +67,7 @@ const TheHeader = () => {
           routes={routes} 
         />
           <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Settings" />
-            </CLink>
+           
             <CLink 
               className="c-subheader-nav-link" 
               aria-current="page" 
@@ -96,7 +76,7 @@ const TheHeader = () => {
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
             <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
+              <CIcon name="cil-settings" alt="Settings" />&nbsp;Réglages
             </CLink>
           </div>
       </CSubheader>

@@ -95,3 +95,5 @@ $ npm run build
 
 <<<keycloak react>>>
 https://www.youtube.com/watch?v=q50LxyGtEf0
+>>> to start on port 8090
+$ sudo ./bin/standalone.sh  -Djboss.socket.binding.port-offset=10
