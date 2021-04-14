@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -26,8 +27,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tests")
-@SQLDelete(sql = "UPDATE tests SET is_deleted = TRUE WHERE id = ?")
-@Where(clause = "is_deleted is false")
+// @SQLDelete(sql = "UPDATE tests SET is_deleted = TRUE WHERE id = ?")
+// @Where(clause = "is_deleted is false")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +37,7 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_type")
-    private TestType testType;
+    private TestType testType; 
 }
