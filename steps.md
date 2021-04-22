@@ -97,3 +97,9 @@ $ npm run build
 https://www.youtube.com/watch?v=q50LxyGtEf0
 >>> to start on port 8090
 $ sudo ./bin/standalone.sh  -Djboss.socket.binding.port-offset=10
+
+admin
+admin
+
+<<<keycloak spring boot>>>
+https://www.youtube.com/watch?v=4b-wZN-6SsU
