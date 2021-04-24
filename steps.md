@@ -1,4 +1,4 @@
-1.  [] Download adn install JDK on computer (you need to have an Oracle account)
+1.  [] Download and install JDK on computer (you need to have an Oracle account)
 >>> https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
 2.  [] Install spring boot Dashboad extention in VSC
 3.  [] Install Java extention Pack in VSC
@@ -6,7 +6,7 @@
 >>> Crtl+p > spring boot initializr ...
 >>>https://www.youtube.com/watch?v=5mpHejytgFE
 https://www.youtube.com/watch?v=hxiWXe5oMrI
-6.   [] Install Maven
+6.   [] Install Maven (Pour la gestion des dependances)
 >>> sudo apt update
 >>> sudo apt install maven
 7. []  [] Support VSC
