@@ -103,3 +103,13 @@ admin
 
 <<<keycloak spring boot>>>
 https://www.youtube.com/watch?v=4b-wZN-6SsU
+
+
+
+<<<Deploy aws>>>
+# 1.  [] add in pom.xml
+<finalName>spring-boot-aws-exe</finalName>
+# 2.  [] generate jar
+$ mvn clean install
+
+https://www.youtube.com/watch?v=LJkkFx7zJJQ
