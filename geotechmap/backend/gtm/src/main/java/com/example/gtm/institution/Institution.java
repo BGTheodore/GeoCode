@@ -217,3 +217,34 @@ public class Institution {
 
     
 }
+
+// Ou fè anpil travay.
+// sou wè sa ki gen pou fèt yo men ou pa utiliser zouti ki pou aleje kòd la.
+// gen 2 fason ou ka structurer kòd la:
+// 1: izole chak kopozan; pa egzanp jan ou fèl la: kreye yon folder Institution epi
+// 	mete tout sa wap bezwen ladan l (plusieurs fichiers .java)
+// 2: regrouper tout konpozan ki sable yo: kreye yon folder Controllers ki gen tout controller projet a,
+// kreye yon folder Entities ki gen tout entity projet a, etc.
+// PA GEN YON METÒD KI PI BON KE LÒT.
+
+// Men etant donné ke m mte kite yon example pou ou ak metòd 2 a,
+// kote mwen te kreye API pou type de test yo (TestType), ou ka kontinye
+// ak stucture 2 a.
+
+// ETAP:
+// 1. kreye yon fichier Intitution.java nan folder Entities la (suiv example TestType.java la)
+// 2. kreye yon fichier IntitutionRepository.java nan folder Repositories la (suiv example TestTypeRepository.java la)
+// 3. kreye yon fichier IntitutionService.java nan folder Services la (suiv example TestTypeServices.java la)
+// 4. kreye yon fichier IntitutionController.java nan folder Controllers la (suiv example TestType.java la)
+// 5. kreye yon fichier InstitutionRepositoryController.java nan folder test/java/com/example/gtm la (suiv example TestTypeRepositoryController.java la)
+// 	sa ap pèmèt ou test yon fonction nan controller a.Nou fè sa paske lè test la pral fèt
+// 	table yo ap tou jenere nan BD a san ou pa bezwen fè anyen.
+// 	NB: lè ou pral run test la :
+// 	ale nan application.properties epi:
+// 	retire 
+// 	spring.jpa.hibernate.ddl-auto=none
+// 	mete
+// 	spring.jpa.hibernate.ddl-auto=create
+// 	lè ou fin run test la, remetel
+// 	spring.jpa.hibernate.ddl-auto=none
+// 6. enstale Postman sou PC ou pou ou ka test API ou sot kreye a
