@@ -21,7 +21,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Institutions',
-    to: '/users',
+    to: '/institutions',
     icon: 'cil-home',
   },
   {
