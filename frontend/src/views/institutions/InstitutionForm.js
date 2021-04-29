@@ -1,4 +1,7 @@
 import React ,{useState, useEffect} from 'react'
+import {Formik, Form} from 'formik';
+import { TextField } from './TextField';
+import * as Yup from 'yup';
 import {
   CButton,
   CCard,
@@ -90,87 +93,91 @@ const BasicForms = ({match}) => {
           setAlert({...alert, isActive: false, message:''})
         }, 4000)
   }
+   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
+  // phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+  const validate = Yup.object({
+    name: Yup.string()
+      .max(45,"Maximum 45 caractères")
+      .required("Champs obligatire"),
+    address: Yup.string()
+    .max(45,"Maximum 45 caractères")
+    .required("Champs obligatire"),
+    phone1: Yup.string()
+    .matches(phoneRegExp, 'Numéro invalide')
+      .required("Champs obligatire"),
+    phone2: Yup.string()
+      .max(5,"Maximum 15 caractères")
+      .required("Champs obligatire"),
+    email: Yup.string()
+      .email("Email invalide")
+      .required("Champs obligatire"),
+        
+  })
   return (
-    <>
-          <form onSubmit={handleSubmit}>
-            { alert.isActive ?  <CAlert color="info" closeButton>{alert.message}</CAlert> : ''}
-         
-      <CRow>
-  
-        <CCol xs="12" sm="6">
-        <CCard>
-            <CCardHeader>
-              Informations sur l'institution   {  match.params.id}
-            </CCardHeader>
-            <CCardBody>
-              <CForm >
-                <CFormGroup>
-                  <CLabel >Nom*</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.name} name="name" placeholder="Entrer le nom de l'institution.." autoComplete="nom"/>
-                  <CFormText className="help-block">Veillez entrer le nom de l'institution</CFormText>
-                </CFormGroup>
-                <CFormGroup>
-                  <CLabel >Adresse*</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.address} name="address" placeholder="Entrer l'adresse de l'institution.." autoComplete="address"/>
-                  <CFormText className="help-block">Veillez entrer l'adresse de l'intitution</CFormText>
-                </CFormGroup>
-                <CFormGroup>
-                  <CLabel >Téléphone 1</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.phone1} name="phone1" placeholder="Entrer un numéro de téléphone.." autoComplete="phone1"/>
-                  <CFormText className="help-block">Veillez entrer un numéro de téléphone de l'institution</CFormText>
-                </CFormGroup>
-                <CFormGroup>
-                  <CLabel >Téléphone 2</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.phone2} name="phone2" placeholder="Entrer un numéro de téléphone.." autoComplete="phone2"/>
-                  <CFormText className="help-block">Veillez entrer un autre numéro de téléphone de l'institution</CFormText>
-                </CFormGroup>
-                <CFormGroup>
-                  <CLabel >Email</CLabel>
-                  <CInput type="email" onChange={handleOnChange} value={inputValues.email} name="email" placeholder="Enter l'email de l'institution.." autoComplete="email"/>
-                  <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
-                </CFormGroup>
-              </CForm>
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CCol xs="12" sm="6">
-          <CCard>
-            <CCardHeader>
-            Informations sur l'institution
-            </CCardHeader>
-            <CCardBody>
-                <CFormGroup>
-                  <CLabel >Site web</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.webSite} name="webSite" placeholder="Entrer le site web de l'institution.." autoComplete="webSite"/>
-                  <CFormText className="help-block">Veillez entrer le site web de l'institution</CFormText>
-                </CFormGroup>
-                <CFormGroup>
-                  <CLabel >Numéro social</CLabel>
-                  <CInput type="text" onChange={handleOnChange} value={inputValues.taxNumber} name="taxNumber" placeholder="Entrer le numéro social de l'institution.." autoComplete="taxNumber"/>
-                  <CFormText className="help-block">Veillez entrer le numéro social de l'institution</CFormText>
-                </CFormGroup>
-                <CFormGroup >
-                    <CLabel htmlFor="textarea-input">Description</CLabel>
-                    <CTextarea 
-                      name="description" 
-                      id="textarea-input" 
-                      rows="9"
-                      onChange={handleOnChange} value={inputValues.description}
-                      placeholder="Veillez entrer la description de l'institution..." 
-                    />
-                </CFormGroup>
-            </CCardBody>
-            <CCardFooter>
-              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> {match.params.id ? 'Modifier': 'Enregistrer'} </CButton>
-              <CButton type="reset" size="sm" color="danger" onClick={() => onReinitialiserInput()}><CIcon name="cil-ban" /> Réinitialiser</CButton>
-            </CCardFooter>
-          </CCard>
-        </CCol>
-      
-      </CRow>
-      </form>
-     </>
+    <Formik
+      initialValues = {{
+        name: '',
+        address: '',
+        phone1: '',
+        phone2: '',
+        email: '',
+      }}
+      validationSchema= {validate}
+      onSubmit={values => {
+       console.log(values)
+      }}
+    >
+      { formik => (
+        <div>
+       <Form>
+          <CRow>
+            <CCol xs="12" sm="6">
+              <CCard>
+                  <CCardHeader>
+                  Informations sur l'institution   {  match.params.id}
+                 </CCardHeader>
+                    <CCardBody>
+                      <CFormGroup>
+                          <TextField label="Nom*:" name="name" type="text" placeholder="Entrer le nom de l'institution..." autoComplete="nom" />
+                          <CFormText className="help-block">Veillez entrer le nom de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Adresse*:" name="address" type="text" placeholder="Entrer l'adresse de l'institution.." autoComplete="address"/>
+                        <CFormText className="help-block">Veillez entrer l'adresse de l'intitution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Téléphone 1:" name="phone1" type="text" placeholder="Entrer un numéro de téléphone..." autoComplete="phone1"/>
+                        <CFormText className="help-block">Veillez entrer un numéro de téléphone de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Téléphone 2:" name="phone2" type="text" placeholder="Entrer un auntre numéro de téléphone..." autoComplete="phone2"/>
+                        <CFormText className="help-block">Veillez entrer un autre numéro de téléphone de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Email*:" name="phone2" type="text" placeholder="Enter l'email de l'institution..." autoComplete="email"/>
+                        <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
+                      </CFormGroup>
+                    </CCardBody>
+                   
+              </CCard>
+            </CCol>
+          </CRow>
+        {/* <TextField label="name" name="name" type="text" />
+        <TextField label="email" name="email" type="email" />
+        <TextField label="phone" name="phone" type="text" /> */}
+        
+        <button className="btn btn-dark mt-3" type="submit">Save</button>
+        <button className="btn btn-danger mt-3 ml-3" type='reset'>Reset</button>
+       </Form>
+        </div>
+     
+      )
+
+      }
+
+    </Formik>
+   
   )
 }
 
