@@ -75,7 +75,7 @@ const TheHeader = () => {
             >
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
+            <CLink className="c-subheader-nav-link" href="http://localhost:8090/auth/realms/GTM/account">
               <CIcon name="cil-settings" alt="Settings" />&nbsp;Réglages
             </CLink>
           </div>

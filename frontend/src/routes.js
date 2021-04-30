@@ -9,7 +9,7 @@ const InstitutionForm = React.lazy(() => import('./views/institutions/Institutio
 const Institutions = React.lazy(() => import('./views/institutions/Institutions'));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Accueil' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
 
   { path: '/users/create', exact: true, name: 'Ajouter', component: UserForm },//CRAETE

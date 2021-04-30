@@ -101,6 +101,8 @@ $ sudo ./bin/standalone.sh  -Djboss.socket.binding.port-offset=10
 admin
 admin
 
+user
+password
 <<<keycloak spring boot>>>
 https://www.youtube.com/watch?v=4b-wZN-6SsU
 
