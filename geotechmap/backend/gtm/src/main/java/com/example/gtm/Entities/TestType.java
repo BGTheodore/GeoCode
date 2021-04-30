@@ -30,4 +30,13 @@ public class TestType {
     @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
     @Column(name = "name", nullable = false, length = 45)
     private String name;
+
+
+    // @Size(min = 2, max = 10, message = "2 caractères au minimum; 10 maximum")
+    @Column(name = "abbreviation", length = 10)
+    private String abbreviation;
+
+    // @Size(min = 2, max = 255, message = "2 caractères au minimum; 255 maximum")
+    @Column(name = "description", length = 10)
+    private String description;
 }
