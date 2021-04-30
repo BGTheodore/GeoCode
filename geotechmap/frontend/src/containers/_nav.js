@@ -38,7 +38,7 @@ const _nav =  [
       {
         _tag: 'CSidebarNavItem',
         name: 'Types d\'essai',
-        to: '/base/cards',
+        to: '/test_types',
       },
     
     ],
