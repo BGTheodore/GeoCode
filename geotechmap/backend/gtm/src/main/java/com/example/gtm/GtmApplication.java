@@ -16,9 +16,9 @@ public class GtmApplication {
 		SpringApplication.run(GtmApplication.class, args);
 	}
 
-	@GetMapping
-	public List<String> hello(){
-		return List.of("Hello", "World");
-	}
+	// @GetMapping
+	// public List<String> hello(){
+	// 	return List.of("Hello", "World");
+	// }
 
 }

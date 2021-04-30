@@ -30,3 +30,8 @@ https://www.youtube.com/watch?v=hxiWXe5oMrI
 
 Maven: Gestion de dependances
 manager---> mvn ..code..
+
+
+
+<<<integration react spring boot >>>
+https://bezkoder.com/integrate-reactjs-spring-boot/
