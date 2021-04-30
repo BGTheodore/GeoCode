@@ -57,16 +57,6 @@ const BasicForms = ({match}) => {
     email: '', webSite: '', taxNumber: '', description: '',
   });
   
-  const handleOnChange = event => {
-    const { name, value } = event.target;
-    setInputValues({ ...inputValues, [name]: value });
-  };
-  const onReinitialiserInput = () =>{
-    setInputValues({
-      name: '', address: '', phone1: '', phone2: '', 
-      email: '', webSite: '', taxNumber: '', description: '',
-    })
-  }
 
   const [alert, setAlert] = React.useState({ 
     isActive: false, status: '', message: '',})
@@ -93,9 +83,7 @@ const BasicForms = ({match}) => {
           setAlert({...alert, isActive: false, message:''})
         }, 4000)
   }
-   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
-  // phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+   
   const validate = Yup.object({
     name: Yup.string()
       .max(45,"Maximum 45 caractères")
@@ -104,13 +92,22 @@ const BasicForms = ({match}) => {
     .max(45,"Maximum 45 caractères")
     .required("Champs obligatire"),
     phone1: Yup.string()
-    .matches(phoneRegExp, 'Numéro invalide')
+      .max(15,"Maximum 15 caractères")
       .required("Champs obligatire"),
     phone2: Yup.string()
-      .max(5,"Maximum 15 caractères")
+      .max(15,"Maximum 15 caractères")
       .required("Champs obligatire"),
     email: Yup.string()
       .email("Email invalide")
+      .required("Champs obligatire"),
+    webSite: Yup.string()
+      .max(45,"Maximum 45 caractères")
+      .required("Champs obligatire"),
+    taxNumber: Yup.string()
+      .max(45,"Maximum 45 caractères")
+      .required("Champs obligatire"),
+    description: Yup.string()
+      .max(45,"Maximum 255 caractères")
       .required("Champs obligatire"),
         
   })
@@ -122,6 +119,9 @@ const BasicForms = ({match}) => {
         phone1: '',
         phone2: '',
         email: '',
+        webSite:'',
+        taxNumber:'',
+        description:'',
       }}
       validationSchema= {validate}
       onSubmit={values => {
@@ -159,16 +159,34 @@ const BasicForms = ({match}) => {
                         <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
                       </CFormGroup>
                     </CCardBody>
-                   
+              </CCard>
+            </CCol>
+            <CCol xs="12" sm="6">
+              <CCard>
+                  <CCardHeader>
+                  Informations sur l'institution   {  match.params.id}
+                 </CCardHeader>
+                    <CCardBody>
+                      <CFormGroup>
+                          <TextField label="Site web:" name="webSite" type="text" placeholder="Entrer le site web de l'institution..." autoComplete="webSite" />
+                          <CFormText className="help-block">Veillez entrer le site web de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Numéro social:" name="taxNumber" type="text" placeholder="Entrer le numéro social de l'institution.." autoComplete="taxNumber"/>
+                        <CFormText className="help-block">Veillez entrer le numéro social de l'intitution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Description:" name="description" type="textarea" placeholder="Entrer la description de téléphone..." autoComplete="description"/>
+                        <CFormText className="help-block">Veillez entrer la description de l'institution</CFormText>
+                      </CFormGroup>      
+                    </CCardBody>
+                    <CCardFooter>
+                      <button className="btn btn-dark mt-3" type="submit">{match.params.id ? 'Modifier': 'Enregistrer'} </button>
+                      <button className="btn btn-danger mt-3 ml-3" type='reset'>Réinitialiser</button>
+                    </CCardFooter>
               </CCard>
             </CCol>
           </CRow>
-        {/* <TextField label="name" name="name" type="text" />
-        <TextField label="email" name="email" type="email" />
-        <TextField label="phone" name="phone" type="text" /> */}
-        
-        <button className="btn btn-dark mt-3" type="submit">Save</button>
-        <button className="btn btn-danger mt-3 ml-3" type='reset'>Reset</button>
        </Form>
         </div>
      
