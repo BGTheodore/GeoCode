@@ -107,6 +107,8 @@ password
 <<<keycloak spring boot>>>
 https://www.youtube.com/watch?v=4b-wZN-6SsU
 
+https://medium.com/devops-dudes/securing-spring-boot-rest-apis-with-keycloak-1d760b2004e
+
 
 
 <<<Deploy aws>>>
