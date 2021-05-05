@@ -20,4 +20,9 @@ class InstitutionRepositoryTests {
     private InstitutionRepository repository;
 
     @Test
+    public void getInstitutionTest(){
+        Institution institution = new Institution();
+        institution.setName("URGeo");
+    }
+
 }
