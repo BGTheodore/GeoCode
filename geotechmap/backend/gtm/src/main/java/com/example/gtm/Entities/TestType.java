@@ -39,8 +39,8 @@ public class TestType extends Auditable<String>{
     @Column(name = "abbreviation", length = 10)
     private String abbreviation;
 
-    // @Size(min = 2, max = 255, message = "2 caractères au minimum; 255 maximum")
-    @Column(name = "description", length = 10)
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(name = "description", length = 255)
     private String description;
 
     @Column(nullable = true)
