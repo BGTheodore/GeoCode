@@ -32,4 +32,13 @@ public class InstitutionService {
             return repository.save(institution);
         }
     }
+
+    public void deleteInstitution(Long id) {
+        Optional<Institution> optional = repository.findById(id);
+        if (!optional.isPresent()){
+            throw new ResourceNotFoundException("Institution not found with id :" + id );
+        } else {
+            repository.deleteById(id);
+        }
+    }
 }
