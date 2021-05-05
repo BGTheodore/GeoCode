@@ -6,21 +6,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "institution")
+@Table(name = "institutions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE institutions SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted is false")
 
-public class Institution {
+public class Institution extends Auditable<String>{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,10 +35,9 @@ public class Institution {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    // A ajouter dans le document
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
-    @Column(name = "sigle", nullable = false, length = 45)
-    private String sigle;
+    @Size( max = 10, message = "10 caractères au maximum")
+    @Column(name = "acronym", length = 45)
+    private String acronym;
 
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
@@ -44,17 +47,17 @@ public class Institution {
 
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
-    @Column(name = "phone", nullable = false, length = 45)
+    @Size(min = 3, max = 45, message = "3 caractères au minimum; 45 maximum")
+    @Column(name = "phone1", nullable = false, length = 45)
     private String phone1;
 
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
-    @Column(name = "phone", nullable = false, length = 45)
+    @Size(min = 3, max = 45, message = "3 caractères au minimum; 45 maximum")
+    @Column(name = "phone2", nullable = false, length = 45)
     private String phone2;
 
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
+    @Size(min = 6, max = 45, message = "6 caractères au minimum; 45 maximum")
     @Column(name = "email", nullable = false, length = 45)
     private String email;
 
@@ -65,9 +68,14 @@ public class Institution {
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
     @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
-    @Column(name = "taxnumber", nullable = false, length = 45)
-    private String taxnumber;
+    @Column(name = "tax_number", nullable = false, length = 45)
+    private String taxNumber;
 
-    @Column(name = "description", length = 10)
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(name = "description", length = 255)
     private String description;
+
+    @Column(nullable = true)
+    private Boolean isDeleted = false;
+
 }

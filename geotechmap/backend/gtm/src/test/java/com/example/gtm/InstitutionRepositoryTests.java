@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-class InstitutionRepositoryTests {
+public class InstitutionRepositoryTests {
     @Autowired
     private InstitutionService service;
 
@@ -30,8 +30,16 @@ class InstitutionRepositoryTests {
     public void getInstitutionTest(){
         Institution institution = new Institution();
         institution.setName("Unité de Recherche en Géosciences");
+        institution.setAcronym("LNBTP");
+        institution.setAddress("Delmas 33");
+        institution.setPhone1("56782332");
+        institution.setPhone2("45678922");
+        institution.setEmail("www.lnbtp.com");
+        institution.setTaxNumber("RR-32323");
+        institution.setDescription("Lorem ipsum dolor.");
 
-        when(repository.findAll()).thenReturn(Stream.of(institution).collect(Collectors.toList()));
+        when(repository.findAll()).thenReturn(Stream
+        .of(institution).collect(Collectors.toList()));
         assertEquals(1, service.listAllInstitutions().size());
     }
 

@@ -33,9 +33,9 @@ public class Test extends Auditable<String>{
     @JoinColumn(name = "id_type")
     private TestType testType; 
 
-    // @ManyToOne
-    // @JoinColumn(name = "id_institution")
-    // private Institution institution; 
+    @ManyToOne
+    @JoinColumn(name = "id_institution")
+    private Institution institution; 
 
     @ManyToOne
     @JoinColumn(name = "id_coordonate")
