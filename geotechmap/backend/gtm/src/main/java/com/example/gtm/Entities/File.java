@@ -10,38 +10,40 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "test_types")
+@Table(name = "coordonates")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SQLDelete(sql = "UPDATE test_types SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE coordonates SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted is false")
-public class TestType extends Auditable<String>{
+
+public class File extends Auditable<String>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Nom obligatoire")
+    @NotNull(message = "Champs obligatoire")
     @NotEmpty(message = "Champs obligatoire")
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
-    @Column(name = "name", nullable = false, length = 45)
-    private String name;
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String link;
 
 
-    // @Size(min = 2, max = 10, message = "2 caractères au minimum; 10 maximum")
-    @Column(name = "abbreviation", length = 10)
-    private String abbreviation;
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String format;
 
-    // @Size(min = 2, max = 255, message = "2 caractères au minimum; 255 maximum")
-    @Column(name = "description", length = 10)
-    private String description;
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String size;
 
     @Column(nullable = true)
     private Boolean isDeleted = false;
