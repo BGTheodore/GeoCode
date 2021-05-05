@@ -31,6 +31,11 @@ public class Institution {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
+    // A ajouter dans le document
+    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
+    @Column(name = "sigle", nullable = false, length = 45)
+    private String sigle;
+
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
     @Size(min = 2, max = 45, message = "2 caractères au minimum; 255 maximum")
