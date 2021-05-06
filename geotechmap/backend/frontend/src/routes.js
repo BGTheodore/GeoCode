@@ -11,6 +11,11 @@ const Institutions = React.lazy(() => import('./views/institutions/Institutions'
 const TestTypeForm = React.lazy(() => import('./views/test_types/TestTypeForm'));
 const TestTypes = React.lazy(() => import('./views/test_types/TestTypes'));
 
+const TestForm = React.lazy(() => import('./views/tests/TestForm'));
+const Tests = React.lazy(() => import('./views/tests/Tests'));
+
+
+
 const routes = [
   { path: '/', exact: true, name: 'Accueil' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -26,6 +31,10 @@ const routes = [
   { path: '/test_types/create', exact: true, name: 'Ajouter', component: TestTypeForm },//CRAETE
   { path: '/test_types', exact: true,  name: 'Types de d\'essais ', component: TestTypes },//READ
   { path: '/test_types/edit/:id', exact: true, name: 'Modifier', component: TestTypeForm },//UPDATE
+
+  { path: '/tests/create', exact: true, name: 'Ajouter', component: TestForm },//CRAETE
+  { path: '/tests', exact: true,  name: 'Essais ', component: Tests },//READ
+  { path: '/tests/edit/:id', exact: true, name: 'Modifier', component: TestForm },//UPDATE
 ];
 
 export default routes;

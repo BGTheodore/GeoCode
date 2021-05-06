@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 const Institution = (props) => {
   return (
@@ -12,13 +11,13 @@ const Institution = (props) => {
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li> Nom : {props.testType.name}</li>
-              <li> Abbréviation : {props.testType.abbreviation}</li>
-              <li> Description : {props.testType.description}</li>
-              <li> Créé le : {props.testType.createdAt}</li>
-              <li><a>Ajouté par : {props.testType.createdBy}</a></li>
-              <li> Dernière modification : {props.testType.updatedAt}</li>
-              <li><a>Modifié par : {props.testType.updatedBy}</a></li>
+              <li>Nom : {props.testType.name}</li>
+              <li>Abbréviation : {props.testType.abbreviation}</li>
+              <li>Description : {props.testType.description}</li>
+              <li>Créé le : {props.testType.createdDate}</li>
+              <li>Créé par : <a href="#">{props.testType.createdBy}</a></li>
+              <li>Dernière modification : {props.testType.lastModifiedDate}</li>
+              <li>Modifié par: <a href="#">{props.testType.lastModifiedBy}</a></li>
             </ul>
           </CCardBody>
         </CCard>

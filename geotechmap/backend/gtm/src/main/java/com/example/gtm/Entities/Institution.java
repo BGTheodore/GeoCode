@@ -1,10 +1,13 @@
 package com.example.gtm.Entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -75,6 +78,9 @@ public class Institution extends Auditable<String>{
     @Column(name = "description", length = 255)
     private String description;
 
+    // @OneToMany(mappedBy = "testType")
+    // private List<Test> tests;
+    
     @Column(nullable = true)
     private Boolean isDeleted = false;
 

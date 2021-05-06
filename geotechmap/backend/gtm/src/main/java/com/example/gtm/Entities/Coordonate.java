@@ -1,10 +1,13 @@
 package com.example.gtm.Entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -30,28 +33,22 @@ public class Coordonate extends Auditable<String>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Champs obligatoire")
-    @NotEmpty(message = "Champs obligatoire")
-    @Size(max = 15, message = "2 caractères au minimum; 15 maximum")
     @Column(name = "x", nullable = false)
     @Digits(integer = 6, fraction = 2)
     private double x;
 
 
-    @NotNull(message = "Champs obligatoire")
-    @NotEmpty(message = "Champs obligatoire")
-    @Size(max = 15, message = "2 caractères au minimum; 15 maximum")
     @Column(name = "y", nullable = false)
     @Digits(integer = 6, fraction = 2)
     private double y;
 
-    @NotNull(message = "Champs obligatoire")
-    @NotEmpty(message = "Champs obligatoire")
-    @Size(max = 15, message = "2 caractères au minimum; 15 maximum")
     @Column(name = "z", nullable = false)
     @Digits(integer = 6, fraction = 2)
     private double z;
 
+    // @OneToMany(mappedBy = "coordonate")
+    // private List<Test> tests;
+    
     @Column(nullable = true)
     private Boolean isDeleted = false;
 }

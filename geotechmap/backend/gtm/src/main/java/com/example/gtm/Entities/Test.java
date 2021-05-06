@@ -1,5 +1,6 @@
 package com.example.gtm.Entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -29,15 +31,15 @@ public class Test extends Auditable<String>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type")
     private TestType testType; 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_institution")
     private Institution institution; 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordonate")
     private Coordonate coordonate; 
 
@@ -45,9 +47,9 @@ public class Test extends Auditable<String>{
     @Column(length = 255)
     private String address;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_file")
-    private File file; 
+    private File file;
 
     @Column(nullable = true)
     private Boolean isDeleted = false;

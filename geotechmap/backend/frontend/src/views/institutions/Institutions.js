@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation, Link } from 'react-router-dom'
 import {
-  CBadge,
-  CCard,
   CCardBody,
-  CCardHeader,
-  CCol,
   CDataTable,
-  CRow,
-  CPagination,
   CButton,
   CCollapse,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import Institution from "./Institution";
 
   const Institutions = () => {
@@ -24,54 +16,27 @@ import Institution from "./Institution";
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
-      // alert(id)
       newDetails = [...details, index]
     }
 
     setDetails(newDetails)
   }
 
-
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
     { key: 'name', label:'Nom', _style: { width: '20%'} },
-    { key: 'address', label:'Adresse', _style: { width: '20%'} },
+    { key: 'acronym', label:'Abbréviation', _style: { width: '20%'} },
+    { key: 'website', label:'Site web', _style: { width: '20%'} },
     { key: 'phone1', label:'Téléphone', _style: { width: '20%'} },
-    { key: 'email', label:'Email', _style: { width: '10%'} },
-    { key: 'webSite', label:'Site web', _style: { width: '10%'} },
-    { key: 'createdAt', label:'Date de création', _style: { width: '10%'} },
+    { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
       key: 'show_details',
-      label: '',
+      label: 'Actions',
       _style: { width: '1%' },
       sorter: false,
       filter: false
     }
   ]
-
-  const getBadge = (status)=>{
-    switch (status) {
-      case 0: return 'success'
-      case 1: return 'primary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
-    }
-  }
-  const getRoleName = (role)=>{
-    switch (role) {
-      case 1: return 'Admin'
-      case 0: return 'Super Admin'
-      default: return 'Admin'
-    }
-  }
-  const getSexeName = (sexe)=>{
-    switch (sexe) {
-      case 0: return 'Homme'
-      case 1: return 'Femme'
-      default: return 'Autre'
-    }
-  }
 
   const onDelete = (id) => {
     if (window.confirm("Confirmer la suppression")) {
@@ -85,7 +50,6 @@ import Institution from "./Institution";
     } else {
       
     }
-
   }
 
   const [data, setData] = useState([])
@@ -114,22 +78,6 @@ import Institution from "./Institution";
       sorter
       pagination
       scopedSlots = {{
-        'role':
-          (item)=>(
-            <td>
-              <CBadge color={getBadge(item.role)}>
-                {getRoleName(item.role)}
-              </CBadge>
-            </td>
-          ),
-          'sexe':
-          (item)=>(
-            <td>
-              <CBadge color='secondary'>
-                {getSexeName(item.sexe)}
-              </CBadge>
-            </td>
-          ),
         'show_details':
           (item, index)=>{
             return (

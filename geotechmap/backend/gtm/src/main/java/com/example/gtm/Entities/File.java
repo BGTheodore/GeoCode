@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,11 +18,11 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "coordonates")
+@Table(name = "files")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SQLDelete(sql = "UPDATE coordonates SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE files SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted is false")
 
 public class File extends Auditable<String>{
@@ -44,6 +45,9 @@ public class File extends Auditable<String>{
     @Size(max = 255, message = "255 caractères au maximum")
     @Column(length = 255)
     private String size;
+
+    // @OneToOne(mappedBy = "file")
+    // private Test test;
 
     @Column(nullable = true)
     private Boolean isDeleted = false;
