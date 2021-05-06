@@ -1,10 +1,13 @@
 package com.example.gtm.Entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -42,6 +46,9 @@ public class TestType extends Auditable<String>{
     @Size(max = 255, message = "255 caractères au maximum")
     @Column(name = "description", length = 255)
     private String description;
+
+    // @OneToMany(mappedBy = "testType")
+    // private List<Test> tests;
 
     @Column(nullable = true)
     private Boolean isDeleted = false;

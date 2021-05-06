@@ -1,93 +1,51 @@
 import React ,{useState, useEffect} from 'react'
 import {Formik, Form} from 'formik';
-import { TextField } from './TextField';
+import { TextField } from '../commun/TextField';
 import * as Yup from 'yup';
 import {
-  CButton,
   CCard,
   CCardBody,
   CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
   CFormGroup,
   CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
   CRow,
-  CSwitch,
   CAlert
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
 
 const BasicForms = ({match}) => {
-  //to know if the form is for create (return false) or for edit (return true)
-  const [isEdit, setIsEdit] = React.useState(false);
-  // const { id } = match.params;
+
   useEffect(() => {
    if( match.params.id ){
-    fetch(`${process.env.REACT_APP_API_URL}/api/users/`+match.params.id)
+    fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`+match.params.id)
       .then((response) => response.json())
-      .then((json) => setInputValues(json))
+      .then((json) => setDataForEdit(json))
+      
    }
- 
-    
   }, []);
 
-  const [inputValues, setInputValues] = useState({
-    name: '', address: '', phone1: '', phone2: '', 
-    email: '', webSite: '', taxNumber: '', description: '',
-  });
-  
-
+  const initVal ={
+    name: '',
+    acronym:'',
+    address:'',
+    phone1:'',
+    phone2:'',
+    email:'',
+    website:'',
+    taxNumber:'',
+    description:'',
+  }
+  const [dataForEdit, setDataForEdit] = useState(null);
   const [alert, setAlert] = React.useState({ 
     isActive: false, status: '', message: '',})
-   const handleSubmit = (evt) => {
-      evt.preventDefault();
-      //VALIDATION
-      const requestOptions = {
-        method: match.params.id ?'PUT':'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(inputValues)
-    };
-    //check if it is POST or PUT
-    if(match.params.id){
-      fetch(`${process.env.REACT_APP_API_URL}/api/users/`+match.params.id, requestOptions)
-        .then(response => response.json())
-        .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
-    }else{
-        fetch(`${process.env.REACT_APP_API_URL}/api/users/`, requestOptions)
-        .then(response => response.json())
-        .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
-      }
 
-        setTimeout(() => {
-          setAlert({...alert, isActive: false, message:''})
-        }, 4000)
-  }
-   
   const validate = Yup.object({
     name: Yup.string()
-      .max(45,"Maximum 45 caractères")
-      .required("Champs obligatire"),
+    .max(45,"Maximum 45 caractères")
+    .required("Champs obligatire"),
+    acronym: Yup.string()
+    .max(45,"Maximum 45 caractères"),
     address: Yup.string()
     .max(45,"Maximum 45 caractères")
     .required("Champs obligatire"),
@@ -95,43 +53,56 @@ const BasicForms = ({match}) => {
       .max(15,"Maximum 15 caractères")
       .required("Champs obligatire"),
     phone2: Yup.string()
-      .max(15,"Maximum 15 caractères")
-      .required("Champs obligatire"),
+      .max(15,"Maximum 15 caractères"),
     email: Yup.string()
       .email("Email invalide")
       .required("Champs obligatire"),
-    webSite: Yup.string()
-      .max(45,"Maximum 45 caractères")
-      .required("Champs obligatire"),
+    website: Yup.string()
+      .max(45,"Maximum 45 caractères"),
     taxNumber: Yup.string()
       .max(45,"Maximum 45 caractères")
       .required("Champs obligatire"),
     description: Yup.string()
-      .max(45,"Maximum 255 caractères")
-      .required("Champs obligatire"),
+      .max(255,"Maximum 255 caractères"),
         
   })
+  
   return (
     <Formik
-      initialValues = {{
-        name: '',
-        address: '',
-        phone1: '',
-        phone2: '',
-        email: '',
-        webSite:'',
-        taxNumber:'',
-        description:'',
-      }}
+      initialValues = {
+        dataForEdit || initVal
+      }
+      enableReinitialize
       validationSchema= {validate}
       onSubmit={values => {
        console.log(values)
+          const requestOptions = {
+            method: match.params.id ?'PUT':'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(values)
+        };
+        
+        //check if it is POST or PUT
+        if(match.params.id){
+          fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`+match.params.id, requestOptions)
+            .then(response => response.json())
+            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+        }else{
+            fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`, requestOptions)
+            .then(response => response.json())
+            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+          }
+
+            setTimeout(() => {
+              setAlert({...alert, isActive: false, message:''})
+            }, 4000)
       }}
     >
       { formik => (
         <div>
        <Form>
-          <CRow>
+       { alert.isActive ?  <CAlert color="info" closeButton>{alert.message}</CAlert> : ''}
+       <CRow>
             <CCol xs="12" sm="6">
               <CCard>
                   <CCardHeader>
@@ -139,8 +110,18 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>
                       <CFormGroup>
-                          <TextField label="Nom*:" name="name" type="text" placeholder="Entrer le nom de l'institution..." autoComplete="nom" />
+                          <TextField label="Nom*:" name="name" 
+                          type="text" placeholder="Entrer le nom de l'institution..." 
+                          autoComplete="nom" 
+                          />
                           <CFormText className="help-block">Veillez entrer le nom de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                          <TextField label="Sigle:" name="acronym" 
+                          type="text" placeholder="Entrer le sigle de l'institution..." 
+                          autoComplete="acronym" 
+                          />
+                          <CFormText className="help-block">Veillez entrer le sigle de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Adresse*:" name="address" type="text" placeholder="Entrer l'adresse de l'institution.." autoComplete="address"/>
@@ -154,10 +135,6 @@ const BasicForms = ({match}) => {
                         <TextField label="Téléphone 2:" name="phone2" type="text" placeholder="Entrer un auntre numéro de téléphone..." autoComplete="phone2"/>
                         <CFormText className="help-block">Veillez entrer un autre numéro de téléphone de l'institution</CFormText>
                       </CFormGroup>
-                      <CFormGroup>
-                        <TextField label="Email*:" name="phone2" type="text" placeholder="Enter l'email de l'institution..." autoComplete="email"/>
-                        <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
-                      </CFormGroup>
                     </CCardBody>
               </CCard>
             </CCol>
@@ -168,7 +145,11 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>
                       <CFormGroup>
-                          <TextField label="Site web:" name="webSite" type="text" placeholder="Entrer le site web de l'institution..." autoComplete="webSite" />
+                        <TextField label="Email*:" name="email" type="text" placeholder="Enter l'email de l'institution..." autoComplete="email"/>
+                        <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                          <TextField label="Site web:" name="website" type="text" placeholder="Entrer le site web de l'institution..." autoComplete="website" />
                           <CFormText className="help-block">Veillez entrer le site web de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
@@ -188,15 +169,10 @@ const BasicForms = ({match}) => {
             </CCol>
           </CRow>
        </Form>
-        </div>
-     
+        </div>    
       )
-
       }
-
-    </Formik>
-   
+    </Formik>   
   )
 }
-
 export default BasicForms
