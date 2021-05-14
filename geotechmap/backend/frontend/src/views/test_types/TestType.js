@@ -11,8 +11,8 @@ const Institution = (props) => {
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Nom : {props.testType.name}</li>
-              <li>Abbréviation : {props.testType.abbreviation}</li>
+              <li>Nom : {props.testType.nom}</li>
+              <li>Sigle : {props.testType.sigle}</li>
               <li>Description : {props.testType.description}</li>
               <li>Créé le : {props.testType.createdDate}</li>
               <li>Créé par : <a href="#">{props.testType.createdBy}</a></li>

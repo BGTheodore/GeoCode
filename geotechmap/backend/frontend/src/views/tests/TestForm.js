@@ -17,11 +17,15 @@ import {
 const BasicForms = ({match}) => {
 
   useEffect(() => {
+    //__START fetch all test types for the select field
+      fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`)
+        .then((response) => response.json())
+        .then((json) => setAllTestTypes(json))
+    //__END fetch all test types for the select field
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+match.params.id)
       .then((response) => response.json())
-      .then((json) => setDataForEdit(json))
-      
+      .then((json) => setDataForEdit(json))   
    }
   }, []);
 
@@ -31,6 +35,7 @@ const BasicForms = ({match}) => {
     description:'',
   }
   const [dataForEdit, setDataForEdit] = useState(null);
+  const [allTestTypes, setAllTestTypes] = useState(null);
   const [alert, setAlert] = React.useState({ 
     isActive: false, status: '', message: '',})
 
@@ -85,13 +90,13 @@ const BasicForms = ({match}) => {
             <CCol xs="12" sm="6">
               <CCard>
                   <CCardHeader>
-                  Informations sur le type de d'essai   {  match.params.id}
+                  Informations sur l'essai   {  match.params.id}
                  </CCardHeader>
                     <CCardBody>
                       <CFormGroup>
-                          <TextField  label="Nom*:" name="name" 
-                          type="text" placeholder="Entrer le nom du type d'essai..."
-                           autoComplete="nom"                       
+                          <TextField  label="Type d'essai*:" name="test_type" 
+                          type="select" options={allTestTypes} placeholder="Entrer le nom du type d'essai..."
+                           autoComplete="test_type"                       
                            />
                           <CFormText className="help-block">Veillez entrer le nom du type d'essai</CFormText>
                       </CFormGroup>

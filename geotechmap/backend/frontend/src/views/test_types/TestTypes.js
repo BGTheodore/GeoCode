@@ -24,8 +24,8 @@ import TestType from "./TestType";
 
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
-    { key: 'name', label:'Nom', _style: { width: '20%'} },
-    { key: 'abbreviation', label:'Abbréviation', _style: { width: '20%'} },
+    { key: 'nom', label:'Nom', _style: { width: '20%'} },
+    { key: 'sigle', label:'Abbréviation', _style: { width: '20%'} },
     { key: 'description', label:'Description', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
@@ -42,7 +42,7 @@ import TestType from "./TestType";
       const requestOptions = {
         method: 'DELETE'
       };
-      fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+id, requestOptions)
+      fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`+id, requestOptions)
         .then(response => console.log(response))
       const newList = data.filter((item) => item.id !== id);
       setData(newList);
@@ -53,7 +53,7 @@ import TestType from "./TestType";
 
   const [data, setData] = useState([])
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`)
       .then((response) => response.json())
       .then((json) => setData(json)); 
     
@@ -99,7 +99,7 @@ import TestType from "./TestType";
               <CCollapse show={details.includes(index)}>
                 <TestType testType = {item} />
                 <CCardBody>
-                  <a href={`/#/test_types/edit/${item.id}`}> 
+                  <a href={`/#/type_essais/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>

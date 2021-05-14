@@ -1,5 +1,6 @@
 package com.example.gtm.Entities;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -34,5 +35,8 @@ public abstract class Auditable<U> {
     @LastModifiedDate
     @Temporal(TIMESTAMP)
     protected Date lastModifiedDate;
+
+    @Column(nullable = true)
+    private Boolean isDeleted = false;
     
 }

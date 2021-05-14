@@ -26,8 +26,8 @@ const BasicForms = ({match}) => {
   }, []);
 
   const initVal ={
-    name: '',
-    abbreviation:'',
+    nom: '',
+    sigle:'',
     description:'',
   }
   const [dataForEdit, setDataForEdit] = useState(null);
@@ -35,10 +35,10 @@ const BasicForms = ({match}) => {
     isActive: false, status: '', message: '',})
 
   const validate = Yup.object({
-    name: Yup.string()
+    nom: Yup.string()
       .max(45,"Maximum 45 caractères")
       .required("Champs obligatire"),
-    abbreviation: Yup.string()
+    sigle: Yup.string()
     .max(45,"Maximum 45 caractères")
     .required("Champs obligatire"),
     description: Yup.string()
@@ -63,11 +63,11 @@ const BasicForms = ({match}) => {
         
         //check if it is POST or PUT
         if(match.params.id){
-          fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+match.params.id, requestOptions)
+          fetch(`${process.env.REACT_APP_API_URL}/api/test_types/`+match.params.id, requestOptions)
             .then(response => response.json())
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
         }else{
-            fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`, requestOptions)
+            fetch(`${process.env.REACT_APP_API_URL}/api/test_types/`, requestOptions)
             .then(response => response.json())
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
           }
@@ -89,14 +89,14 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>
                       <CFormGroup>
-                          <TextField  label="Nom*:" name="name" 
+                          <TextField  label="Nom*:" name="nom" 
                           type="text" placeholder="Entrer le nom du type d'essai..."
                            autoComplete="nom"                       
                            />
                           <CFormText className="help-block">Veillez entrer le nom du type d'essai</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Abbreviation*:" name="abbreviation" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="abbreviation"/>
+                        <TextField label="Sigle*:" name="sigle" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="sigle"/>
                         <CFormText className="help-block">Veillez entrer l'abbréviation du type d'essai</CFormText>
                       </CFormGroup>
                     </CCardBody>
@@ -109,7 +109,7 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>  
                       <CFormGroup>
-                        <TextField label="Description:" name="description"  placeholder="Entrer la description de téléphone..." autoComplete="description"/>
+                        <TextField label="Description:" type="textarea" name="description"  placeholder="Entrer la description de téléphone..." autoComplete="description"/>
                         <CFormText className="help-block">Veillez entrer la description de l'institution</CFormText>
                       </CFormGroup>      
                     </CCardBody>

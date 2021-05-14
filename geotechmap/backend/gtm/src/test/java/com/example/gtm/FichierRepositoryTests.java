@@ -3,8 +3,8 @@ package com.example.gtm;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;  
 
-import com.example.gtm.Entities.Coordonate;
-import com.example.gtm.Repositories.CoordonateRepository;
+import com.example.gtm.Entities.Fichier;
+import com.example.gtm.Repositories.FichierRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,20 +17,20 @@ import org.junit.runner.RunWith;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CoordonateRepositoryTests {
+public class FichierRepositoryTests {
 
 	@MockBean
-    private CoordonateRepository repository;
+    private FichierRepository repository;
 
     @Test
-	public void getCoordonateTest() {
-        Coordonate coordonate = new Coordonate();
-        coordonate.setX(1.2);;
-        coordonate.setY(2.3);
-        coordonate.setZ(3.4);
+	public void getFileTest() {
+        Fichier fichier = new Fichier();
+        fichier.setLien("www.gtm.fichiers/245456545.pdf");
+        fichier.setFormat("PDF");
+        fichier.setCapacite("1024 MB");
         
 		when(repository.findAll()).thenReturn(Stream
-		.of(coordonate).collect(Collectors.toList()));
+		.of(fichier).collect(Collectors.toList()));
 		assertEquals(1, repository.findAll().size());
 
 

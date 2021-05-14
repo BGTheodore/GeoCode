@@ -118,3 +118,7 @@ https://medium.com/devops-dudes/securing-spring-boot-rest-apis-with-keycloak-1d7
 $ mvn clean install
 
 https://www.youtube.com/watch?v=LJkkFx7zJJQ
+
+
+<<<gis>>>
+https://bocharoviliyav.blog/java/2021/02/03/Spring-Boot-Postgis-Example.html

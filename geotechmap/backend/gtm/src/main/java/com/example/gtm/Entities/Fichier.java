@@ -1,54 +1,51 @@
 package com.example.gtm.Entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "coordonates")
+@Table(name = "fichiers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SQLDelete(sql = "UPDATE coordonates SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE fichiers SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted is false")
 
-public class Coordonate extends Auditable<String>{
-
+@EqualsAndHashCode(callSuper=false)//to check
+public class Fichier extends Auditable<String>{
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "x", nullable = false)
-    @Digits(integer = 6, fraction = 2)
-    private double x;
+    @NotNull(message = "Champs obligatoire")
+    @NotEmpty(message = "Champs obligatoire")
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String lien;
 
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String format;
 
-    @Column(name = "y", nullable = false)
-    @Digits(integer = 6, fraction = 2)
-    private double y;
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(length = 255)
+    private String capacite;
 
-    @Column(name = "z", nullable = false)
-    @Digits(integer = 6, fraction = 2)
-    private double z;
-
-    // @OneToMany(mappedBy = "coordonate")
-    // private List<Test> tests;
-    
-    @Column(nullable = true)
-    private Boolean isDeleted = false;
+    // @OneToOne(mappedBy = "file")
+    // private Test test;
 }
+

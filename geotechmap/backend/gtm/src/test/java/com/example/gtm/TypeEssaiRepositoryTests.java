@@ -3,9 +3,9 @@ package com.example.gtm;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;  
 
-import com.example.gtm.Entities.TestType;
-import com.example.gtm.Repositories.TestTypeRepository;
-import com.example.gtm.Services.TestTypeService;
+import com.example.gtm.Entities.TypeEssai;
+import com.example.gtm.Repositories.TypeEssaiRepository;
+import com.example.gtm.Services.TypeEssaiService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +19,23 @@ import org.junit.runner.RunWith;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestTypeRepositoryTests {
+public class TypeEssaiRepositoryTests {
     @Autowired
-	private TestTypeService service;
+	private TypeEssaiService service;
 
 	@MockBean
-    private TestTypeRepository repository;
+    private TypeEssaiRepository repository;
 
     @Test
-	public void getTestTypeTest() {
-        TestType testType = new TestType();
-        testType.setName("Teneur en eau");
+	public void getTypeEssaiTest() {
+        TypeEssai typeEssai = new TypeEssai();
+        typeEssai.setNom("Teneur en eau");
+		typeEssai.setSigle("TEE");
+		typeEssai.setDescription("Test servant faire calculer la teneur en eau d'un terrain");
         
 		when(repository.findAll()).thenReturn(Stream
-				.of(testType).collect(Collectors.toList()));
-		assertEquals(1, service.listAllTestTypes().size());
+				.of(typeEssai).collect(Collectors.toList()));
+		assertEquals(1, service.listAllTypeEssais().size());
 	}
 
 }
