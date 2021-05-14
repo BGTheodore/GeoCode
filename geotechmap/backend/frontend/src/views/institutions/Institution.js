@@ -11,14 +11,14 @@ const Institution = (props) => {
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Nom : {props.institution.name}</li>
-              <li>Abbréviation : {props.institution.acronym}</li>
-              <li>Site web : {props.institution.website}</li>
+              <li>Nom : {props.institution.nom}</li>
+              <li>Sigle : {props.institution.sigle}</li>
+              <li>Site web : {props.institution.siteWeb}</li>
               <li>Email : {props.institution.email}</li>
-              <li>Téléphone 1 : {props.institution.phone1}</li>
-              <li>Téléphone 2 : {props.institution.phone2}</li>
-              <li>Adresse: {props.institution.address}</li>
-              <li>Numéro fiscal: {props.institution.taxNumber}</li>
+              <li>Téléphone 1 : {props.institution.telephone1}</li>
+              <li>Téléphone 2 : {props.institution.telephone1}</li>
+              <li>Adresse: {props.institution.adresse}</li>
+              <li>Numéro fiscal: {props.institution.numeroFiscal}</li>
               <li>Description : {props.institution.description}</li>
               <li>Créé le : {props.institution.createdDate}</li>
               <li>Créé par : <a href="#">{props.institution.createdBy}</a></li>

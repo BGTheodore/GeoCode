@@ -1,5 +1,6 @@
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
+import { Link } from 'react-router-dom';
 
 const Institution = (props) => {
   return (
@@ -7,17 +8,42 @@ const Institution = (props) => {
       <CCol lg={6}>
         <CCard>
           <CCardHeader  className="text-muted">
-           Identifiant de l'eessai : {props.test.id}
+           Identifiant de l'eessai : {props.essai.id}
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Nom : {props.test.name}</li>
-              <li>Abbréviation : {props.test.abbreviation}</li>
-              <li>Description : {props.test.description}</li>
-              <li>Créé le : {props.test.createdDate}</li>
-              <li>Créé par : <a href="#">{props.test.createdBy}</a></li>
-              <li>Dernière modification : {props.test.lastModifiedDate}</li>
-              <li>Modifié par: <a href="#">{props.test.lastModifiedBy}</a></li>
+              <li>Type d'essai :
+                <Link 
+                to={`/test_types/edit/${props.essai.typeEssai.id}`} 
+                >{props.essai.typeEssai.nom}
+                </Link>
+              </li>
+              <li>Institution :
+                <Link 
+                to={`/institutions/edit/${props.essai.institution.id}`} 
+                >{props.essai.institution.nom} ({props.essai.institution.sigle})
+                </Link>
+              </li>
+              <li>Coodonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
+              <li>Adresse : {props.essai.position.adresse}</li>
+              <li>Résultat :
+                <ul>
+                  <li>Document: 
+                    <Link 
+                      to={`/institutions/edit/${props.essai.fichier.lien}`} 
+                      > Cliquez ici
+                    </Link>
+                  </li>
+                  <li>Format: {props.essai.fichier.format}</li>
+                  <li>Capacité: {props.essai.fichier.capacite}</li>
+               </ul>
+
+                
+              </li>
+              <li>Créé le : {props.essai.createdDate}</li>
+              <li>Créé par : <a href="#">{props.essai.createdBy}</a></li>
+              <li>Dernière modification : {props.essai.lastModifiedDate}</li>
+              <li>Modifié par: <a href="#">{props.essai.lastModifiedBy}</a></li>
             </ul>
           </CCardBody>
         </CCard>

@@ -29,13 +29,13 @@ public class InstitutionRepositoryTests {
     @Test
     public void getInstitutionTest(){
         Institution institution = new Institution();
-        institution.setName("Unité de Recherche en Géosciences");
-        institution.setAcronym("LNBTP");
-        institution.setAddress("Delmas 33");
-        institution.setPhone1("56782332");
-        institution.setPhone2("45678922");
+        institution.setNom("Unité de Recherche en Géosciences");
+        institution.setSigle("LNBTP");
+        institution.setAdresse("Delmas 33");
+        institution.setTelephone1("56782332");
+        institution.setTelephone2("45678922");
         institution.setEmail("www.lnbtp.com");
-        institution.setTaxNumber("RR-32323");
+        institution.setNumeroFiscal("RR-32323");
         institution.setDescription("Lorem ipsum dolor.");
 
         when(repository.findAll()).thenReturn(Stream

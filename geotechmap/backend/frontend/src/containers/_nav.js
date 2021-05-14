@@ -42,6 +42,13 @@ const _nav =  [
       },
     
     ],
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Carte',
+    to: '/carte',
+    icon: 'cil-home',
   },
   
 ]

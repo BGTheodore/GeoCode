@@ -24,10 +24,10 @@ import Institution from "./Institution";
 
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
-    { key: 'name', label:'Nom', _style: { width: '20%'} },
-    { key: 'acronym', label:'Abbréviation', _style: { width: '20%'} },
-    { key: 'website', label:'Site web', _style: { width: '20%'} },
-    { key: 'phone1', label:'Téléphone', _style: { width: '20%'} },
+    { key: 'nom', label:'Nom', _style: { width: '20%'} },
+    { key: 'sigle', label:'Abbréviation', _style: { width: '20%'} },
+    { key: 'siteWeb', label:'Site web', _style: { width: '20%'} },
+    { key: 'telephone1', label:'Téléphone', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
       key: 'show_details',

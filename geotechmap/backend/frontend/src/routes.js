@@ -14,11 +14,14 @@ const TestTypes = React.lazy(() => import('./views/test_types/TestTypes'));
 const TestForm = React.lazy(() => import('./views/tests/TestForm'));
 const Tests = React.lazy(() => import('./views/tests/Tests'));
 
+const Carte = React.lazy(() => import('./views/carte/Carte'));
+
 
 
 const routes = [
   { path: '/', exact: true, name: 'Accueil' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/carte', exact: true, name: 'Carte', component: Carte },
 
   { path: '/users/create', exact: true, name: 'Ajouter', component: UserForm },//CRAETE
   { path: '/users', exact: true,  name: 'Utilisateurs', component: Users },//READ
