@@ -7,7 +7,7 @@ const Institution = (props) => {
       <CCol lg={6}>
         <CCard>
           <CCardHeader  className="text-muted">
-           Identifiant de l'institutions : {props.institution.id}
+           Identifiant de l'institution : {props.institution.id}
           </CCardHeader>
           <CCardBody>
             <ul>
@@ -20,10 +20,10 @@ const Institution = (props) => {
               <li>Adresse: {props.institution.adresse}</li>
               <li>Numéro fiscal: {props.institution.numeroFiscal}</li>
               <li>Description : {props.institution.description}</li>
-              <li>Créé le : {props.institution.createdDate}</li>
-              <li>Créé par : <a href="#">{props.institution.createdBy}</a></li>
+              <li>Créée le : {props.institution.createdDate}</li>
+              <li>Créée par : <a href="#">{props.institution.createdBy}</a></li>
               <li>Dernière modification : {props.institution.lastModifiedDate}</li>
-              <li>Modifié par: <a href="#">{props.institution.lastModifiedBy}</a></li>
+              <li>Modifiée par: <a href="#">{props.institution.lastModifiedBy}</a></li>
             </ul>
           </CCardBody>
         </CCard>
