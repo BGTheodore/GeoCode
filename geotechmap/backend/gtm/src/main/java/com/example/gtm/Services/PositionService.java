@@ -9,12 +9,22 @@ import com.example.gtm.Repositories.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+
 @Service
 public class PositionService {
     @Autowired
     PositionRepository repository;
 
     public Position createNewPosition(Position position) {
+        GeometryFactory geometryFactory = new GeometryFactory();
+        Coordinate coordinate = new Coordinate(position.getLatitude(), position.getLongitude());
+        Point point = geometryFactory.createPoint(coordinate);
+        point.setSRID(3857);
+        position.setGeom(point);
+
         return repository.save(position);
     }
 
@@ -48,5 +58,15 @@ public class PositionService {
         } else {
             return optional;
         }
+    }
+
+    public List<Position> rechercheAuxEnvirons(String latitude, String longitude) {
+        //On crée un point à partir des coordonnées en paramètre.
+        GeometryFactory geometryFactory = new GeometryFactory();
+        Coordinate coordinate = new Coordinate(Float.parseFloat(latitude), Float.parseFloat(longitude));
+        Point point = geometryFactory.createPoint(coordinate);
+        point.setSRID(3857);
+
+        return repository.rechercheAuxEnvirons(point);
     }
 }

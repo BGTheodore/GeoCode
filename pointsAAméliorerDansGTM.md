@@ -34,3 +34,25 @@
 # 13. [] 
 # 14. [] 
 # 15. [] 
+
+
+
+--------------------
+map la ap genere cote server
+Java : map server
+minimum : 1 map; afficher 1 essai, calculer distance entre essais, afficher detay sou essais;
+diferencier differencent type d'essais yo ak des marqueurs de couleur diff.
+4 server: appication- Bd - fichier - map
+fok gen yon schema pou deploiement system nan.
+MAP SERVER
+
+recuperer point geospacial
+
+
+fok nou gen yon gen yon bd ki gen point geo tout communune
+
+TRAVAY
+travail stoker kelke point and rechercher 
+lap antre yon zone, lap gad si jwenn essai ou pas.
+
+fe tyon schema ki gen departement, communes, ...

@@ -1,5 +1,7 @@
 package com.example.gtm.Entities;
 
+import java.io.Serializable;
+
 // import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +12,15 @@ import javax.persistence.Id;
 // import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
+import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,9 +39,8 @@ import org.locationtech.jts.geom.Point;
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE positions SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted is false")
-
 @EqualsAndHashCode(callSuper=false)//to check
-public class Position extends Auditable<String>{
+public class Position extends Auditable<String> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,7 +80,11 @@ public class Position extends Auditable<String>{
     @Column(length = 255)
     private String adresse;
 
-    @Column(name = "geom")
+
+    @Column(columnDefinition = "geometry(Point)", name = "geom")
+    // @JsonSerialize(using = GeometrySerializer.class)
+    // @JsonDeserialize(contentUsing = GeometryDeserializer.class)
+    @JsonIgnore
     private Point geom;
 
     // @OneToMany(mappedBy = "coordonate")
