@@ -7,7 +7,7 @@ import {
 } from '@coreui/react'
 import Test from "./Essai";
 
-  const Tests = () => {
+  const Essais = () => {
   const [details, setDetails] = useState([])
 
   const toggleDetails = (index,id) => {
@@ -112,7 +112,7 @@ import Test from "./Essai";
                     </CButton>
                   </a>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Suprimmer
+                    Supprimmer
                   </CButton>
                 </CCardBody>
               </CCollapse>
