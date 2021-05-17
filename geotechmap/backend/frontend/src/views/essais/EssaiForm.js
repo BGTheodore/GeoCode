@@ -97,11 +97,11 @@ const BasicForms = ({match}) => {
                           type="select" options={allTestTypes} placeholder="Entrer le nom du type d'essai..."
                            autoComplete="test_type"                       
                            />
-                          <CFormText className="help-block">Veillez entrer le nom du type d'essai</CFormText>
+                          <CFormText className="help-block">Veuillez entrer le nom du type d'essai</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Abbreviation*:" name="abbreviation" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="abbreviation"/>
-                        <CFormText className="help-block">Veillez entrer l'abbréviation du type d'essai</CFormText>
+                        <CFormText className="help-block">Veuillez entrer l'abbréviation du type d'essai</CFormText>
                       </CFormGroup>
                     </CCardBody>
               </CCard>
@@ -114,7 +114,7 @@ const BasicForms = ({match}) => {
                     <CCardBody>  
                       <CFormGroup>
                         <TextField label="Description:" name="description"  placeholder="Entrer la description de téléphone..." autoComplete="description"/>
-                        <CFormText className="help-block">Veillez entrer la description de l'institution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer la description de l'essai</CFormText>
                       </CFormGroup>      
                     </CCardBody>
                     <CCardFooter>
