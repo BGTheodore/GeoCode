@@ -2,13 +2,13 @@ import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { Link } from 'react-router-dom';
 
-const Institution = (props) => {
+const Essai = (props) => {
   return (
     <CRow>
       <CCol lg={6}>
         <CCard>
           <CCardHeader  className="text-muted">
-           Identifiant de l'eessai : {props.essai.id}
+           Identifiant de l'essai : {props.essai.id}
           </CCardHeader>
           <CCardBody>
             <ul>
@@ -24,7 +24,7 @@ const Institution = (props) => {
                 >{props.essai.institution.nom} ({props.essai.institution.sigle})
                 </Link>
               </li>
-              <li>Coodonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
+              <li>Coordonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
               <li>Adresse : {props.essai.position.adresse}</li>
               <li>Résultat :
                 <ul>
@@ -52,4 +52,4 @@ const Institution = (props) => {
   )
 }
 
-export default Institution
+export default Essai
