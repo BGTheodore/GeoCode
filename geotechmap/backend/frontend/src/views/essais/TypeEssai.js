@@ -25,4 +25,4 @@ const TypeEssai = (props) => {
       )
     }
     
-    export default typeEssai
+    export default TypeEssai
