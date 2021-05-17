@@ -12,7 +12,7 @@ const TestTypeForm = React.lazy(() => import('./views/test_types/TestTypeForm'))
 const TestTypes = React.lazy(() => import('./views/test_types/TestTypes'));
 
 const TestForm = React.lazy(() => import('./views/essais/EssaiForm'));
-const Tests = React.lazy(() => import('./views/essais/Tests'));
+const Tests = React.lazy(() => import('./views/essais/Essais'));
 
 const Carte = React.lazy(() => import('./views/carte/Carte'));
 
