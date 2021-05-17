@@ -39,8 +39,7 @@ const BasicForms = ({match}) => {
       .max(45,"Maximum 45 caractères")
       .required("Champs obligatoire"),
     sigle: Yup.string()
-    .max(45,"Maximum 45 caractères")
-    .required("Champs obligatoire"),
+    .max(45,"Maximum 45 caractères"),
     description: Yup.string()
       .max(255,"Maximum 255 caractères"),
         
