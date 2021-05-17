@@ -99,7 +99,7 @@ import TestType from "./TestType";
               <CCollapse show={details.includes(index)}>
                 <TestType testType = {item} />
                 <CCardBody>
-                  <a href={`/#/type_essais/edit/${item.id}`}> 
+                  <a href={`/#/test_types/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>

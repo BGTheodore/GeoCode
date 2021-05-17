@@ -1,6 +1,7 @@
 package com.example.gtm.Controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -74,6 +76,12 @@ public class EssaiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
         public void deleteEssai(@PathVariable Long id) {
             service.deleteEssai(id);
+    }
+
+    @GetMapping(path = "/search")
+    public  ResponseEntity<List<Essai>>  rechercheParmotsCles(@RequestParam String mot_cle){
+        //trim mot_cle
+        return ResponseEntity.ok().body(service.rechercheParmotsCles(mot_cle));
     }
 
 }

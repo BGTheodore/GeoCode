@@ -18,7 +18,7 @@ const BasicForms = ({match}) => {
 
   useEffect(() => {
    if( match.params.id ){
-    fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+match.params.id)
+    fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`+match.params.id)
       .then((response) => response.json())
       .then((json) => setDataForEdit(json))
       

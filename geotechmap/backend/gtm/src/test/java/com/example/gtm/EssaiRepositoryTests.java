@@ -71,6 +71,7 @@ public class EssaiRepositoryTests {
         essai1.setInstitution(institution);
         essai1.setPosition(position);
         essai1.setFichier(fichier);
+        essai1.setMotsCles("bonjour bonsoir test");
 
         when(essaiRepository.findAll()).thenReturn(Stream
         .of(essai1).collect(Collectors.toList()));
