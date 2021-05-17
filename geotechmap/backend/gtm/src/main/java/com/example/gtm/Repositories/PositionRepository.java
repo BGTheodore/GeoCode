@@ -8,8 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
+
 import org.locationtech.jts.geom.Point;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {

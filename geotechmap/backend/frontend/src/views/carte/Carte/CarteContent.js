@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useContext } from "react";
 import { Tooltip, Marker, Popup, TileLayer, MapContainer, LayersControl } from 'react-leaflet';
-import {Icon } from 'leaflet';
-import useSwr from 'swr';
+// import {Icon } from 'leaflet';
+// import useSwr from 'swr';
+import Search from '../Search';
+import { CounterContext } from "../EssaisContext";
+// const Carte = (props) => {
+  export default function CarteContent() { 
+    const [essais, setEssais] = useContext(CounterContext);
+    //const [ activeCrime, setActiveCrime] = React.useState(null);
+  //   const fetcher = (...args) => fetch(...args).then(response => response.json());
+  //   const url = 
+  //   "http://localhost:8080/api/essais"
+  //   // "https://data.police.uk/api/crimes-street/all-crime?lat=52.6297296&lng=-1.1315927&date=2019-10"
+  //  const { data, error } = useSwr(url, {fetcher });
 
-const Carte = (props) => {
-    const [ activeCrime, setActiveCrime] = React.useState(null);
-    const fetcher = (...args) => fetch(...args).then(response => response.json());
-    const url = 
-    "http://localhost:8080/api/essais"
-    // "https://data.police.uk/api/crimes-street/all-crime?lat=52.6297296&lng=-1.1315927&date=2019-10"
-   const { data, error } = useSwr(url, {fetcher });
-
-   const essais = data && !error ? data.slice(0,100): [];
+  //  const essais = data && !error ? data.slice(0,100): [];
 
     const position = [51.505, -0.09]
   return (
-    <MapContainer style={{height:'70vh', width:'100%'}} center={[19.0558, -73.0513]} zoom={9} scrollWheelZoom={true}>
+  <div>
+    <Search />
+       <MapContainer style={{height:'70vh', width:'100%'}} center={[19.0558, -73.0513]} zoom={9} scrollWheelZoom={true}>
     <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -44,10 +49,10 @@ const Carte = (props) => {
 
 
 
-    {essais.map(essai => (
-        <>{console.log(essai.createdBy)}
+     {essais.map(essai => (
+        < div key={essai.id} >
         <Marker
-        key={essai.id}
+      
         position={[essai.position.latitude, 
         essai.position.longitude]}
         // onClick = {() => {
@@ -78,11 +83,14 @@ const Carte = (props) => {
        
     
      
-        </>
+        </div>
         
-    ))}
+    )
+    )} 
   </MapContainer>
+  </div>
+   
   )
 }
 
-export default Carte
+// export default Carte

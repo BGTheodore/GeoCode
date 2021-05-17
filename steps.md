@@ -87,6 +87,9 @@ $ npm run serve
 # 4.  [] build for production with minification
 $ npm run build
 
+important for refac:
+https://www.sitepoint.com/replace-redux-react-hooks-context-api/
+
 
 
 <<<Unit test>>>

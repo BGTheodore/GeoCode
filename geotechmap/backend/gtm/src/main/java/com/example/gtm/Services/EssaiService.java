@@ -55,4 +55,8 @@ public class EssaiService {
         }
     }
 
+    public List<Essai> rechercheParmotsCles(String mot_cle) {
+        return repository.rechercheParmotsCles(mot_cle);
+    }
+
 }
