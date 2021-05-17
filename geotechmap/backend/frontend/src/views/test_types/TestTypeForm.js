@@ -97,7 +97,7 @@ const BasicForms = ({match}) => {
                       <CFormGroup>
                         <TextField label="Sigle:" name="sigle" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="sigle"/>
                         <CFormText className="help-block">Veillez entrer l'abbréviation du type d'essai</CFormText>
-                      </CFormGroup>
+                      </CFormGroup> 
                     </CCardBody>
               </CCard>
             </CCol>
