@@ -35,6 +35,8 @@
 # 14. [] 
 # 15. [] 
 
+[INDEX_IN_OU_DB]
+https://www.baeldung.com/jpa-indexes
 
 
 --------------------

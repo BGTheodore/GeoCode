@@ -3,14 +3,17 @@ package com.example.gtm.Entities;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,7 +26,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "essais")
+@Table(name = "essais", indexes = @Index(name = "essais_mots_cles_index", columnList = "mots_cles"))
 @SQLDelete(sql = "UPDATE essais SET is_deleted = TRUE WHERE id = ?")
 @Where(clause = "is_deleted is false")
 @Data
@@ -49,4 +52,8 @@ public class Essai extends Auditable<String>  {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_fichier")
     private Fichier fichier;
+
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(name="mots_cles", length = 255)
+    private String motsCles;
 }
