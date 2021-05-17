@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.example.gtm.Entities.TypeEssai;
-import com.example.gtm.Repositories.TypeEssaiRepository;
-import com.example.gtm.Services.TypeEssaiService;
+import com.example.gtm.Entities.Fichier;
+import com.example.gtm.Repositories.FichierRepository;
+import com.example.gtm.Services.FichierService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,42 +24,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/type_essais")
+@RequestMapping("/api/fichiers")
 @CrossOrigin(origins = "http://localhost:3000")
-public class TypeEssaiController {
+public class FichierController {
     @Autowired
-    TypeEssaiService service;
-    TypeEssaiRepository repository;
+    FichierService service;
+    FichierRepository repository;
 
-    //Create a TypeEssai
+    //Create a File
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<TypeEssai> createNewTypeEssai(@Valid @RequestBody TypeEssai typeEssai) {         
-            TypeEssai createdTypeEssai = service.createNewTypeEssai(typeEssai);
-            return new ResponseEntity<>(createdTypeEssai, HttpStatus.CREATED);
+    public ResponseEntity<Fichier> createNewFichier(@Valid @RequestBody Fichier fichier) {         
+        Fichier createdFichier = service.createNewFichier(fichier);
+            return new ResponseEntity<>(createdFichier, HttpStatus.CREATED);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseEntity<List<TypeEssai>>  getAllTypeEssais(){
-        return ResponseEntity.ok().body(service.listAllTypeEssais());
+    public  ResponseEntity<List<Fichier>>  getAllFichiers(){
+        return ResponseEntity.ok().body(service.listAllFichiers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<TypeEssai>> getTypeEssai(@PathVariable Long id){
-        return ResponseEntity.ok().body(service.getTypeEssai(id));
+    public ResponseEntity<Optional<Fichier>> getFichier(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.getFichier(id));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TypeEssai> updateTypeEssai(@RequestBody TypeEssai typeEssai, @PathVariable Long id) {
-        return ResponseEntity.ok().body(service.updateTypeEssai(id, typeEssai));
+    public ResponseEntity<Fichier> updateFichier(@RequestBody Fichier fichier, @PathVariable Long id) {
+        return ResponseEntity.ok().body(service.updateFichier(id, fichier));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteTypeEssai(@PathVariable Long id) {
-            service.deleteTypeEssai(id);
+        public void deleteFichier(@PathVariable Long id) {
+            service.deleteFichier(id);
     }
     
 }
