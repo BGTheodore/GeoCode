@@ -11,7 +11,7 @@ const Institutions = React.lazy(() => import('./views/institutions/Institutions'
 const TestTypeForm = React.lazy(() => import('./views/test_types/TestTypeForm'));
 const TestTypes = React.lazy(() => import('./views/test_types/TestTypes'));
 
-const TestForm = React.lazy(() => import('./views/essais/TestForm'));
+const TestForm = React.lazy(() => import('./views/essais/EssaiForm'));
 const Tests = React.lazy(() => import('./views/essais/Tests'));
 
 const Carte = React.lazy(() => import('./views/carte/Carte'));
