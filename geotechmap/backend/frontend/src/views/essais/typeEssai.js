@@ -12,18 +12,11 @@ const TypeEssai = (props) => {
               <CCardBody>
                 <ul>
                   <li>Nom : {props.typeEssai.nom}</li>
-                  <li>Sigle : {props.institution.sigle}</li>
-                  <li>Site web : {props.institution.siteWeb}</li>
-                  <li>Email : {props.institution.email}</li>
-                  <li>Téléphone 1 : {props.institution.telephone1}</li>
-                  <li>Téléphone 2 : {props.institution.telephone1}</li>
-                  <li>Adresse: {props.institution.adresse}</li>
-                  <li>Numéro fiscal: {props.institution.numeroFiscal}</li>
-                  <li>Description : {props.institution.description}</li>
-                  <li>Créée le : {props.institution.createdDate}</li>
-                  <li>Créée par : <a href="#">{props.institution.createdBy}</a></li>
-                  <li>Dernière modification : {props.institution.lastModifiedDate}</li>
-                  <li>Modifiée par: <a href="#">{props.institution.lastModifiedBy}</a></li>
+                  <li>Description : {props.typeEssai.description}</li>
+                  <li>Créé le : {props.typeEssai.createdDate}</li>
+                  <li>Créé par : <a href="#">{props.typeEssai.createdBy}</a></li>
+                  <li>Dernière modification : {props.typeEssai.lastModifiedDate}</li>
+                  <li>Modifié par: <a href="#">{props.typeEssai.lastModifiedBy}</a></li>
                 </ul>
               </CCardBody>
             </CCard>
