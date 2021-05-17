@@ -18,12 +18,12 @@ const BasicForms = ({match}) => {
 
   useEffect(() => {
     //__START fetch all test types for the select field
-      fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`)
         .then((response) => response.json())
         .then((json) => setAllTestTypes(json))
     //__END fetch all test types for the select field
    if( match.params.id ){
-    fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+match.params.id)
+    fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
       .then((response) => response.json())
       .then((json) => setDataForEdit(json))   
    }
@@ -67,11 +67,11 @@ const BasicForms = ({match}) => {
         
         //check if it is POST or PUT
         if(match.params.id){
-          fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`+match.params.id, requestOptions)
+          fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id, requestOptions)
             .then(response => response.json())
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
         }else{
-            fetch(`${process.env.REACT_APP_API_URL}/api/testtypes/`, requestOptions)
+            fetch(`${process.env.REACT_APP_API_URL}/api/essais/`, requestOptions)
             .then(response => response.json())
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
           }
