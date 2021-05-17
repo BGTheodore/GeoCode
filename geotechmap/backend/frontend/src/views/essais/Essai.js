@@ -14,7 +14,7 @@ const Essai = (props) => {
             <ul>
               <li>Type d'essai :
                 <Link 
-                to={`/test_types/edit/${props.essai.typeEssai.id}`} 
+                to={`/type_essais/edit/${props.essai.typeEssai.id}`} 
                 >{props.essai.typeEssai.nom}
                 </Link>
               </li>
