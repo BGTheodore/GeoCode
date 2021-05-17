@@ -5,7 +5,7 @@ import {
   CButton,
   CCollapse,
 } from '@coreui/react'
-import Test from "./Test";
+import Test from "./Essai";
 
   const Tests = () => {
   const [details, setDetails] = useState([])
