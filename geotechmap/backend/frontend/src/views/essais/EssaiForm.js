@@ -52,11 +52,11 @@ const BasicForms = ({match}) => {
       .max(255,"Maximum 255 caractères")
       .required("Champs obligatoire"),
     adresse: Yup.string()
-    .required("Champs obligatoire")
       .max(255,"Maximum 255 caractères"),
     fichier: Yup.string()
       .max(255,"Maximum 255 caractères"),
   })
+  .required("Champs obligatoire")
   
   return (
     <Formik
@@ -131,7 +131,7 @@ const BasicForms = ({match}) => {
                         <CFormText className="help-block">Veuillez entrer l'adresse</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Fichier*:" name="fichier" 
+                        <TextField label="Fichier:" name="fichier" 
                         type="text" placeholder="Entrer le fichier" autoComplete="fichier"/>
                         <CFormText className="help-block">Veuillez entrer le fichier</CFormText>
                       </CFormGroup>      
