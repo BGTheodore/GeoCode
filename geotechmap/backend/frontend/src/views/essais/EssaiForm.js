@@ -18,9 +18,9 @@ const BasicForms = ({match}) => {
 
   useEffect(() => {
     //__START fetch all test types for the select field
-      // fetch(`${process.env.REACT_APP_API_URL}/api/essais/`)
-      //   .then((response) => response.json())
-      //   .then((json) => setAllTest(json))
+      fetch(`${process.env.REACT_APP_API_URL}/api/essais/`)
+        .then((response) => response.json())
+        .then((json) => setAllTestTypes(json))
     //__END fetch all test types for the select field
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
