@@ -18,9 +18,9 @@ const BasicForms = ({match}) => {
 
   useEffect(() => {
     //__START fetch all test types for the select field
-      fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`)
-        .then((response) => response.json())
-        .then((json) => setAllTestTypes(json))
+      // fetch(`${process.env.REACT_APP_API_URL}/api/essais/`)
+      //   .then((response) => response.json())
+      //   .then((json) => setAllTest(json))
     //__END fetch all test types for the select field
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
@@ -31,8 +31,11 @@ const BasicForms = ({match}) => {
 
   const initVal ={
     name: '',
-    abbreviation:'',
-    description:'',
+    typeEssai:'',
+    institution:'',
+    coordonnées:'',
+    adresse:'',
+    fichier:''
   }
   const [dataForEdit, setDataForEdit] = useState(null);
   const [allTestTypes, setAllTestTypes] = useState(null);
