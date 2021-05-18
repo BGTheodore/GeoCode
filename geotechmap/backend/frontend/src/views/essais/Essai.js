@@ -12,7 +12,7 @@ const Essai = (props) => {
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Type d'essai :
+              <li>Bonjour :
                 <Link 
                 to={`/type_essais/edit/${props.essai.typeEssai.id}`} 
                 >{props.essai.typeEssai.nom}
