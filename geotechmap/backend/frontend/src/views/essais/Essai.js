@@ -12,7 +12,7 @@ const Essai = (props) => {
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Bonjour :
+              <li>Type d'essai :
                 <Link 
                 to={`/type_essais/edit/${props.essai.typeEssai.id}`} 
                 >{props.essai.typeEssai.nom}
@@ -26,20 +26,7 @@ const Essai = (props) => {
               </li>
               <li>Coordonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
               <li>Adresse : {props.essai.position.adresse}</li>
-              <li>Résultat :
-                <ul>
-                  <li>Document: 
-                    <Link 
-                      to={`/institutions/edit/${props.essai.fichier.lien}`} 
-                      > Cliquez ici
-                    </Link>
-                  </li>
-                  <li>Format: {props.essai.fichier.format}</li>
-                  <li>Capacité: {props.essai.fichier.capacite}</li>
-               </ul>
-
-                
-              </li>
+              <li>Fichier : {props.essai.fichier.id}</li>
               <li>Créé le : {props.essai.createdDate}</li>
               <li>Créé par : <a href="#">{props.essai.createdBy}</a></li>
               <li>Dernière modification : {props.essai.lastModifiedDate}</li>
