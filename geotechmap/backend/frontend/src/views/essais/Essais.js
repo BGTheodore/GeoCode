@@ -24,9 +24,11 @@ import Test from "./Essai";
 
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
-    { key: 'typeEssai', label:'Type d\'esai', _style: { width: '20%'} },
-    { key: 'sigle', label:'Sigle', _style: { width: '20%'} },
-    { key: 'description', label:'Description', _style: { width: '20%'} },
+    { key: 'idTypeEssai', label:'Type d\'essai', _style: { width: '20%'} },
+    { key: 'idInstitution', label:'Institution', _style: { width: '20%'} },
+    { key: 'idCoordonnee', label:'Coordonnées', _style: { width: '20%'} },
+    { key: 'adresse', label:'Adresse', _style: { width: '20%'} },
+    { key: 'idFichier', label:'Fichier', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
       key: 'show_details',
