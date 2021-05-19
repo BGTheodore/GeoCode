@@ -62,7 +62,7 @@ public class EssaiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Essai>> getEssai(@PathVariable Long id){
+    public ResponseEntity<Essai> getEssai(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getEssai(id));
     }
 

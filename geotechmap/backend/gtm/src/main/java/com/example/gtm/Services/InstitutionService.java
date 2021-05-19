@@ -42,12 +42,12 @@ public class InstitutionService {
         }
     }
 
-    public Optional<Institution> getInstitution(Long id) {
+    public Institution getInstitution(Long id) {
         Optional<Institution> optional = repository.findById(id);
         if (!optional.isPresent()){
             throw new ResourceNotFoundException("Institution not found with id :" + id );
         } else {
-            return optional;
+            return optional.get();
         }
     }
 }
