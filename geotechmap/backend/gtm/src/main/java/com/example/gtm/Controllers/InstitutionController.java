@@ -45,7 +45,8 @@ public class InstitutionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Institution>> getInstitution(@PathVariable Long id){
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Institution> getInstitution(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getInstitution(id));
     }
 

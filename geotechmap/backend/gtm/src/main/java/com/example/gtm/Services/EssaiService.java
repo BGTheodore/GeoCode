@@ -46,12 +46,12 @@ public class EssaiService {
         }
     }
 
-    public Optional<Essai> getEssai(Long id) {
+    public Essai getEssai(Long id) {
         Optional<Essai> optional = repository.findById(id);
         if (!optional.isPresent()) {
         throw new ResourceNotFoundException("Essai not found with id :" + id);
         } else {
-        return optional;
+        return optional.get();
         }
     }
 

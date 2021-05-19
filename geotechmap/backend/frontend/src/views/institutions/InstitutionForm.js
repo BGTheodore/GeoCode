@@ -26,14 +26,14 @@ const BasicForms = ({match}) => {
   }, []);
 
   const initVal ={
-    name: '',
-    acronym:'',
-    address:'',
-    phone1:'',
-    phone2:'',
+    nom: '',
+    sigle:'',
+    adresse:'',
+    telephone1:'',
+    telephone2:'',
     email:'',
-    website:'',
-    taxNumber:'',
+    siteWeb:'',
+    numeroFiscal:'',
     description:'',
   }
   const [dataForEdit, setDataForEdit] = useState(null);

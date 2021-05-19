@@ -18,10 +18,17 @@ const BasicForms = ({match}) => {
 
   useEffect(() => {
     //__START fetch all test types for the select field
-      fetch(`${process.env.REACT_APP_API_URL}/api/essais/`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`)
         .then((response) => response.json())
         .then((json) => setAllTestTypes(json))
     //__END fetch all test types for the select field
+
+    //__START fetch all test types for the select field
+      fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`)
+      .then((response) => response.json())
+      .then((json) => setAllInstitutions(json))
+    //__END fetch all test types for the select field
+    
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
       .then((response) => response.json())
@@ -37,7 +44,8 @@ const BasicForms = ({match}) => {
     fichier:''
   }
   const [dataForEdit, setDataForEdit] = useState(null);
-  const [allTestTypes, setAllTestTypes] = useState(null);
+  const [allTestTypes, setAllTestTypes] = useState([]);
+  const [allInstitutions, setAllInstitutions] = useState([]);
   const [alert, setAlert] = React.useState({ 
     isActive: false, status: '', message: '',})
 
@@ -102,13 +110,12 @@ const BasicForms = ({match}) => {
                     <CCardBody>
                       <CFormGroup>
                           <TextField  label="Type d'essai*:" name="test_type" 
-                          type="select" options={allTestTypes} placeholder="Entrer le type d'essai..."
-                           autoComplete="test_type"/>
+                          type="select" options={allTestTypes} placeholder="Entrer le type d'essai..."/>
                           <CFormText className="help-block">Veuillez entrer le type d'essai</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Institution*:" name="institution" 
-                        type="text" placeholder="Entrer l'institution" autoComplete="institution"/>
+                         type="select" options={allInstitutions} placeholder="Entrer l'institution" />
                         <CFormText className="help-block">Veuillez entrer l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>

@@ -42,12 +42,12 @@ public class TypeEssaiService {
         }
     }
 
-    public Optional<TypeEssai> getTypeEssai(Long id) {
+    public TypeEssai getTypeEssai(Long id) {
         Optional<TypeEssai> optional = repository.findById(id);
         if (!optional.isPresent()) {
         throw new ResourceNotFoundException("Type Essai not found with id :" + id);
         } else {
-        return optional;
+        return optional.get();
         }
     }
 }

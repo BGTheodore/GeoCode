@@ -24,9 +24,9 @@ import Test from "./Essai";
 
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
-    { key: 'idTypeEssai', label:'Type d\'essai', _style: { width: '20%'} },
-    { key: 'idInstitution', label:'Institution', _style: { width: '20%'} },
-    { key: 'idCoordonnee', label:'Coordonnées', _style: { width: '20%'} },
+    { key: 'typeEssai', label:'Type d\'essai', _style: { width: '20%'} },
+    { key: 'institution', label:'Institution', _style: { width: '20%'} },
+    { key: 'departement', label:'Département', _style: { width: '20%'} },
     { key: 'adresse', label:'Adresse', _style: { width: '20%'} },
     { key: 'idFichier', label:'Fichier', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
@@ -99,7 +99,25 @@ import Test from "./Essai";
           'typeEssai':
           (item)=>{
             return (
-              <td> {item.typeEssai.nom} </td>
+              <td>{item.typeEssai.nom}</td>
+              )
+          },
+          'institution':
+          (item)=>{
+            return (
+              <td>{item.institution.nom} ({item.institution.sigle})</td>
+              )
+          },
+          'departement':
+          (item)=>{
+            return (
+              <td>{item.position.departement}</td>
+              )
+          },
+          'adresse':
+          (item)=>{
+            return (
+              <td>{item.position.adresse}</td>
               )
           },
         'details':
