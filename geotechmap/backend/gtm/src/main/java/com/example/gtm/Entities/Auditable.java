@@ -5,6 +5,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -27,6 +29,7 @@ public abstract class Auditable<U> {
 
     @CreatedDate
     @Temporal(TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     protected Date createdDate;
 
     @LastModifiedBy
@@ -34,6 +37,7 @@ public abstract class Auditable<U> {
 
     @LastModifiedDate
     @Temporal(TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     protected Date lastModifiedDate;
 
     @Column(nullable = true)

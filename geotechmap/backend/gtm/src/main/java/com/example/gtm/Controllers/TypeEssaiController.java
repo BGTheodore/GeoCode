@@ -46,7 +46,7 @@ public class TypeEssaiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<TypeEssai>> getTypeEssai(@PathVariable Long id){
+    public ResponseEntity<TypeEssai> getTypeEssai(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getTypeEssai(id));
     }
 
