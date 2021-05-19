@@ -1,7 +1,7 @@
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 
-const Institution = (props) => {
+const TypeEssai = (props) => {
   return (
     <CRow>
       <CCol lg={6}>
@@ -26,4 +26,4 @@ const Institution = (props) => {
   )
 }
 
-export default Institution
+export default TypeEssai

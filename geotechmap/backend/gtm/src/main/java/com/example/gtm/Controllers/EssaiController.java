@@ -46,7 +46,7 @@ public class EssaiController {
                 GeometryFactory geometryFactory = new GeometryFactory();
                 Coordinate coordinate = new Coordinate(essai.getPosition().getAltitude(), essai.getPosition().getLongitude());
                 Point point = geometryFactory.createPoint(coordinate);
-                point.setSRID(3857);//Nous devont choisir un SRID (old 4326)
+                point.setSRID(3857);//Nous devons choisir un SRID (old 4326) WGS84
                 Position position = essai.getPosition();
                 position.setGeom(point);
                 essai.setPosition(position);

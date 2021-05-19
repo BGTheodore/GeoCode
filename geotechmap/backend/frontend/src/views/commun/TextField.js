@@ -11,14 +11,14 @@ export const TextField = ({label, type, options, ...props}) => {
             {type == "textarea" ?
             <textarea 
             className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid' }`}
-            placeholder="Veillez entrer la description..."
+            placeholder="Veuillez entrer la description..."
             rows="6"
             {...field} {...props}
             ></textarea>:
             type == "select" ?
             <CSelect custom name="select" id="select">
                  { options.map((option, key) => {              
-                    return <option key={key} value="0">{option.nom}</option>
+                    return <option key={key} value={option.id}>{option.nom}</option>
                     })}      
             </CSelect>:
             type == "file" ?

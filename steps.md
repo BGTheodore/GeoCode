@@ -76,7 +76,7 @@ https://github.com/RameshMF/todo-management-spring-boot/blob/master/src/main/jav
 
 <<<<<Frontend>>>>>
 # 1.  [] Download Coreui admin template
->>>https://coreui.io/react/demo/3.1.0/dark/#/dashboard
+>>>https://cohttps://coreui.io/react/demo/3.1.0/dark/#/dashboardreui.io/react/demo/3.1.0/dark/#/dashboard
 >>>https://coreui.io/react/?affChecked=1#compare
 # 2.  [] install app's dependencies
 $ npm install
