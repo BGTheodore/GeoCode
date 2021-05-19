@@ -114,26 +114,26 @@ const BasicForms = ({match}) => {
                           type="text" placeholder="Entrer le nom de l'institution..." 
                           autoComplete="nom" 
                           />
-                          <CFormText className="help-block">Veillez entrer le nom de l'institution</CFormText>
+                          <CFormText className="help-block">Veuillez entrer le nom de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                           <TextField label="Sigle:" name="sigle" 
                           type="text" placeholder="Entrer le sigle de l'institution..." 
                           autoComplete="sigle" 
                           />
-                          <CFormText className="help-block">Veillez entrer le sigle de l'institution</CFormText>
+                          <CFormText className="help-block">Veuillez entrer le sigle de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Adresse*:" name="adresse" type="text" placeholder="Entrer l'adresse de l'institution.." autoComplete="adresse"/>
-                        <CFormText className="help-block">Veillez entrer l'adresse de l'intitution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer l'adresse de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Téléphone 1:" name="telephone1" type="text" placeholder="Entrer un numéro de téléphone..." autoComplete="telephone1"/>
-                        <CFormText className="help-block">Veillez entrer un numéro de téléphone de l'institution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer un numéro de téléphone de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Téléphone 2:" name="telephone2" type="text" placeholder="Entrer un auntre numéro de téléphone..." autoComplete="telephone2"/>
-                        <CFormText className="help-block">Veillez entrer un autre numéro de téléphone de l'institution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer un autre numéro de téléphone de l'institution</CFormText>
                       </CFormGroup>
                     </CCardBody>
               </CCard>
@@ -146,19 +146,19 @@ const BasicForms = ({match}) => {
                     <CCardBody>
                       <CFormGroup>
                         <TextField label="Email*:" name="email" type="text" placeholder="Enter l'email de l'institution..." autoComplete="email"/>
-                        <CFormText className="help-block">Veillez entrer l'email de l'institution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer l'email de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                           <TextField label="Site web:" name="siteWeb" type="text" placeholder="Entrer le site web de l'institution..." autoComplete="siteWeb" />
-                          <CFormText className="help-block">Veillez entrer le site web de l'institution</CFormText>
+                          <CFormText className="help-block">Veuillez entrer le site web de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Numéro social:" name="numeroFiscal" type="text" placeholder="Entrer le numéro social de l'institution.." autoComplete="numeroFiscal"/>
-                        <CFormText className="help-block">Veillez entrer le numéro social de l'intitution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer le numéro social de l'intitution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Description:" type="textarea" name="description" placeholder="Entrer la description de téléphone..." autoComplete="description"/>
-                        <CFormText className="help-block">Veillez entrer la description de l'institution</CFormText>
+                        <CFormText className="help-block">Veuillez entrer la description de l'institution</CFormText>
                       </CFormGroup>      
                     </CCardBody>
                     <CCardFooter>

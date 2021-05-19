@@ -37,10 +37,9 @@ const BasicForms = ({match}) => {
   const validate = Yup.object({
     nom: Yup.string()
       .max(45,"Maximum 45 caractères")
-      .required("Champs obligatire"),
+      .required("Champs obligatoire"),
     sigle: Yup.string()
-    .max(45,"Maximum 45 caractères")
-    .required("Champs obligatire"),
+    .max(45,"Maximum 45 caractères"),
     description: Yup.string()
       .max(255,"Maximum 255 caractères"),
         
@@ -96,9 +95,9 @@ const BasicForms = ({match}) => {
                           <CFormText className="help-block">Veillez entrer le nom du type d'essai</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Sigle*:" name="sigle" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="sigle"/>
+                        <TextField label="Sigle:" name="sigle" type="text" placeholder="Entrer l'abbréviation du type d'essai.." autoComplete="sigle"/>
                         <CFormText className="help-block">Veillez entrer l'abbréviation du type d'essai</CFormText>
-                      </CFormGroup>
+                      </CFormGroup> 
                     </CCardBody>
               </CCard>
             </CCol>

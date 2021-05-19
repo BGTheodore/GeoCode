@@ -106,7 +106,7 @@ import Institution from "./Institution";
                     </CButton>
                   </a>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Suprimmer
+                    Supprimmer
                   </CButton>
                 </CCardBody>
               </CCollapse>

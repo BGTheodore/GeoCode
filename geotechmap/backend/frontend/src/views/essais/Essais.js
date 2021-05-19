@@ -5,9 +5,9 @@ import {
   CButton,
   CCollapse,
 } from '@coreui/react'
-import Test from "./Test";
+import Test from "./Essai";
 
-  const Tests = () => {
+  const Essais = () => {
   const [details, setDetails] = useState([])
 
   const toggleDetails = (index,id) => {
@@ -24,9 +24,11 @@ import Test from "./Test";
 
   const fields = [
     { key: 'id', label:'ID', _style: { width: '2%'} },
-    { key: 'typeEssai', labsigleel:'Type d\'esai', _style: { width: '20%'} },
-    { key: 'sigle', label:'Sigle', _style: { width: '20%'} },
-    { key: 'description', label:'Description', _style: { width: '20%'} },
+    { key: 'idTypeEssai', label:'Type d\'essai', _style: { width: '20%'} },
+    { key: 'idInstitution', label:'Institution', _style: { width: '20%'} },
+    { key: 'idCoordonnee', label:'Coordonnées', _style: { width: '20%'} },
+    { key: 'adresse', label:'Adresse', _style: { width: '20%'} },
+    { key: 'idFichier', label:'Fichier', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
       key: 'show_details',
@@ -112,7 +114,7 @@ import Test from "./Test";
                     </CButton>
                   </a>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Suprimmer
+                    Supprimmer
                   </CButton>
                 </CCardBody>
               </CCollapse>
@@ -124,4 +126,4 @@ import Test from "./Test";
     
   )
     }
-  export default Tests
+  export default Essais
