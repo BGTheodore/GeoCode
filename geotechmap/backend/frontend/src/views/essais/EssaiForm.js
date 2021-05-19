@@ -11,7 +11,8 @@ import {
   CFormGroup,
   CFormText,
   CRow,
-  CAlert
+  CAlert,
+  CLabel,CInputFile
 } from '@coreui/react'
 
 const BasicForms = ({match}) => {
@@ -28,7 +29,7 @@ const BasicForms = ({match}) => {
       .then((response) => response.json())
       .then((json) => setAllInstitutions(json))
     //__END fetch all test types for the select field
-    
+
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
       .then((response) => response.json())
@@ -61,6 +62,8 @@ const BasicForms = ({match}) => {
       .required("Champs obligatoire"),
     adresse: Yup.string()
       .max(255,"Maximum 255 caractères"),
+    motsCles: Yup.string()
+    .max(255,"Maximum 255 caractères"),
     fichier: Yup.string()
       .max(255,"Maximum 255 caractères"),
   })
@@ -129,19 +132,32 @@ const BasicForms = ({match}) => {
             <CCol xs="12" sm="6">
               <CCard>
                   <CCardHeader>
-                  Informations sur le type d'essai   {  match.params.id}
+                  Informations sur l'essai   {  match.params.id}
                  </CCardHeader>
                     <CCardBody>  
-                    <CFormGroup>
+                      <CFormGroup>
                         <TextField label="Adresse:" name="adresse" 
                         type="text" placeholder="Entrer l'adresse" autoComplete="adresse"/>
                         <CFormText className="help-block">Veuillez entrer l'adresse</CFormText>
                       </CFormGroup>
                       <CFormGroup>
+                        <TextField label="Mots clés:" name="motsCles" 
+                        type="textarea" placeholder="Entrer les mots clés" autoComplete="motsCles"/>
+                        <CFormText className="help-block">Veuillez entrer les mots clés</CFormText>
+                      </CFormGroup>
+                      <CFormGroup >
                         <TextField label="Fichier:" name="fichier" 
-                        type="text" placeholder="Entrer le fichier" autoComplete="fichier"/>
+                        type="file" placeholder="Entrer le fichier" autoComplete="fichier"/>
                         <CFormText className="help-block">Veuillez entrer le fichier</CFormText>
-                      </CFormGroup>      
+                      </CFormGroup> 
+                      {/* <CFormGroup row>
+                      <CCol xs="12" md="12">
+                        <CInputFile custom id="custom-file-input"/>
+                        <CLabel htmlFor="custom-file-input" variant="custom-file">
+                          Choose file...
+                        </CLabel>
+                      </CCol>
+                    </CFormGroup>      */}
                     </CCardBody>
                     <CCardFooter>
                       <button className="btn btn-dark mt-3" type="submit">{match.params.id ? 'Modifier': 'Enregistrer'} </button>
