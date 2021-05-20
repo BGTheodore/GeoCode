@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
+import logo from './target.svg';
 
 // sidebar nav config
 import navigation from './_nav'
@@ -26,19 +27,20 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" style={{color:'black'}} to="/">
        <h4>Ge</h4>
-      <CIcon
+      {/* <CIcon
           className="c-sidebar-brand-full"
-          name="cilLocationPin"
+          name="target"
           height={25}
-        />
+        /> */}
+         <img src={logo}  width="30" height="30" alt="logo" style={{marginRight:'-5px'}}></img>
         <h4>TechMap</h4>
-        <CIcon
+        {/* <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
           height={35}
-        />
+        /> */}
       </CSidebarBrand>
       <CSidebarNav>
 

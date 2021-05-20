@@ -54,10 +54,10 @@ const BasicForms = ({match}) => {
 
   const validate = Yup.object({
     typeEssai: Yup.string()
-    .max(45,"Maximum 45 caractères")
-    .required("Champs obligatoire"),
+      .max(45,"Maximum 45 caractères")
+      .required("Champs obligatoire"),
     institution: Yup.string()
-      .max(255,"Maximum 255 caractères")
+      .max(45,"Maximum 45 caractères")
       .required("Champs obligatoire"),
     latitude: Yup.string()
       .max(255,"Maximum 255 caractères")
@@ -75,7 +75,7 @@ const BasicForms = ({match}) => {
     fichier: Yup.string()
       .max(255,"Maximum 255 caractères"),
   })
-  .required("Champs obligatoire")
+  
   
   return (
     <Formik
@@ -85,7 +85,7 @@ const BasicForms = ({match}) => {
       enableReinitialize
       validationSchema= {validate}
       onSubmit={values => {
-       console.log(values)
+      //  console.log(values)
           const requestOptions = {
             method: match.params.id ?'PUT':'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -125,3 +125,7 @@ https://www.youtube.com/watch?v=LJkkFx7zJJQ
 
 <<<gis>>>
 https://bocharoviliyav.blog/java/2021/02/03/Spring-Boot-Postgis-Example.html
+
+
+<<<logo>>>
+https://thenounproject.com/term/location/1608723/

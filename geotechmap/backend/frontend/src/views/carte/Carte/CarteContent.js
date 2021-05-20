@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Tooltip, Marker, Popup, TileLayer, MapContainer, LayersControl } from 'react-leaflet';
-// import {Icon } from 'leaflet';
+ //import {Icon } from 'leaflet';
+
 // import useSwr from 'swr';
 import Search from '../Search';
 import { CounterContext } from "../EssaisContext";
+
 // const Carte = (props) => {
   export default function CarteContent() { 
     const [essais, setEssais] = useContext(CounterContext);
@@ -52,7 +54,6 @@ import { CounterContext } from "../EssaisContext";
      {essais.map(essai => (
         < div key={essai.id} >
         <Marker
-      
         position={[essai.position.latitude, 
         essai.position.longitude]}
         // onClick = {() => {
