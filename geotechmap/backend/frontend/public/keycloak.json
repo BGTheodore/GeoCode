@@ -1,5 +1,5 @@
 {
-  "realm": "GTM",
+  "realm": "master",
   "auth-server-url": "http://localhost:8090/auth/",
   "ssl-required": "external",
   "resource": "react-app",
