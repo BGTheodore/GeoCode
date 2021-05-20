@@ -16,7 +16,7 @@ export const TextField = ({label, type, options, ...props}) => {
             {...field} {...props}
             ></textarea>:
             type == "select" ?
-            <CSelect custom name="select" id="select">
+            <CSelect custom id="select">
                  { options.map((option, key) => {              
                     return <option key={key} value={option.id}>{option.nom}</option>
                     })}      
