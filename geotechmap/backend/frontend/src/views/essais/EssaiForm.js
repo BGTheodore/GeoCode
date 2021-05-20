@@ -40,8 +40,10 @@ const BasicForms = ({match}) => {
   const initVal ={
     typeEssai:'',
     institution:'',
-    coordonnees:'',
-    adresse:'',
+    latitude:'',
+    longitude:'',
+    altitude:'',
+    commentaire:'',
     fichier:''
   }
   const [dataForEdit, setDataForEdit] = useState(null);
@@ -57,10 +59,16 @@ const BasicForms = ({match}) => {
     institution: Yup.string()
       .max(255,"Maximum 255 caractères")
       .required("Champs obligatoire"),
-    coordonnees: Yup.string()
+    latitude: Yup.string()
       .max(255,"Maximum 255 caractères")
       .required("Champs obligatoire"),
-    adresse: Yup.string()
+    longitude: Yup.string()
+      .max(255,"Maximum 255 caractères")
+      .required("Champs obligatoire"),
+    altitude: Yup.string()
+      .max(255,"Maximum 255 caractères")
+      .required("Champs obligatoire"),
+    commentaire: Yup.string()
       .max(255,"Maximum 255 caractères"),
     motsCles: Yup.string()
     .max(255,"Maximum 255 caractères"),
@@ -122,9 +130,19 @@ const BasicForms = ({match}) => {
                         <CFormText className="help-block">Veuillez entrer l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Coordonnées*:" name="coordonnees" 
-                        type="text" placeholder="Entrer les coordonnées" autoComplete="coordonnees"/>
-                        <CFormText className="help-block">Veuillez entrer les coordonnées</CFormText>
+                        <TextField label="Latitude*:" name="latitude" 
+                        type="text" placeholder="Entrer la latitude" autoComplete="latitude"/>
+                        <CFormText className="help-block">Veuillez entrer la latitude</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Longitude*:" name="longitude" 
+                        type="text" placeholder="Entrer la longitude" autoComplete="longitude"/>
+                        <CFormText className="help-block">Veuillez entrer la longitude</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Altitude*:" name="altitude" 
+                        type="text" placeholder="Entrer l'altitude" autoComplete="altitude"/>
+                        <CFormText className="help-block">Veuillez entrer l'altitude</CFormText>
                       </CFormGroup>
                     </CCardBody>
               </CCard>
@@ -136,14 +154,14 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>  
                       <CFormGroup>
-                        <TextField label="Adresse:" name="adresse" 
-                        type="text" placeholder="Entrer l'adresse" autoComplete="adresse"/>
-                        <CFormText className="help-block">Veuillez entrer l'adresse</CFormText>
-                      </CFormGroup>
-                      <CFormGroup>
                         <TextField label="Mots clés:" name="motsCles" 
                         type="textarea" placeholder="Entrer les mots clés" autoComplete="motsCles"/>
                         <CFormText className="help-block">Veuillez entrer les mots clés</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                        <TextField label="Commentaires:" name="commentaire" 
+                        type="textarea" placeholder="Entrer les commentaires" autoComplete="commentaire"/>
+                        <CFormText className="help-block">Veuillez entrer un commentaire</CFormText>
                       </CFormGroup>
                       <CFormGroup >
                         <TextField label="Fichier:" name="fichier" 
@@ -163,10 +181,7 @@ const BasicForms = ({match}) => {
                       <button className="btn btn-dark mt-3" type="submit">{match.params.id ? 'Modifier': 'Enregistrer'} </button>
                       <button className="btn btn-danger mt-3 ml-3" type='reset'>Réinitialiser</button>
                     </CCardFooter>
-              </CCard><CFormGroup>
-                        <TextField label="Description:" name="description"  placeholder="Entrer la description de l'essai..." autoComplete="description"/>
-                        <CFormText className="help-block">Veuillez entrer la description de l'essai</CFormText>
-                      </CFormGroup>
+              </CCard>
             </CCol>
           </CRow>
        </Form>
