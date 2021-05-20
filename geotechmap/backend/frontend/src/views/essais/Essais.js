@@ -26,8 +26,8 @@ import Test from "./Essai";
     { key: 'id', label:'ID', _style: { width: '2%'} },
     { key: 'typeEssai', label:'Type d\'essai', _style: { width: '20%'} },
     { key: 'institution', label:'Institution', _style: { width: '20%'} },
-    { key: 'departement', label:'Département', _style: { width: '20%'} },
-    { key: 'adresse', label:'Adresse', _style: { width: '20%'} },
+    // { key: 'departement', label:'Département', _style: { width: '20%'} },
+    // { key: 'adresse', label:'Adresse', _style: { width: '20%'} },
     { key: 'idFichier', label:'Fichier', _style: { width: '20%'} },
     { key: 'createdDate', label:'Date de création', _style: { width: '10%'} },
     {
@@ -108,16 +108,34 @@ import Test from "./Essai";
               <td>{item.institution.nom} ({item.institution.sigle})</td>
               )
           },
-          'departement':
+          // 'departement':
+          // (item)=>{
+          //   return (
+          //     <td>{item.position.departement}</td>
+          //     )
+          // },
+          // 'adresse':
+          // (item)=>{
+          //   return (
+          //     <td>{item.position.adresse}</td>
+          //     )
+          // },
+          'latitude':
           (item)=>{
             return (
-              <td>{item.position.departement}</td>
+              <td>{item.position.latitude} </td>
               )
           },
-          'adresse':
+          'longitude':
           (item)=>{
             return (
-              <td>{item.position.adresse}</td>
+              <td>{item.position.longitude} </td>
+              )
+          },
+          'altitude':
+          (item)=>{
+            return (
+              <td>{item.position.altitude} </td>
               )
           },
         'details':

@@ -39,7 +39,7 @@ public class Institution extends Auditable<String>{
 
     @NotNull(message = "Nom obligatoire")
     @NotEmpty(message = "Champs obligatoire")
-    @Size(min = 2, max = 45, message = "2 caractères au minimum; 45 maximum")
+    @Size(min = 2, max = 255, message = "2 caractères au minimum; 255 maximum")
     @Column(nullable = false, length = 45)
     private String nom;
 
