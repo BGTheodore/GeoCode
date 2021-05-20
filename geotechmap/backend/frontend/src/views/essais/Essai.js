@@ -24,8 +24,11 @@ const Essai = (props) => {
                 >{props.essai.institution.nom} ({props.essai.institution.sigle})
                 </Link>
               </li>
-              <li>Coordonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
-              <li>Adresse : {props.essai.position.adresse}</li>
+              {/* <li>Coordonnées : ({props.essai.position.latitude}, {props.essai.position.longitude}, {props.essai.position.altitude})</li>
+              <li>Adresse : {props.essai.position.adresse}</li> */}
+              <li>Latitute : {props.essai.position.latitude}</li>
+              <li>Longitude : {props.essai.position.longitude}</li>
+              <li>Altitude : {props.essai.position.altitude}</li>
               <li>Fichier : {props.essai.fichier.id}</li>
               <li>Créé le : {props.essai.createdDate}</li>
               <li>Créé par : <a href="#">{props.essai.createdBy}</a></li>
