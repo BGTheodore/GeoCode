@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { CounterContext, CounterContextProvider } from "../EssaisContext";
-import  Fichierontent from './FichierContent';
-  export default function Fichier() {
+import React from 'react';
+// import logo from './logo.svg';  className="Fichier"
+// import './Fichier.css';
+function Fichier() {
   return (
-  <CounterContextProvider>
-      <CarteContent />
-  </CounterContextProvider>
+  <div>
+  Hello World !
+</div>
    
   )
-}
+} export default Fichier;
+
