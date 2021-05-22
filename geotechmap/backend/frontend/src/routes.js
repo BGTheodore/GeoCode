@@ -15,6 +15,7 @@ const TestForm = React.lazy(() => import('./views/essais/EssaiForm'));
 const Tests = React.lazy(() => import('./views/essais/Essais'));
 
 const Carte = React.lazy(() => import('./views/carte/Carte'));
+const Fichier = React.lazy(() => import('./views/fichier/Fichier'));
 
 
 
@@ -22,6 +23,7 @@ const routes = [
   { path: '/', exact: true, name: 'Accueil' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/carte', exact: true, name: 'Carte', component: Carte },
+  { path: '/fichier', exact: true, name: 'Fichier', component: Fichier },
 
   { path: '/users/create', exact: true, name: 'Ajouter', component: UserForm },//CRAETE
   { path: '/users', exact: true,  name: 'Utilisateurs', component: Users },//READ

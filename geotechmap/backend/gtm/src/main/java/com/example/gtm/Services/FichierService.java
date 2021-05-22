@@ -1,53 +1,16 @@
 package com.example.gtm.Services;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
 
 import com.example.gtm.Entities.Fichier;
-import com.example.gtm.Exception.ResourceNotFoundException;
-import com.example.gtm.Repositories.FichierRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FichierService {
-    @Autowired
-    FichierRepository repository;
-
-    public Fichier createNewFichier(Fichier fichier) {
-        return repository.save(fichier);
-        }
-
-    public List<Fichier> listAllFichiers() {
-        return repository.findAll();
-        }
-    
-    public Fichier updateFichier(Long id, Fichier fichier) {
-        Optional<Fichier> optional = repository.findById(id);
-        if (!optional.isPresent()) {
-        throw new ResourceNotFoundException("Fichier not found with id :" + id);
-        } else {
-            fichier.setId(id);
-            return repository.save(fichier);
-        }
-    }
-
-    public void deleteFichier(Long id) {
-        Optional<Fichier> optional = repository.findById(id);
-        if (!optional.isPresent()) {
-            throw new ResourceNotFoundException("Fichier not found with id :" + id);
-        } else {
-            repository.deleteById(id);
-        }
-    }
-
-    public Optional<Fichier> getFichier(Long id) {
-        Optional<Fichier> optional = repository.findById(id);
-        if (!optional.isPresent()) {
-        throw new ResourceNotFoundException("Fichier not found with id :" + id);
-        } else {
-        return optional;
-        }
-    }
+   public void telechargementFichier(MultipartFile fichier) throws IllegalStateException, IOException{
+       fichier.transferTo(new File("/home/kevin/Documents/kevin/EN3/PROJET_FINAL_URGEO/Spring/gtm/geotechmap/backend/gtm/src/main/java/com/example/gtm/Services"+fichier.getOriginalFilename()));//Path de destination des fichiers telecharges
+   }
 }
