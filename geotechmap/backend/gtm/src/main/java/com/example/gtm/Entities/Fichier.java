@@ -45,6 +45,11 @@ public class Fichier extends Auditable<String>{
     @Column(length = 255)
     private String capacite;
 
+    @Size(max = 400, message = "400 caractères au maximum")
+    @NotEmpty(message = "Champs obligatoire")
+    @Column(length = 400)
+    private String hash;
+
     // @OneToOne(mappedBy = "file")
     // private Test test;
 }

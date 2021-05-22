@@ -23,7 +23,7 @@ export const TextField = ({label, type, options, ...props}) => {
             </CSelect>:
             type == "file" ?
             <CCol xs="12" md="12">
-             <CInputFile custom id="custom-file-input"/>
+             <CInputFile custom id="custom-file-input" />
             <CLabel htmlFor="custom-file-input" variant="custom-file">
             Choisir fichier...
             </CLabel>

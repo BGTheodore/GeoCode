@@ -166,7 +166,7 @@ const BasicForms = ({match}) => {
                       <CFormGroup >
                         <TextField label="Fichier:" name="fichier" 
                         type="file" placeholder="Entrer le fichier" autoComplete="fichier"/>
-                        <CFormText className="help-block">Veuillez entrer le fichier</CFormText>
+                        <CFormText className="help-block">Veuillez entrer le fichier (Max: 2 MB)</CFormText>
                       </CFormGroup> 
                       {/* <CFormGroup row>
                       <CCol xs="12" md="12">
