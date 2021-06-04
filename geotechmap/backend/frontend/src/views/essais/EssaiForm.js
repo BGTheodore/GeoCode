@@ -44,8 +44,15 @@ const BasicForms = ({match}) => {
     longitude:'',
     altitude:'',
     commentaire:'',
-    fichier:''
+    motsCles:'',
+
   }
+  const [myFile, setMyFile] = useState({file:null});//for the file
+  const onFileChange = event => {
+    // Update the state
+    setMyFile({file: event.target.files[0]}); 
+    };
+
   const [dataForEdit, setDataForEdit] = useState(null);
   const [allTestTypes, setAllTestTypes] = useState([]);
   const [allInstitutions, setAllInstitutions] = useState([]);
@@ -72,8 +79,9 @@ const BasicForms = ({match}) => {
       .max(255,"Maximum 255 caractères"),
     motsCles: Yup.string()
     .max(255,"Maximum 255 caractères"),
-    fichier: Yup.string()
-      .max(255,"Maximum 255 caractères"),
+    // fichier: Yup.string()
+    //   .max(255,"Maximum 255 caractères")
+    //   .required("Champs obligatoire"),
   })
   
   
@@ -85,11 +93,23 @@ const BasicForms = ({match}) => {
       enableReinitialize
       validationSchema= {validate}
       onSubmit={values => {
-      //  console.log(values)
+         console.log(values)
+ 
+        // Create an object of formData
+        const formData = new FormData();
+        formData.append('typeEssai', values.typeEssai);
+        formData.append('institution', values.institution);
+        formData.append('latitude', values.latitude);
+        formData.append('longitude', values.longitude);
+        formData.append('altitude', values.altitude);
+        formData.append('motsCles', values.motsCles);
+        formData.append('commentaire', values.commentaire);
+        formData.append('fichier', myFile.file);
+ 
           const requestOptions = {
             method: match.params.id ?'PUT':'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
+            body: JSON.stringify(formData)
         };
         
         //check if it is POST or PUT
@@ -98,9 +118,19 @@ const BasicForms = ({match}) => {
             .then(response => response.json())
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
         }else{
-            fetch(`${process.env.REACT_APP_API_URL}/api/essais/`, requestOptions)
-            .then(response => response.json())
-            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+          
+            // fetch(`${process.env.REACT_APP_API_URL}/api/essais/`, requestOptions)
+            // .then(response => response.json())
+            fetch(`${process.env.REACT_APP_API_URL}/api/essais`,
+              {
+                method: 'POST',
+                body: formData,
+              }
+            )
+            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
+            .catch((error) => {
+              console.error('Error:', error);
+            });
           }
 
             setTimeout(() => {
@@ -120,7 +150,7 @@ const BasicForms = ({match}) => {
                  </CCardHeader>
                     <CCardBody>
                       <CFormGroup>
-                          <TextField  label="Type d'essai*:" name="test_type" 
+                          <TextField  label="Type d'essai*:" name="typeEssai" 
                           type="select" options={allTestTypes} placeholder="Entrer le type d'essai..."/>
                           <CFormText className="help-block">Veuillez entrer le type d'essai</CFormText>
                       </CFormGroup>
@@ -163,19 +193,20 @@ const BasicForms = ({match}) => {
                         type="textarea" placeholder="Entrer les commentaires" autoComplete="commentaire"/>
                         <CFormText className="help-block">Veuillez entrer un commentaire</CFormText>
                       </CFormGroup>
-                      <CFormGroup >
+                      {/* <CFormGroup >
                         <TextField label="Fichier:" name="fichier" 
                         type="file" placeholder="Entrer le fichier" autoComplete="fichier"/>
                         <CFormText className="help-block">Veuillez entrer le fichier (Max: 2 MB)</CFormText>
-                      </CFormGroup> 
-                      {/* <CFormGroup row>
+                      </CFormGroup>  */}
+                      <CFormGroup row>{}
                       <CCol xs="12" md="12">
-                        <CInputFile custom id="custom-file-input"/>
+                        <CInputFile custom id="custom-file-input" onChange={onFileChange} />
                         <CLabel htmlFor="custom-file-input" variant="custom-file">
-                          Choose file...
+                           {myFile.file? myFile.file.name:'Choisir un fichier...'}
                         </CLabel>
+                     
                       </CCol>
-                    </CFormGroup>      */}
+                    </CFormGroup>     
                     </CCardBody>
                     <CCardFooter>
                       <button className="btn btn-dark mt-3" type="submit">{match.params.id ? 'Modifier': 'Enregistrer'} </button>

@@ -85,7 +85,7 @@ const BasicForms = ({match}) => {
         //check if it is POST or PUT
         if(match.params.id){
           fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`+match.params.id, requestOptions)
-            .then(response => response.json())
+            .then(response => response.json())//to do:TEST IF SUCCES first
             .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
         }else{
             fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`, requestOptions)

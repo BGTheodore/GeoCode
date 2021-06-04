@@ -11,15 +11,18 @@ import { icons } from './assets/icons'
 
 import { Provider } from 'react-redux'
 // import store from './store'
-import StoreService from "./services/StoreService";
 
+import StoreService from "./services/StoreService";
 import HttpService from "./services/HttpService";
 import UserService from "./services/UserService";
-React.icons = icons
 const store = StoreService.setup();
+React.icons = icons
+
 const renderApp = () => 
   ReactDOM.render(
-    <Provider store={store}>
+    <Provider 
+    store={store}
+    >
        <App/>   
     </Provider>,
     document.getElementById('root')
