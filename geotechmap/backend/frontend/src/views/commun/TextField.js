@@ -16,25 +16,28 @@ export const TextField = ({label, type, options, ...props}) => {
             {...field} {...props}
             ></textarea>:
             type == "select" ?
-            <CSelect custom id="select">
+            <CSelect name={label}
+            className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid' }`}
+            {...field} {...props}>
                  { options.map((option, key) => {              
                     return <option key={key} value={option.id}>{option.nom}</option>
                     })}      
             </CSelect>:
-            type == "file" ?
-            <CCol xs="12" md="12">
-             <CInputFile custom id="custom-file-input" />
-            <CLabel htmlFor="custom-file-input" variant="custom-file">
-            Choisir fichier...
-            </CLabel>
-            </CCol>
-           :
+        //     type == "file" ?
+        //     <CCol xs="12" md="12">
+        //      <CInputFile custom id="custom-file-input" />
+        //     <CLabel htmlFor="custom-file-input" variant="custom-file">
+        //     Choisir fichier...
+        //     </CLabel>
+        //     </CCol>
+        //    :
             <input 
             className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid' }`}
             {...field} {...props}
             />
             }
-             <ErrorMessage component="div" name={field.name} style={{position: "absolute", color:"red", fontSize: ".6rem"} }/>
+            <ErrorMessage component="div" name={field.name} style={{position: "absolute", color:"red", fontSize: ".6rem"} }/>
+            
         </div>
     )
 }

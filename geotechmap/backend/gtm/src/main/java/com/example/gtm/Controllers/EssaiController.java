@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -40,7 +41,11 @@ public class EssaiController {
     //Create a test
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Essai> createNewEssai(@Valid @RequestBody Essai essai) {         
+    public ResponseEntity<Essai> createNewEssai(
+         @Valid @RequestBody Essai essai 
+        // @RequestParam("fichier") MultipartFile fichier
+        
+        ) {         
            
             //__créons d'abord le point géographique:
                 GeometryFactory geometryFactory = new GeometryFactory();
