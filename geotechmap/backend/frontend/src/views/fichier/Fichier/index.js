@@ -1,31 +1,15 @@
-// import React from 'react';
-// // import logo from './logo.svg';  className="Fichier"
-// // import './Fichier.css';
-// function Fichier() {
-//   return (
-//   <div>
-//   Hello World !
-// </div>
-   
-//   )
-// } export default Fichier;
-
-import axios from 'axios';
 import React,{Component} from 'react';
 
 class Fichier extends Component {
-
 	state = {
-
 	// Initially, no file is selected
-	selectedFile: null
+	fichier: null
 	};
 	
 	// On file select (from the pop up)
 	onFileChange = event => {
-	
 	// Update the state
-	this.setState({ selectedFile: event.target.files[0] });
+	this.setState({ fichier: event.target.files[0] });
 	
 	};
 	
@@ -36,39 +20,67 @@ class Fichier extends Component {
 	const formData = new FormData();
 	
 	// Update the formData object
-	formData.append(
-		"myFile",
-		this.state.selectedFile,
-		this.state.selectedFile.name
-	);
-	
+	// formData.append(
+	// 	"myFile",
+	// 	this.state.fichier,
+	// 	this.state.fichier.name
+	// );
+	formData.append('fichier', this.state.fichier);
 	// Details of the uploaded file
-	console.log(this.state.selectedFile);
+	console.log(this.state.fichier);
 	
 	// Request made to the backend api
 	// Send formData object
-	// axios.post("api/uploadfile", formData);
+	fetch(
+		'http://localhost:8080/api/file',
+		{
+			method: 'POST',
+			body: formData,
+		}
+	)
+		// .then((response) => response.json())
+		.then((result) => {
+			console.log('Success:', result);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+	// axios({
+	// 	method: "post",
+	// 	url: "http://localhost:8080/api/file",
+	// 	data: formData,
+	// 	headers: { "Content-Type": "multipart/form-data" },
+	//   })
+	//   .then(function (response) {
+	// 	//handle success
+	// 	console.log(response);
+	//   })
+	//   .catch(function (response) {
+	// 	//handle error
+	// 	console.log(response);
+	//   });
+	// axios.post("http://localhost:8080/api/file", formData);
 	};
 	
 	// File content to be displayed after
 	// file upload is complete
 	fileData = () => {
 	
-	if (this.state.selectedFile) {
+	if (this.state.fichier) {
 		
 		return (
 		<div>
 			<h2>Informations sur le fichier:</h2>
 			
-<p>Nom du fichier: {this.state.selectedFile.name}</p>
+<p>Nom du fichier: {this.state.fichier.name}</p>
 
 			
-<p>Type du fichier: {this.state.selectedFile.type}</p>
+<p>Type du fichier: {this.state.fichier.type}</p>
 
 			
 <p>
 			Dernière modification:{" "}
-			{this.state.selectedFile.lastModifiedDate.toDateString()}
+			{this.state.fichier.lastModifiedDate.toDateString()}
 			</p>
 
 		</div>
