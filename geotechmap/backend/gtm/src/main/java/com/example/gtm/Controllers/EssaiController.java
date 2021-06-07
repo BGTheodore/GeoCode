@@ -45,8 +45,8 @@ public class EssaiController {
     @Autowired
     EssaiService service;
     EssaiRepository repository;
-    @Autowired
-    FichierService fichierService;
+    // @Autowired
+    // FichierService fichierService;
 
     //Create a test
     @PostMapping
@@ -64,7 +64,8 @@ public class EssaiController {
         ){     
             System.out.println("||||||||||||||");
             System.out.println(essai);
-            File file = new File("./test.pdf");
+            File file = new File("./testo.pdf");
+            
 
             try ( FileOutputStream fos = new FileOutputStream(file); ) {
               // To be short I use a corrupted PDF string, so make sure to use a valid one if you want to preview the PDF file

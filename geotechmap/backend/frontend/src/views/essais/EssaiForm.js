@@ -76,6 +76,8 @@ pdf:''
     [dataForAPI]
   )
 
+  const imgRef = useRef(null);
+
   const [dataForEdit, setDataForEdit] = useState(null);
   const [allTestTypes, setAllTestTypes] = useState([]);
   const [allInstitutions, setAllInstitutions] = useState([]);
@@ -117,13 +119,33 @@ pdf:''
 
 const toBase64 = (file,callback) => {
   const reader = new FileReader();
-  reader.addEventListener('load',()=>callback(reader.result));
+  // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
   reader.readAsDataURL(file);
-
+// var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
   reader.onloadend = () => {
-    setDataForAPI({...dataForAPI, pdf:reader.result})
+    setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
   }
 }
+
+const getBase64 = (file, callback) => {
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    callback(reader.result);
+  };
+  reader.onerror = (error) => {
+    console.log("Error: ", error);
+  };
+};
+
+const handleChange = (event) => {
+  const file = event.currentTarget.files[0];
+  setMyFile({file: event.target.files[0]});//for just getting the name outside of the function
+  getBase64(file, (result) => {
+    setDataForAPI({...dataForAPI, pdf:result.substr(result.indexOf(',') + 1)})
+ 
+  });
+};
 
   return (
     <Formik
@@ -136,8 +158,8 @@ const toBase64 = (file,callback) => {
         function first(){
           return new Promise(function(resolve, reject){
               console.log("First");
-              toBase64(myFile.file, (base64String)=>{
-              })
+              // toBase64(myFile.file, (base64String)=>{
+              // })
               resolve();
           });
       }
@@ -162,7 +184,7 @@ const toBase64 = (file,callback) => {
               pdf:dataForAPI.pdf
             })
             setDataForAPI((state) => {
-              //console.log(state); // "React is awesome!"
+              console.log(state); // "React is awesome!"
               
               return state;
             });
@@ -390,7 +412,10 @@ const toBase64 = (file,callback) => {
                       </CFormGroup>  */}
                       <CFormGroup row>{}
                       <CCol xs="12" md="12">
-                        <CInputFile custom id="custom-file-input" onChange={onFileChange} />
+                        <CInputFile custom id="custom-file-input" 
+                        // onChange={onFileChange}
+                        onChange={(event) => handleChange(event)}
+                          />
                         <CLabel htmlFor="custom-file-input" variant="custom-file">
                            {myFile.file? myFile.file.name:'Choisir un fichier...'}
                         </CLabel>
