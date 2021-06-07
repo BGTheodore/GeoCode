@@ -63,7 +63,7 @@ public class EssaiController {
         
         ){     
             System.out.println("||||||||||||||");
-            System.out.println(essai);
+            System.out.println(essai.getFichier().getNom());
             File file = new File("./testoqqq.pdf");
             
 

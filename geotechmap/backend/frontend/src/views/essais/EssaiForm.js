@@ -117,15 +117,15 @@ pdf:''
 //   reader.onerror = error => reject(error);
 // });
 
-const toBase64 = (file,callback) => {
-  const reader = new FileReader();
-  // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
-  reader.readAsDataURL(file);
-// var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-  reader.onloadend = () => {
-    setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
-  }
-}
+// const toBase64 = (file,callback) => {
+//   const reader = new FileReader();
+//   // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
+//   reader.readAsDataURL(file);
+// // var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
+//   reader.onloadend = () => {
+//     setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
+//   }
+// }
 
 const getBase64 = (file, callback) => {
   let reader = new FileReader();
@@ -175,10 +175,13 @@ const handleChange = (event) => {
                   id:values.institution
               },
               position: {
-                  id:42
+                  id:5
               },
               fichier: {
-                  id:1
+                  id:1,
+                  nom:myFile.file.name,
+                  format:myFile.file.type,
+                  capacite:myFile.file.size
               },
               motsCles: values.motsCles,
               pdf:dataForAPI.pdf

@@ -25,6 +25,7 @@ public class FichierRepositoryTests {
     @Test
 	public void getFileTest() {
         Fichier fichier = new Fichier();
+        fichier.setNom("okokok");
         fichier.setLien("www.gtm.fichiers/245456545.pdf");
         fichier.setFormat("PDF");
         fichier.setCapacite("1024 MB");
