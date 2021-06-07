@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react'
+import React ,{useState, useEffect, useRef} from 'react'
 import {Formik, Form} from 'formik';
 import { TextField } from '../commun/TextField';
 import * as Yup from 'yup';
@@ -45,6 +45,7 @@ const BasicForms = ({match}) => {
     altitude:'',
     commentaire:'',
     motsCles:'',
+    pdf:'',
 
   }
   const [myFile, setMyFile] = useState({file:null});//for the file
@@ -52,6 +53,28 @@ const BasicForms = ({match}) => {
     // Update the state
     setMyFile({file: event.target.files[0]}); 
     };
+const init = {
+  typeEssai: {
+    id:null
+},
+institution: {
+    id:null
+},
+position: {
+    id:null
+},
+fichier: {
+    id:null
+},
+motsCles: '',
+pdf:''
+}
+  const [dataForAPI = init, setDataForAPI, refDataForAPI] = useState();
+  const dataForAPIref = useRef(dataForAPI);
+  useEffect(
+    () => { dataForAPIref.current = dataForAPI },
+    [dataForAPI]
+  )
 
   const [dataForEdit, setDataForEdit] = useState(null);
   const [allTestTypes, setAllTestTypes] = useState([]);
@@ -84,7 +107,24 @@ const BasicForms = ({match}) => {
     //   .required("Champs obligatoire"),
   })
   
-  
+
+//  const toBase64 = file => new Promise((resolve, reject) => {
+//   const reader = new FileReader();
+//   reader.readAsDataURL(file);
+//   reader.onload = () => resolve(reader.result);
+//   reader.onerror = error => reject(error);
+// });
+
+const toBase64 = (file,callback) => {
+  const reader = new FileReader();
+  reader.addEventListener('load',()=>callback(reader.result));
+  reader.readAsDataURL(file);
+
+  reader.onloadend = () => {
+    setDataForAPI({...dataForAPI, pdf:reader.result})
+  }
+}
+
   return (
     <Formik
       initialValues = {
@@ -93,46 +133,196 @@ const BasicForms = ({match}) => {
       enableReinitialize
       validationSchema= {validate}
       onSubmit={values => {
-         console.log(values)
- 
-        // Create an object of formData
-        const formData = new FormData();
-        formData.append('typeEssai', values.typeEssai);
-        formData.append('institution', values.institution);
-        formData.append('latitude', values.latitude);
-        formData.append('longitude', values.longitude);
-        formData.append('altitude', values.altitude);
-        formData.append('motsCles', values.motsCles);
-        formData.append('commentaire', values.commentaire);
-        formData.append('fichier', myFile.file);
- 
-          const requestOptions = {
-            method: match.params.id ?'PUT':'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        };
-        
-        //check if it is POST or PUT
-        if(match.params.id){
-          fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id, requestOptions)
-            .then(response => response.json())
-            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
-        }else{
-          
-            // fetch(`${process.env.REACT_APP_API_URL}/api/essais/`, requestOptions)
-            // .then(response => response.json())
-            fetch(`${process.env.REACT_APP_API_URL}/api/essais`,
-              {
-                method: 'POST',
-                body: formData,
-              }
-            )
-            .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
-            .catch((error) => {
-              console.error('Error:', error);
+        function first(){
+          return new Promise(function(resolve, reject){
+              console.log("First");
+              toBase64(myFile.file, (base64String)=>{
+              })
+              resolve();
+          });
+      }
+      
+      function second(){
+          return new Promise(function(resolve, reject){
+              console.log("Second");
+              setDataForAPI({
+                typeEssai: {
+                  id:values.typeEssai
+              },
+              institution: {
+                  id:values.institution
+              },
+              position: {
+                  id:42
+              },
+              fichier: {
+                  id:1
+              },
+              motsCles: values.motsCles,
+              pdf:dataForAPI.pdf
+            })
+            setDataForAPI((state) => {
+              //console.log(state); // "React is awesome!"
+              
+              return state;
             });
-          }
+            
+              resolve();
+          });
+      }
+      
+      function third(){
+        // console.log(dataForAPI)
+          return new Promise(function(resolve, reject){
+              console.log("Third");
+              const requestOptions = {
+                method: match.params.id ?'PUT':'POST',
+                headers: { 'Content-Type': 'application/json',
+                'Accept': 'application/json'},
+                body: JSON.stringify(dataForAPIref.current)
+            };
+            
+            //check if it is POST or PUT
+            if(match.params.id){
+              fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id, requestOptions)
+                .then(response => response.json())
+                .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+            }else{
+              // console.log(requestOptions.body)
+                fetch(`${process.env.REACT_APP_API_URL}/api/essais`, requestOptions)
+                .then(response => response.json())
+                // fetch(`${process.env.REACT_APP_API_URL}/api/essais`,
+                //   {
+                //     method: 'POST',
+                //     body: values,
+                //   }
+                // )
+                // .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
+                // .catch((error) => {
+                //   console.error('Error:', error);
+                // });
+              }
+              resolve();
+          });
+      }
+      first()
+      .then(second)
+      .then(third);
 
+
+
+          //console.log(values)
+      //     function myfunction() {
+      //       longfunctionfirst(shortfunctionsecond);
+      //   }
+      //   myfunction();
+
+      //   function longfunctionfirst(callback) {
+      //     toBase64(myFile.file, (base64String)=>{
+      //       console.log('======1')
+            
+      //     setDataForAPI({
+      //       typeEssai: {
+      //         id:values.typeEssai
+      //     },
+      //     institution: {
+      //         id:values.institution
+      //     },
+      //     position: {
+      //         id:42
+      //     },
+      //     fichier: {
+      //         id:1
+      //     },
+      //     motsCles: values.motsCles,
+      //     // pdf:base64String
+      //   })
+      //   console.log(dataForAPI)
+      //   callback();
+      //   })
+      // }
+      //     //  toBase64(myFile.file)
+      //     // .then((result) => {
+      //     //   // console.log(result)
+      //     //   setDataForAPI({
+      //     //     typeEssai: {
+      //     //       id:values.typeEssai
+      //     //   },
+      //     //   institution: {
+      //     //       id:values.institution
+      //     //   },
+      //     //   position: {
+      //     //       id:42
+      //     //   },
+      //     //   fichier: {
+      //     //       id:1
+      //     //   },
+      //     //   motsCles: values.motsCles,
+      //     //   //pdf:result
+      //     // });
+      //     // })
+      //     // .then(res => {
+      //     //   // console.log(dataForAPI)
+      //     //   console.log(dataForAPI)
+      //     // })
+        
+        
+         
+   
+      // // values.pdf=getBase64(myFile.file);
+      //   // Create an object of formData
+      //   // const formData = new FormData();
+      //   // formData.append('typeEssai', values.typeEssai);
+      //   // formData.append('institution', values.institution);
+      //   // formData.append('latitude', values.latitude);
+      //   // formData.append('longitude', values.longitude);
+      //   // formData.append('altitude', values.altitude);
+      //   // formData.append('motsCles', values.motsCles);
+      //   // formData.append('commentaire', values.commentaire);
+      //   //.............
+      // //   formData.append('file', myFile.file);
+      // //   formData.append('essai', new Blob([JSON.stringify({
+      // //     "typeEssai": Number(values.typeEssai),
+      // //     "institution": values.institution,
+      // //     "latitude": values.latitude,
+      // //     "longitude": values.longitude,
+      // //     "altitude": values.altitude,
+      // //     "motsCles": values.motsCles,
+      // //     "commentaire": values.commentaire
+      // // })], {
+      // //         type: "application/json"
+      // //     }));
+      // function shortfunctionsecond() {
+      //   console.log('======2')
+      //     const requestOptions = {
+      //       method: match.params.id ?'PUT':'POST',
+      //       headers: { 'Content-Type': 'application/json',
+      //       'Accept': 'application/json'},
+      //       body: JSON.stringify(dataForAPI)
+      //   };
+        
+      //   //check if it is POST or PUT
+      //   if(match.params.id){
+      //     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id, requestOptions)
+      //       .then(response => response.json())
+      //       .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+      //   }else{
+      //     // console.log(requestOptions.body)
+      //       fetch(`${process.env.REACT_APP_API_URL}/api/essais`, requestOptions)
+      //       .then(response => response.json())
+      //       // fetch(`${process.env.REACT_APP_API_URL}/api/essais`,
+      //       //   {
+      //       //     method: 'POST',
+      //       //     body: values,
+      //       //   }
+      //       // )
+      //       // .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
+      //       // .catch((error) => {
+      //       //   console.error('Error:', error);
+      //       // });
+      //     }
+      //   }
+     
             setTimeout(() => {
               setAlert({...alert, isActive: false, message:''})
             }, 4000)
