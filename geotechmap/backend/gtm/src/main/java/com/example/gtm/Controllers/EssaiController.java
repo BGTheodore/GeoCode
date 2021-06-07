@@ -8,8 +8,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.example.gtm.Entities.Essai;
+import com.example.gtm.Entities.Fichier;
 import com.example.gtm.Entities.Position;
 import com.example.gtm.Repositories.EssaiRepository;
+import com.example.gtm.Repositories.FichierRepository;
 import com.example.gtm.Services.EssaiService;
 import com.example.gtm.Services.FichierService;
 
@@ -47,6 +49,8 @@ public class EssaiController {
     EssaiRepository repository;
     // @Autowired
     // FichierService fichierService;
+    @Autowired
+    FichierRepository fichierRepository;
 
     //Create a test
     @PostMapping
@@ -62,21 +66,28 @@ public class EssaiController {
         //  @Valid @ModelAttribute Essai essai 
         
         ){     
-            System.out.println("||||||||||||||");
             System.out.println(essai.getFichier().getNom());
-            File file = new File("./testoqqq.pdf");
             
-
+            File file = new File("./testoqqq.pdf");
             try ( FileOutputStream fos = new FileOutputStream(file); ) {
-              // To be short I use a corrupted PDF string, so make sure to use a valid one if you want to preview the PDF file
               String b64 = essai.getPdf();
               byte[] decoder = Base64.getDecoder().decode(b64);
-        
               fos.write(decoder);
               System.out.println("PDF File Saved");
             } catch (Exception e) {
               e.printStackTrace();
             }    
+
+            //__creation du fichier
+                Fichier fichier = new Fichier();
+                fichier.setNom(essai.getFichier().getNom());
+                fichier.setCapacite(essai.getFichier().getCapacite());
+                fichier.setFormat(essai.getFichier().getFormat());
+                fichier.setLien("gyul");
+                fichier.setHash("igutf");
+                fichierRepository.save(fichier);
+            //__fin creation du fichier
+
             // fichierService.telechargementFichier(fichier);
             //__créons d'abord le point géographique:
                 GeometryFactory geometryFactory = new GeometryFactory();
