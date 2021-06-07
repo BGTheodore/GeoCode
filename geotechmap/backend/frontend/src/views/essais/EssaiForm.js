@@ -412,8 +412,11 @@ const handleChange = (event) => {
                       </CFormGroup>  */}
                       <CFormGroup row>{}
                       <CCol xs="12" md="12">
-                        <CInputFile custom id="custom-file-input" 
+                        <input  id="custom-file-input" 
                         // onChange={onFileChange}
+                        type="file" 
+                        accept="application/pdf, 
+                        application/vnd.ms-excel"     
                         onChange={(event) => handleChange(event)}
                           />
                         <CLabel htmlFor="custom-file-input" variant="custom-file">
