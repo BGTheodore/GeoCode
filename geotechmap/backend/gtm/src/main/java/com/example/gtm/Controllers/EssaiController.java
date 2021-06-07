@@ -1,6 +1,7 @@
 package com.example.gtm.Controllers;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,8 +9,11 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.example.gtm.Entities.Essai;
+import com.example.gtm.Entities.Fichier;
 import com.example.gtm.Entities.Position;
 import com.example.gtm.Repositories.EssaiRepository;
+import com.example.gtm.Repositories.FichierRepository;
+import com.example.gtm.Repositories.PositionRepository;
 import com.example.gtm.Services.EssaiService;
 import com.example.gtm.Services.FichierService;
 
@@ -37,6 +41,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Base64;
+import java.util.Date;
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -47,6 +53,10 @@ public class EssaiController {
     EssaiRepository repository;
     // @Autowired
     // FichierService fichierService;
+    @Autowired
+    FichierRepository fichierRepository;
+    @Autowired
+    PositionRepository positionRepository;
 
     //Create a test
     @PostMapping
@@ -61,32 +71,57 @@ public class EssaiController {
         // ,
         //  @Valid @ModelAttribute Essai essai 
         
-        ){     
-            System.out.println("||||||||||||||");
-            System.out.println(essai);
-            File file = new File("./testo.pdf");
-            
+        ){    
+            //__creation du fichier dans server de fichier 
+            Date date = new Date();
+            String nomInitial = essai.getFichier().getNom();
+            String nomUniqueDuFichier = nomInitial.substring(0, nomInitial.length() - 3)+ new Timestamp(date.getTime()) + ".pdf";
+            nomUniqueDuFichier = nomUniqueDuFichier.replace(' ','-');
 
+            File file = new File(nomUniqueDuFichier);
+            System.out.println(nomUniqueDuFichier);
             try ( FileOutputStream fos = new FileOutputStream(file); ) {
-              // To be short I use a corrupted PDF string, so make sure to use a valid one if you want to preview the PDF file
               String b64 = essai.getPdf();
               byte[] decoder = Base64.getDecoder().decode(b64);
-        
               fos.write(decoder);
               System.out.println("PDF File Saved");
             } catch (Exception e) {
               e.printStackTrace();
-            }    
-            // fichierService.telechargementFichier(fichier);
-            //__créons d'abord le point géographique:
+            }   
+            //__ fin creation du fichier dans server de fichier  
+
+            //__creation du fichier dans la BD
+                Fichier fichier = new Fichier();
+                fichier.setNom(essai.getFichier().getNom());
+                fichier.setCapacite(essai.getFichier().getCapacite());
+                fichier.setFormat(essai.getFichier().getFormat());
+                fichier.setLien("gyul");
+                fichier.setHash("igutf");
+                fichierRepository.save(fichier);
+            //__fin creation du fichier dans la BD
+
+            //__création de positiion géographique:
                 GeometryFactory geometryFactory = new GeometryFactory();
-                Coordinate coordinate = new Coordinate(essai.getPosition().getAltitude(), essai.getPosition().getLongitude());
+                Coordinate coordinate = new Coordinate(essai.getPosition().getLatitude(), essai.getPosition().getLongitude());
                 Point point = geometryFactory.createPoint(coordinate);
                 point.setSRID(3857);//Nous devons choisir un SRID (old 4326) WGS84
                 Position position = essai.getPosition();
                 position.setGeom(point);
-                essai.setPosition(position);
-            //__fin créationpoint géographique:
+                position.setLatitude(essai.getPosition().getLatitude());
+                position.setLongitude(essai.getPosition().getLongitude());
+                position.setAltitude(essai.getPosition().getAltitude());
+                position.setDepartement(essai.getPosition().getDepartement());
+                position.setCommune(essai.getPosition().getCommune());
+                position.setSectionCommunale(essai.getPosition().getSectionCommunale());
+                positionRepository.save(position);
+            //__fin création de positiion géographique:
+
+
+            // fichierService.telechargementFichier(fichier);
+          
+
+            essai.setPosition(position);
+            essai.setFichier(fichier);
             Essai createdEssai = service.createNewEssai(essai);
             return new ResponseEntity<>(createdEssai, HttpStatus.CREATED);
     }

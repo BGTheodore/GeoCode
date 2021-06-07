@@ -43,6 +43,9 @@ const BasicForms = ({match}) => {
     latitude:'',
     longitude:'',
     altitude:'',
+    departement:'',
+    commume:'',
+    sectionCommunale:'',
     commentaire:'',
     motsCles:'',
     pdf:'',
@@ -91,19 +94,28 @@ pdf:''
     institution: Yup.string()
       .max(45,"Maximum 45 caractères")
       .required("Champs obligatoire"),
-    latitude: Yup.string()
-      .max(255,"Maximum 255 caractères")
+    latitude: Yup.number("Entrer un nombre")
+      .max(99999999,"Maximum 255 caractères")
       .required("Champs obligatoire"),
-    longitude: Yup.string()
-      .max(255,"Maximum 255 caractères")
+    longitude:  Yup.number("Entrer un nombre")
+      .max(99999999,"Maximum 255 caractères")
       .required("Champs obligatoire"),
-    altitude: Yup.string()
-      .max(255,"Maximum 255 caractères")
+    altitude:  Yup.number("Entrer un nombre")
+      .max(99999999,"Maximum 255 caractères")
       .required("Champs obligatoire"),
     commentaire: Yup.string()
       .max(255,"Maximum 255 caractères"),
     motsCles: Yup.string()
     .max(255,"Maximum 255 caractères"),
+    departement: Yup.string()
+    .max(255,"Maximum 255 caractères")
+    .required("Champs obligatoire"),
+    commune: Yup.string()
+    .max(255,"Maximum 255 caractères")
+    .required("Champs obligatoire"),
+    sectionCommunale: Yup.string()
+    .max(255,"Maximum 255 caractères")
+    .required("Champs obligatoire"),
     // fichier: Yup.string()
     //   .max(255,"Maximum 255 caractères")
     //   .required("Champs obligatoire"),
@@ -117,15 +129,15 @@ pdf:''
 //   reader.onerror = error => reject(error);
 // });
 
-const toBase64 = (file,callback) => {
-  const reader = new FileReader();
-  // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
-  reader.readAsDataURL(file);
-// var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-  reader.onloadend = () => {
-    setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
-  }
-}
+// const toBase64 = (file,callback) => {
+//   const reader = new FileReader();
+//   // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
+//   reader.readAsDataURL(file);
+// // var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
+//   reader.onloadend = () => {
+//     setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
+//   }
+// }
 
 const getBase64 = (file, callback) => {
   let reader = new FileReader();
@@ -175,10 +187,19 @@ const handleChange = (event) => {
                   id:values.institution
               },
               position: {
-                  id:42
+                  // id:5,
+                  latitude:values.latitude,
+                  longitude:values.longitude,
+                  altitude:values.altitude,
+                  departement:values.departement,
+                  commune:values.commune,
+                  sectionCommunale:values.sectionCommunale
               },
               fichier: {
-                  id:1
+                  id:1,
+                  nom:myFile.file.name,
+                  format: myFile.file.type,
+                  capacite:myFile.file.size
               },
               motsCles: values.motsCles,
               pdf:dataForAPI.pdf
@@ -374,17 +395,22 @@ const handleChange = (event) => {
                       <CFormGroup>
                         <TextField label="Latitude*:" name="latitude" 
                         type="text" placeholder="Entrer la latitude" autoComplete="latitude"/>
-                        <CFormText className="help-block">Veuillez entrer la latitude</CFormText>
+                        <CFormText className="help-block">Veuillez entrer la latitude (ex: 76.23)</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Longitude*:" name="longitude" 
                         type="text" placeholder="Entrer la longitude" autoComplete="longitude"/>
-                        <CFormText className="help-block">Veuillez entrer la longitude</CFormText>
+                        <CFormText className="help-block">Veuillez entrer la longitude (ex: -127.89)</CFormText>
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Altitude*:" name="altitude" 
                         type="text" placeholder="Entrer l'altitude" autoComplete="altitude"/>
-                        <CFormText className="help-block">Veuillez entrer l'altitude</CFormText>
+                        <CFormText className="help-block">Veuillez entrer l'altitude (ex: 45)</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                          <TextField  label="Département*:" name="departement" 
+                          type="select" options={allTestTypes} placeholder="Entrer le département de l'essai..."/>
+                          <CFormText className="help-block">Veuillez entrer le département de l'essai</CFormText>
                       </CFormGroup>
                     </CCardBody>
               </CCard>
@@ -395,6 +421,16 @@ const handleChange = (event) => {
                   Informations sur l'essai   {  match.params.id}
                  </CCardHeader>
                     <CCardBody>  
+                    <CFormGroup>
+                          <TextField  label="Commune*:" name="commune" 
+                          type="select" options={allTestTypes} placeholder="Entrer la commune de l'essai..."/>
+                          <CFormText className="help-block">Veuillez entrer la commune de l'essai</CFormText>
+                      </CFormGroup>
+                      <CFormGroup>
+                          <TextField  label="Section communale*:" name="sectionCommunale" 
+                          type="select" options={allTestTypes} placeholder="Entrer la section communale de l'essai..."/>
+                          <CFormText className="help-block">Veuillez entrer la section communale de l'essai</CFormText>
+                      </CFormGroup>
                       <CFormGroup>
                         <TextField label="Mots clés:" name="motsCles" 
                         type="textarea" placeholder="Entrer les mots clés" autoComplete="motsCles"/>
@@ -412,8 +448,11 @@ const handleChange = (event) => {
                       </CFormGroup>  */}
                       <CFormGroup row>{}
                       <CCol xs="12" md="12">
-                        <CInputFile custom id="custom-file-input" 
+                        <input  id="custom-file-input" 
                         // onChange={onFileChange}
+                        type="file" 
+                        accept="application/pdf, 
+                        application/vnd.ms-excel"     
                         onChange={(event) => handleChange(event)}
                           />
                         <CLabel htmlFor="custom-file-input" variant="custom-file">
