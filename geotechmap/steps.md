@@ -99,10 +99,13 @@ nan premier sprint la ou pran CU ki pi important an.
     + Analyse des risques
         * Risques sur le plan social
         * Risques sur le plan technique
+        * Risques sur le plan économique
 
 - État de l'art 
     + Les BDD géotechniques dans le monde
     + Existant en Haïti
+        * Cartographie Géotechnique du LNBTP	16
+        * Ancien projet de l’URGéo	
     + Avantages d’un Système de gestion des Informations Géotechniques
     + La solution proposée
         * Les apports de cette solution    
@@ -131,6 +134,7 @@ nan premier sprint la ou pran CU ki pi important an.
 - Démarche projet
     + Activités d'ingénierie logicielle
     + Methode de gestion de projet
+        * Perspective de réalisation
     + Roles et responsabilités
     + Outils
     + Gestion déploiement/configuration
@@ -138,9 +142,15 @@ nan premier sprint la ou pran CU ki pi important an.
     + Planification
     + Budget
 
-- Conception
+- Conception et implementation
     + Architecture matérielle et logicielle
     + Conception du code source
+    + Implémentation d’une BDD géotechniques
+        * Numérisation des données
+        * Intégration de ces données dans une BDD
+    + Utilisation d’un SIG
+    + Visualisation des données
+    + Perspective de réalisation
 
 - Plan de tests
 

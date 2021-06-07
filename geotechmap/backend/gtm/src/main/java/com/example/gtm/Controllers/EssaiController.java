@@ -1,5 +1,6 @@
 package com.example.gtm.Controllers;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import com.example.gtm.Entities.Essai;
 import com.example.gtm.Entities.Position;
 import com.example.gtm.Repositories.EssaiRepository;
 import com.example.gtm.Services.EssaiService;
+import com.example.gtm.Services.FichierService;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -20,15 +22,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Base64;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -37,16 +45,38 @@ public class EssaiController {
     @Autowired
     EssaiService service;
     EssaiRepository repository;
+    @Autowired
+    FichierService fichierService;
 
     //Create a test
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Essai> createNewEssai(
-         @Valid @RequestBody Essai essai 
-        // @RequestParam("fichier") MultipartFile fichier
+    public
+    // void
+    ResponseEntity<Essai> 
+    createNewEssai(
+        @RequestBody @Valid Essai essai
+        // @RequestPart("file") MultipartFile fichier
+        // @RequestParam("file") MultipartFile fichier
+        // ,
+        //  @Valid @ModelAttribute Essai essai 
         
-        ) {         
-           
+        ){     
+            System.out.println("||||||||||||||");
+            System.out.println(essai);
+            File file = new File("./test.pdf");
+
+            try ( FileOutputStream fos = new FileOutputStream(file); ) {
+              // To be short I use a corrupted PDF string, so make sure to use a valid one if you want to preview the PDF file
+              String b64 = essai.getPdf();
+              byte[] decoder = Base64.getDecoder().decode(b64);
+        
+              fos.write(decoder);
+              System.out.println("PDF File Saved");
+            } catch (Exception e) {
+              e.printStackTrace();
+            }    
+            // fichierService.telechargementFichier(fichier);
             //__créons d'abord le point géographique:
                 GeometryFactory geometryFactory = new GeometryFactory();
                 Coordinate coordinate = new Coordinate(essai.getPosition().getAltitude(), essai.getPosition().getLongitude());

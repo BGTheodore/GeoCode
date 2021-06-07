@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -56,4 +58,9 @@ public class Essai extends Auditable<String>  {
     @Size(max = 255, message = "255 caractères au maximum")
     @Column(name="mots_cles", length = 255)
     private String motsCles;
+
+    @Transient //to not persist in DB
+    @Lob // large object
+    private String pdf;
+
 }
