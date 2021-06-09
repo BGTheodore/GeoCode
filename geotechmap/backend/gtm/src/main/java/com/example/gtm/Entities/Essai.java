@@ -39,11 +39,11 @@ public class Essai extends Auditable<String>  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "id_type_essai")
     private TypeEssai typeEssai; 
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "id_institution")
     private Institution institution; 
 
@@ -58,6 +58,10 @@ public class Essai extends Auditable<String>  {
     @Size(max = 255, message = "255 caractères au maximum")
     @Column(name="mots_cles", length = 255)
     private String motsCles;
+
+    @Size(max = 255, message = "255 caractères au maximum")
+    @Column(name="commentaire", length = 255)
+    private String commentaire;
 
     @Transient //to not persist in DB
     @Lob // large object

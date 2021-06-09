@@ -11,6 +11,10 @@ import com.example.gtm.Repositories.EssaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import com.example.gtm.Entities.Position;
 
 
 
@@ -57,6 +61,26 @@ public class EssaiService {
 
     public List<Essai> rechercheParmotsCles(String mot_cle) {
         return repository.rechercheParmotsCles(mot_cle);
+    }
+
+    //============================
+
+    public Position genererStucturePosition(Essai essai) {
+        
+        GeometryFactory geometryFactory = new GeometryFactory();
+        Coordinate coordinate = new Coordinate(essai.getPosition().getLatitude(), essai.getPosition().getLongitude());
+        Point point = geometryFactory.createPoint(coordinate);
+        point.setSRID(3857);//Nous devons choisir un SRID (old 4326) WGS84
+        Position position = essai.getPosition();
+        position.setGeom(point);
+        position.setLatitude(essai.getPosition().getLatitude());
+        position.setLongitude(essai.getPosition().getLongitude());
+        position.setAltitude(essai.getPosition().getAltitude());
+        position.setDepartement(essai.getPosition().getDepartement());
+        position.setCommune(essai.getPosition().getCommune());
+        position.setSectionCommunale(essai.getPosition().getSectionCommunale());
+        return position;
+        
     }
 
 }
