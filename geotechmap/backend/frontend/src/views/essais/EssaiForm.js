@@ -21,36 +21,64 @@ const BasicForms = ({match}) => {
     //__START fetch all test types for the select field
       fetch(`${process.env.REACT_APP_API_URL}/api/type_essais/`)
         .then((response) => response.json())
-        .then((json) => setAllTestTypes(json))
+        .then((json) => {
+          setAllTestTypes(json)
+         return json;})
+         .then((json) => setInitVal({...initVal,
+          typeEssai:json[0].id
+        }))
     //__END fetch all test types for the select field
 
     //__START fetch all test types for the select field
       fetch(`${process.env.REACT_APP_API_URL}/api/institutions/`)
       .then((response) => response.json())
-      .then((json) => setAllInstitutions(json))
+      .then((json) =>{ 
+        setAllInstitutions(json)
+        return json;})
+      .then((json) => setInitVal({...initVal,
+        institution:json[0].id
+      }))
     //__END fetch all test types for the select field
 
    if( match.params.id ){
     fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id)
       .then((response) => response.json())
-      .then((json) => setDataForEdit(json))   
+      .then((json) => setDataForEdit({
+        id:json.id,
+        typeEssai:json.typeEssai.id,
+        institution:json.institution.id,
+        latitude:json.position.latitude,
+        longitude:json.position.longitude,
+        altitude:json.position.altitude,
+        departement:json.position.departement,
+        commune:json.position.commune,
+        sectionCommunale:json.position.sectionCommunale,
+        commentaire:json.commentaire,
+        motsCles:json.motsCles,
+        pdf:'',
+        //---------
+        idPosition:json.position.id,
+        idFichier:json.fichier.id,
+        nomFichier:json.fichier.nom
+      }))
+      
    }
   }, []);
 
-  const initVal ={
-    typeEssai:'',
-    institution:'',
-    latitude:'',
-    longitude:'',
-    altitude:'',
-    departement:'',
-    commume:'',
-    sectionCommunale:'',
-    commentaire:'',
-    motsCles:'',
-    pdf:'',
+  // const initVal ={
+  //   typeEssai:3,
+  //   institution:'',
+  //   latitude:'',
+  //   longitude:'',
+  //   altitude:'',
+  //   departement:'',
+  //   commune:'',
+  //   sectionCommunale:'',
+  //   commentaire:'',
+  //   motsCles:'',
+  //   pdf:'',
 
-  }
+  // }
   const [myFile, setMyFile] = useState({file:null});//for the file
   const onFileChange = event => {
     // Update the state
@@ -79,8 +107,20 @@ pdf:''
     [dataForAPI]
   )
 
-  const imgRef = useRef(null);
 
+   const [initVal, setInitVal] = useState({
+    typeEssai:'',
+    institution:'',
+    latitude:'',
+    longitude:'',
+    altitude:'',
+    departement:'',
+    commune:'',
+    sectionCommunale:'',
+    commentaire:'',
+    motsCles:'',
+    pdf:'',
+  });
   const [dataForEdit, setDataForEdit] = useState(null);
   const [allTestTypes, setAllTestTypes] = useState([]);
   const [allInstitutions, setAllInstitutions] = useState([]);
@@ -116,28 +156,9 @@ pdf:''
     sectionCommunale: Yup.string()
     .max(255,"Maximum 255 caractères")
     .required("Champs obligatoire"),
-    // fichier: Yup.string()
-    //   .max(255,"Maximum 255 caractères")
-    //   .required("Champs obligatoire"),
+
   })
   
-
-//  const toBase64 = file => new Promise((resolve, reject) => {
-//   const reader = new FileReader();
-//   reader.readAsDataURL(file);
-//   reader.onload = () => resolve(reader.result);
-//   reader.onerror = error => reject(error);
-// });
-
-// const toBase64 = (file,callback) => {
-//   const reader = new FileReader();
-//   // reader.addEventListener('load',()=>callback(reader.result.substr(reader.result.indexOf(',') + 1)));
-//   reader.readAsDataURL(file);
-// // var base64result = reader.result.substr(reader.result.indexOf(',') + 1);
-//   reader.onloadend = () => {
-//     setDataForAPI({...dataForAPI, pdf:reader.result.substr(reader.result.indexOf(',') + 1)})
-//   }
-// }
 
 const getBase64 = (file, callback) => {
   let reader = new FileReader();
@@ -180,6 +201,7 @@ const handleChange = (event) => {
           return new Promise(function(resolve, reject){
               console.log("Second");
               setDataForAPI({
+                id:match.params.id ? dataForEdit.id : null,
                 typeEssai: {
                   id:values.typeEssai
               },
@@ -187,7 +209,7 @@ const handleChange = (event) => {
                   id:values.institution
               },
               position: {
-                  // id:5,
+                  id: match.params.id ? dataForEdit.idPosition : null,
                   latitude:values.latitude,
                   longitude:values.longitude,
                   altitude:values.altitude,
@@ -196,11 +218,12 @@ const handleChange = (event) => {
                   sectionCommunale:values.sectionCommunale
               },
               fichier: {
-                  id:1,
+                  id:match.params.id ? dataForEdit.idFichier : null,
                   nom:myFile.file.name,
                   format: myFile.file.type,
                   capacite:myFile.file.size
               },
+              commentaire:values.commentaire,
               motsCles: values.motsCles,
               pdf:dataForAPI.pdf
             })
@@ -229,11 +252,18 @@ const handleChange = (event) => {
             if(match.params.id){
               fetch(`${process.env.REACT_APP_API_URL}/api/essais/`+match.params.id, requestOptions)
                 .then(response => response.json())
-                .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+                .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
             }else{
               // console.log(requestOptions.body)
                 fetch(`${process.env.REACT_APP_API_URL}/api/essais`, requestOptions)
                 .then(response => response.json())
+                .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
                 // fetch(`${process.env.REACT_APP_API_URL}/api/essais`,
                 //   {
                 //     method: 'POST',
@@ -456,12 +486,19 @@ const handleChange = (event) => {
                         onChange={(event) => handleChange(event)}
                           />
                         <CLabel htmlFor="custom-file-input" variant="custom-file">
-                           {myFile.file? myFile.file.name:'Choisir un fichier...'}
+                           {myFile.file ? myFile.file.name:'Choisir un fichier...'}
                         </CLabel>
-                     
                       </CCol>
                     </CFormGroup>     
                     </CCardBody>
+                    
+                      {dataForEdit ? 
+                      <CFormGroup row>
+                      <CCol xs="12" md="12">
+                      {dataForEdit ? dataForEdit.nomFichier :''}
+                      </CCol>
+                    </CFormGroup>   :''}
+                     
                     <CCardFooter>
                       <button className="btn btn-dark mt-3" type="submit">{match.params.id ? 'Modifier': 'Enregistrer'} </button>
                       <button className="btn btn-danger mt-3 ml-3" type='reset'>Réinitialiser</button>

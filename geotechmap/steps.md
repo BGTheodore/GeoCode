@@ -159,3 +159,43 @@ nan premier sprint la ou pran CU ki pi important an.
     + Bilan
 
 - Références et bibliographie
+
+
+=======================
+DOCKER
+========================
+https://www.youtube.com/watch?v=e3YERpG2rMs&t=46s
+
+1. create Dockerfile in root directory
+2. add final name in pom.xml
+3. create jar file [right click on maven projet and install]
+4. create the docker image
+$ docker build -t geotechmap.jar .
+5. to see all images
+5. create docker-compose.yml
+$ docker image ls
+6. to run docker image (on port 9090 of our localhost)
+$ docker run -p 9090:8080 geotechmap.jar
+
+7. to clean project
+$ mvn clean install -DskipTests=true
+or
+./mvnw clean install -DskipTests
+
+docker-compose up
+
+7. to remove all runing containers
+$ docker rm $(docker ps -a -q)
+7. The Compose file provides a way to document and configure all of the application's service dependencies
+$docker-compose up
+{
+    stop service: systemctl stop postgresql
+    start service: systemctl start postgresql
+    show status of service: systemctl status postgresql
+}
+
+docker exec -it postgres /bin/bash
+psql -h localhost -U postgres
+psql -d postgres
+psql -h localhost -U postgres
+CREATE DATABASE geotechdb;

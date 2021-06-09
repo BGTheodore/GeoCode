@@ -50,12 +50,12 @@ const _nav =  [
     to: '/carte',
     icon: 'cil-home',
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Fichier',
-    to: '/fichier',
-    icon: 'cil-home',
-  },
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Fichier',
+  //   to: '/fichier',
+  //   icon: 'cil-home',
+  // },
   
 ]
 
