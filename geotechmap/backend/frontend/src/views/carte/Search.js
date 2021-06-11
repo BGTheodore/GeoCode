@@ -50,18 +50,18 @@ const Search = () => {
        <Form>
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="6">     
+          <CCol md="12">     
             <CInputGroup className="input-prepend">
-              <CInputGroupPrepend>
+              {/* <CInputGroupPrepend>
                 <CInputGroupText>
                   <CIcon name="cil-magnifying-glass" />
                 </CInputGroupText>
-              </CInputGroupPrepend>
+              </CInputGroupPrepend> */} <CInputGroupAppend>
               <SearchTextField name="searchContent" type="text" placeholder="Mots clés" />
               {/* <CInput size="16" name="searchContent" type="text" placeholder="Mots clés" /> */}
-              <CInputGroupAppend>
+             
               {/* <button className="btn btn-dark mt-3" type="submit">Rechercher</button> */}
-                <CButton color="info" type="submit" >Rechercher</CButton>
+                <CButton color="info" type="submit" ><CIcon name="cil-magnifying-glass" /></CButton>
               </CInputGroupAppend>
             </CInputGroup>
           </CCol>

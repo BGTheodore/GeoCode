@@ -15,7 +15,7 @@ export const CounterContextProvider = props => {
 
   // const [data, setData] = useState([])
   useEffect(() => {
-    fetch('http://localhost:8080/api/essais')
+    fetch('http://localhost:8080/api/type_essais')
       .then((response) => response.json())
       .then((json) => setEssais(json)); 
     
