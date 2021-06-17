@@ -3,7 +3,10 @@ import { Tooltip, Marker, Popup, TileLayer, MapContainer, LayersControl } from '
  //import {Icon } from 'leaflet';
 
 // import useSwr from 'swr';
-import Search from '../Search';
+// import Search from '../Search';
+
+// import Search from "react-leaflet-search";
+
 import { CounterContext } from "../EssaisContext";
 import * as L from "leaflet";
 import { useState } from "react";
@@ -47,7 +50,7 @@ import { useState } from "react";
     const position = [51.505, -0.09]
   return (
   <div>
-    <Search />
+    {/* <Search /> */}
        <MapContainer style={{height:'70vh', width:'100%'}} center={[19.0558, -73.0513]} zoom={9} scrollWheelZoom={true}>
     <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -83,7 +86,7 @@ import { useState } from "react";
 
 {typeEssais.map(typeEssai => (
         < div key={typeEssais.id} >
-      {/* Pour chaque type d'essai un crée un group et on ajoute tous les essais y relatif */}
+      {/* Pour chaque type d'essai on crée un group et on ajoute tous les essais y relatif */}
      
       <LayersControl.Overlay checked name={`${typeEssai.nom}`}>
       {typeEssai.essais.map(essai => (
@@ -104,7 +107,7 @@ import { useState } from "react";
                     <ul>
                         <li><strong>Nom du projet:</strong> ...</li>
                         <li><strong>Institution:</strong>{essai.institution.nom} ({essai.institution.sigle})</li>
-                        <li><strong>Type d\'essai:</strong> {typeEssai.nom}</li>
+                        <li><strong>Type d'essai:</strong> {typeEssai.nom}</li>
                         <li><strong>Latitude:</strong> {essai.position.latitude}</li>
                         <li><strong>Longitude:</strong> {essai.position.longitude}</li>
                         <li><strong>Altitude:</strong> {essai.position.altitude}</li>
