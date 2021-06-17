@@ -14,7 +14,8 @@ import {
 
 import CIcon from '@coreui/icons-react'
 import logo from './target.svg';
-
+import Search from '../views/carte/Search';
+import { CounterContextProvider } from "../views/carte/EssaisContext";
 // sidebar nav config
 import navigation from './_nav'
 
@@ -41,8 +42,13 @@ const TheSidebar = () => {
           name="sygnet"
           height={35}
         /> */}
+   
       </CSidebarBrand>
+      {/* <CounterContextProvider>
+              <Search />                           
+         </CounterContextProvider> */}
       <CSidebarNav>
+
 
         <CCreateElement
           items={navigation}
@@ -52,9 +58,10 @@ const TheSidebar = () => {
             CSidebarNavItem,
             CSidebarNavTitle
           }}
-        />
+        />  
       </CSidebarNav>
       <CSidebarMinimizer className="c-d-md-down-none"/>
+     
     </CSidebar>
   )
 }

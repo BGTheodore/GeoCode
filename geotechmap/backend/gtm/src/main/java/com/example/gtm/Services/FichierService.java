@@ -19,6 +19,9 @@ import java.util.Base64;
 import java.util.Date;
 import java.sql.Timestamp;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @Service
 public class FichierService {
     @Autowired
@@ -66,12 +69,26 @@ public class FichierService {
             e.printStackTrace();
             }   
         //__ fin enregistrement du fichier dans server de fichier  
-
+            //__ recupération du nom de domaine
+            InetAddress ip;
+            String localIp ="";
+            try {
+      
+              ip = InetAddress.getLocalHost();
+              System.out.println("Current IP address : " + ip.getHostAddress());
+              localIp = ip.getHostAddress();
+      
+            } catch (UnknownHostException e) {
+      
+              e.printStackTrace();
+      
+            }
+            // __ fin récuperation du nom de domaine
         Fichier fichier = new Fichier();
         fichier.setNom(essai.getFichier().getNom());
         fichier.setCapacite(essai.getFichier().getCapacite());
         fichier.setFormat(essai.getFichier().getFormat());
-        fichier.setLien("gyul");
+        fichier.setLien(localIp +"/"+nomUniqueDuFichier);
         fichier.setHash("igutf");
        
         return fichier;

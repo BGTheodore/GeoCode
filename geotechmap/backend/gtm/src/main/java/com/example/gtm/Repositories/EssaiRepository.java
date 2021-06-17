@@ -13,7 +13,8 @@ public interface EssaiRepository extends JpaRepository<Essai, Long> {
     , nativeQuery = true)
     List<Essai> rechercheParmotsCles(@Param("mot_cle") String mot_cle);
 
-
+    @Query(value = "SELECT * FROM essais e GROUP BY e.id_type_essai", nativeQuery = true)
+    List<Essai> getAllEssaisRegroupeParCategorie();
 }
 
 

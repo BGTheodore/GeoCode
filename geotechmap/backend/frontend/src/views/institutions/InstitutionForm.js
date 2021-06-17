@@ -42,7 +42,7 @@ const BasicForms = ({match}) => {
 
   const validate = Yup.object({
     nom: Yup.string()
-    .max(45,"Maximum 45 caractères")
+    .max(100,"Maximum 100 caractères")
     .required("Champs obligatire"),
     sigle: Yup.string()
     .max(45,"Maximum 45 caractères"),

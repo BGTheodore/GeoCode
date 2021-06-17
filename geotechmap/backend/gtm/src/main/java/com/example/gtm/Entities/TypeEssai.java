@@ -1,12 +1,22 @@
 package com.example.gtm.Entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +34,9 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE type_essais SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted is false")
-
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class, 
+  property = "id") 
 @EqualsAndHashCode(callSuper=false)//to check
 public class TypeEssai extends Auditable<String>{
 
@@ -46,6 +58,10 @@ public class TypeEssai extends Auditable<String>{
     @Column(length = 255)
     private String description;
 
-    // @OneToMany(mappedBy = "testType")
-    // private List<Test> tests;
+   
+    @OneToMany(mappedBy = "typeEssai")
+    // @JsonManagedReference
+          // @JsonBackReference
+    private List<Essai> essais;
+
 }

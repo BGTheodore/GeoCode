@@ -103,6 +103,13 @@ public class EssaiController {
         return ResponseEntity.ok().body(service.listAllEssais());
     }
 
+    //cette route est pour retourner les essai dans le webmap tout en les regroupant par categorie pour générer les ovelay dynamiquent
+    @GetMapping(path = "/webmap")
+    @ResponseStatus(HttpStatus.OK)
+    public  ResponseEntity<List<Essai>>  getAllEssaisRegroupeParCategorie(){
+        return ResponseEntity.ok().body(service.listAllEssais());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Essai> getEssai(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getEssai(id));

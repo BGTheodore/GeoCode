@@ -31,6 +31,12 @@ public class EssaiService {
         return repository.findAll();
         }
 
+    public List<Essai> getAllEssaisRegroupeParCategorie() {
+        return repository.getAllEssaisRegroupeParCategorie();
+        }
+    
+
+
     public Essai updateEssai(Long id, Essai essai) {
         Optional<Essai> optional = repository.findById(id);
         if (!optional.isPresent()) {
