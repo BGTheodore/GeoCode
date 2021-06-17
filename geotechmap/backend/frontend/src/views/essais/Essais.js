@@ -99,13 +99,13 @@ import Test from "./Essai";
           'typeEssai':
           (item)=>{
             return (
-              <td>{item.nom}</td>
+              <td>{item.typeEssai.nom}</td>
               )
           },
           'institution':
           (item)=>{
             return (
-              <td>{item.nom} ({item.sigle})</td>
+              <td>{item.institution.nom} ({item.institution.sigle})</td>
               )
           },
           // 'departement':
@@ -142,7 +142,7 @@ import Test from "./Essai";
             (item, index)=>{
               return (
               <CCollapse show={details.includes(index)}>
-                {/* <Test essai = {item} /> */}
+                <Test essai = {item} />
                 <CCardBody>
                   <a href={`/#/tests/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
