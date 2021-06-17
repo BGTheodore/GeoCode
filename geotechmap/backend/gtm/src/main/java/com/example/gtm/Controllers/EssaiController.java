@@ -2,6 +2,7 @@ package com.example.gtm.Controllers;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +40,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import Dto.Essai.EssaiDto;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Base64;
@@ -67,15 +70,15 @@ public class EssaiController {
     @ResponseStatus(HttpStatus.CREATED)
     public
     // void
-    ResponseEntity<Essai> 
+    ResponseEntity<EssaiDto> 
     createNewEssai(
-        @RequestBody @Valid Essai essai
+        @RequestBody @Valid EssaiDto essai
         // @RequestPart("file") MultipartFile fichier
         // @RequestParam("file") MultipartFile fichier
         // ,
         //  @Valid @ModelAttribute Essai essai 
         
-        ){    
+        ) throws ParseException{    
             //__creation du fichier dans la BD apres l'avire enregistré sur le file server
                 Fichier fichier = fichierService.genererStuctureFichier(essai);
                 fichierRepository.save(fichier);
@@ -93,20 +96,20 @@ public class EssaiController {
 
             essai.setPosition(position);
             essai.setFichier(fichier);
-            Essai createdEssai = service.createNewEssai(essai);
+            EssaiDto createdEssai = service.createNewEssai(essai);
             return new ResponseEntity<>(createdEssai, HttpStatus.CREATED);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseEntity<List<Essai>>  getAllEssais(){
+    public  ResponseEntity<List<EssaiDto>>  getAllEssais(){
         return ResponseEntity.ok().body(service.listAllEssais());
     }
 
     //cette route est pour retourner les essai dans le webmap tout en les regroupant par categorie pour générer les ovelay dynamiquent
     @GetMapping(path = "/webmap")
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseEntity<List<Essai>>  getAllEssaisRegroupeParCategorie(){
+    public  ResponseEntity<List<EssaiDto>>  getAllEssaisRegroupeParCategorie(){
         return ResponseEntity.ok().body(service.listAllEssais());
     }
 
@@ -115,22 +118,22 @@ public class EssaiController {
         return ResponseEntity.ok().body(service.getEssai(id));
     }
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Essai> updateEssai(@RequestBody Essai essai, @PathVariable Long id) {
-        //__ update position de l'aissai
-            Position position = essai.getPosition(); service.genererStucturePosition(essai);
-            positionService.updatePosition(essai.getPosition().getId(), position);
-        //__ fin update position de l'aissai
+    // @PutMapping("/{id}")
+    // @ResponseStatus(HttpStatus.OK)
+    // public ResponseEntity<Essai> updateEssai(@RequestBody Essai essai, @PathVariable Long id) {
+    //     //__ update position de l'aissai
+    //         Position position = essai.getPosition(); service.genererStucturePosition(essai);
+    //         positionService.updatePosition(essai.getPosition().getId(), position);
+    //     //__ fin update position de l'aissai
 
-        //__creation du fichier dans la BD
-            Fichier fichier = fichierService.genererStuctureFichier(essai);
-            fichierService.updateFichier(essai.getFichier().getId(), fichier);
-        //__fin creation du fichier dans la BD
-        essai.setPosition(position);
-        essai.setFichier(fichier);
-        return ResponseEntity.ok().body(service.updateEssai(id, essai));
-    }
+    //     //__creation du fichier dans la BD
+    //         Fichier fichier = fichierService.genererStuctureFichier(essai);
+    //         fichierService.updateFichier(essai.getFichier().getId(), fichier);
+    //     //__fin creation du fichier dans la BD
+    //     essai.setPosition(position);
+    //     essai.setFichier(fichier);
+    //     return ResponseEntity.ok().body(service.updateEssai(id, essai));
+    // }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

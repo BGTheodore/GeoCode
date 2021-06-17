@@ -7,20 +7,38 @@ import com.example.gtm.Entities.Institution;
 import com.example.gtm.Exception.ResourceNotFoundException;
 import com.example.gtm.Repositories.InstitutionRepository;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.TypeToken;
+import java.lang.reflect.Type;
+import Dto.Institution.InstitutionDto;
 
 @Service
 public class InstitutionService {
     @Autowired
     InstitutionRepository repository;
+    final ModelMapper modelMapper = new ModelMapper();
 
+    // private InstitutionDto convertToDto(Institution institution) {
+    //     InstitutionDto institutionDto = modelMapper.map(institution, InstitutionDto.class);
+    //     return institutionDto;
+    // }
+    // private Institution convertToEntity(InstitutionDto institutionDto) throws ParseException {
+    //     Institution institution = modelMapper.map(institutionDto, Institution.class);
+    //     return institution;
+    // }
+    
     public Institution createNewInstitution(Institution institution) {
         return repository.save(institution);
     }
 
-    public List<Institution> listAllInstitutions(){
-        return repository.findAll();
+    public List<InstitutionDto> listAllInstitutions(){
+        List<InstitutionDto> institutionDto;
+        List<Institution> institutions = repository.findAll();
+        Type listType = new TypeToken<List<InstitutionDto>>() {}.getType();
+        institutionDto = modelMapper.map(institutions, listType);
+        return institutionDto;
     }
 
     public Institution updateInstitution(Long id, Institution institution){

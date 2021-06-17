@@ -1,8 +1,12 @@
 package com.example.gtm.Services;
 
 
+import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import com.example.gtm.Entities.Essai;
 import com.example.gtm.Exception.ResourceNotFoundException;
@@ -11,9 +15,13 @@ import com.example.gtm.Repositories.EssaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Dto.Essai.EssaiDto;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+
 import com.example.gtm.Entities.Position;
 
 
@@ -23,12 +31,41 @@ public class EssaiService {
     @Autowired
     EssaiRepository repository;
 
-    public Essai createNewEssai(Essai essai) {
-        return repository.save(essai);
+
+
+    final ModelMapper modelMapper = new ModelMapper();
+    
+    private EssaiDto convertToDto(Essai essai) {
+        EssaiDto essaiDto = modelMapper.map(essai, EssaiDto.class);
+        // essaiDto.setSubmissionDate(essai.getSubmissionDate(), 
+        //     userService.getCurrentUser().getPreference().getTimezone());
+        return essaiDto;
+    }
+    private Essai convertToEntity(EssaiDto essaiDto) throws ParseException {
+        Essai essai = modelMapper.map(essaiDto, Essai.class);
+        // essai.setSubmissionDate(EssaiDto.getSubmissionDateConverted(
+        //   userService.getCurrentUser().getPreference().getTimezone()));
+     
+        // if (EssaiDto.getId() != null) {
+        //     Post oldPost = postService.getPostById(EssaiDto.getId());
+        //     post.setRedditID(oldPost.getRedditID());
+        //     post.setSent(oldPost.isSent());
+        // }
+        return essai;
+    }
+    
+    public EssaiDto createNewEssai(EssaiDto essaiDto) throws ParseException {
+        Essai essai = convertToEntity(essaiDto);
+        Essai essaiCreated =  repository.save(essai);
+        return convertToDto(essaiCreated);
         }
 
-    public List<Essai> listAllEssais() {
-        return repository.findAll();
+    public List<EssaiDto> listAllEssais() {
+        List<EssaiDto> essaiDto;
+        List<Essai> essais = repository.findAll();
+        Type listType = new TypeToken<List<EssaiDto>>() {}.getType();
+        essaiDto = modelMapper.map(essais, listType);
+        return essaiDto;
         }
 
     public List<Essai> getAllEssaisRegroupeParCategorie() {
@@ -71,7 +108,7 @@ public class EssaiService {
 
     //============================
 
-    public Position genererStucturePosition(Essai essai) {
+    public Position genererStucturePosition(@Valid EssaiDto essai) {
         
         GeometryFactory geometryFactory = new GeometryFactory();
         Coordinate coordinate = new Coordinate(essai.getPosition().getLatitude(), essai.getPosition().getLongitude());

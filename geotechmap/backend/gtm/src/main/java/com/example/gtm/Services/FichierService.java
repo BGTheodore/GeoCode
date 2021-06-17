@@ -11,7 +11,12 @@ import com.example.gtm.Repositories.FichierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import Dto.Essai.EssaiDto;
+
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +49,7 @@ public class FichierService {
 
     //============================
 
-    public Fichier genererStuctureFichier(Essai essai) {
+    public Fichier genererStuctureFichier(@Valid EssaiDto essai) {
         Date date = new Date();
         String nomInitial = essai.getFichier().getNom();
         String nomUniqueDuFichier = nomInitial.substring(0, nomInitial.length() - 3)+ new Timestamp(date.getTime()) + ".pdf";
@@ -94,4 +99,5 @@ public class FichierService {
         return fichier;
         
     }
+
 }

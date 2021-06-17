@@ -7,6 +7,7 @@ import com.bedatadriven.jackson.datatype.jts.JtsModule;
 import com.example.gtm.Entities.SpringSecurityAuditorAware;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +43,12 @@ public class GtmApplication {
     //     return mapper;
     // }
 	//__ End permettre à Jackson de serialize geoJSO
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
 	@Bean
 	public AuditorAware<String> auditorAware() {
 		return new SpringSecurityAuditorAware();
