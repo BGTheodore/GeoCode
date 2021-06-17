@@ -51,7 +51,11 @@ import { useState } from "react";
   return (
   <div>
     {/* <Search /> */}
-       <MapContainer style={{height:'70vh', width:'100%'}} center={[19.0558, -73.0513]} zoom={9} scrollWheelZoom={true}>
+       <MapContainer style={{height:'70vh', width:'100%'}} 
+       center={[19.0558, -73.0513]} 
+       zoom={9}
+       minZoom={8}
+       scrollWheelZoom={true}>
     <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -84,21 +88,22 @@ import { useState } from "react";
         </Marker>
       </LayersControl.Overlay> */}
 
-{typeEssais.map(typeEssai => (
-        < div key={typeEssais.id} >
+{typeEssais.map((typeEssai, key) => (
+        < div key={key} >
       {/* Pour chaque type d'essai on crée un group et on ajoute tous les essais y relatif */}
      
       <LayersControl.Overlay checked name={`${typeEssai.nom}`}>
-      {typeEssai.essais.map(essai => (
-        <Marker
-        position={[essai.position.latitude, 
-        essai.position.longitude]}
+      {typeEssai.essais.map((essai, key) => (
+        <div key={key}>
+             <Marker
+              position={[essai.position.latitude, 
+              essai.position.longitude]}
+              icon={typeEssai.id == 4 ? blueIcon : greenIcon}
+              // onClick = {() => {
+              //     alert('okoko')
+              // }}
         
-        icon={typeEssai.id == 4 ? blueIcon : greenIcon}
-        // onClick = {() => {
-        //     alert('okoko')
-        // }}
-        >
+              >
              <Popup 
                 position={[essai.position.latitude, essai.position.longitude]}
                 >
@@ -118,7 +123,9 @@ import { useState } from "react";
             </div>
            </Popup>
            <Tooltip>Tooltip for Marker</Tooltip>
-        </Marker>    ))} 
+        </Marker>  
+        </div>
+         ))} 
         </LayersControl.Overlay>
     
         </div>

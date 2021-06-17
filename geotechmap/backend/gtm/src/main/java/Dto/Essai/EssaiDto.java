@@ -1,4 +1,5 @@
 package Dto.Essai;
+import com.example.gtm.Entities.Auditable;
 import com.example.gtm.Entities.Fichier;
 import com.example.gtm.Entities.Institution;
 import com.example.gtm.Entities.Position;
@@ -6,7 +7,7 @@ import com.example.gtm.Entities.TypeEssai;
 import lombok.Data;
 
 @Data
-public class EssaiDto {
+public class EssaiDto extends Auditable<String>{
     private Long id;
     private TypeEssai typeEssai; 
     private Institution institution; 

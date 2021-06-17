@@ -32,27 +32,18 @@ public class EssaiService {
     EssaiRepository repository;
 
 
-
     final ModelMapper modelMapper = new ModelMapper();
     
     private EssaiDto convertToDto(Essai essai) {
         EssaiDto essaiDto = modelMapper.map(essai, EssaiDto.class);
-        // essaiDto.setSubmissionDate(essai.getSubmissionDate(), 
-        //     userService.getCurrentUser().getPreference().getTimezone());
         return essaiDto;
     }
     private Essai convertToEntity(EssaiDto essaiDto) throws ParseException {
         Essai essai = modelMapper.map(essaiDto, Essai.class);
-        // essai.setSubmissionDate(EssaiDto.getSubmissionDateConverted(
-        //   userService.getCurrentUser().getPreference().getTimezone()));
-     
-        // if (EssaiDto.getId() != null) {
-        //     Post oldPost = postService.getPostById(EssaiDto.getId());
-        //     post.setRedditID(oldPost.getRedditID());
-        //     post.setSent(oldPost.isSent());
-        // }
         return essai;
     }
+    
+    //_______________________
     
     public EssaiDto createNewEssai(EssaiDto essaiDto) throws ParseException {
         Essai essai = convertToEntity(essaiDto);
@@ -74,13 +65,14 @@ public class EssaiService {
     
 
 
-    public Essai updateEssai(Long id, Essai essai) {
+    public EssaiDto updateEssai(Long id, EssaiDto essaiDto) throws ParseException {
         Optional<Essai> optional = repository.findById(id);
         if (!optional.isPresent()) {
         throw new ResourceNotFoundException("Essai not found with id :" + id);
         } else {
+            Essai essai = convertToEntity(essaiDto);
             essai.setId(id);
-            return repository.save(essai);
+            return convertToDto(repository.save(essai));
         }
     }
 
@@ -93,35 +85,39 @@ public class EssaiService {
         }
     }
 
-    public Essai getEssai(Long id) {
+    public EssaiDto getEssai(Long id) {
         Optional<Essai> optional = repository.findById(id);
         if (!optional.isPresent()) {
         throw new ResourceNotFoundException("Essai not found with id :" + id);
         } else {
-        return optional.get();
+        return convertToDto(optional.get());
         }
     }
 
-    public List<Essai> rechercheParmotsCles(String mot_cle) {
-        return repository.rechercheParmotsCles(mot_cle);
+    public List<EssaiDto> rechercheParmotsCles(String mot_cle) {
+        List<EssaiDto> essaiDto;
+        List<Essai> essais = repository.rechercheParmotsCles(mot_cle);
+        Type listType = new TypeToken<List<EssaiDto>>() {}.getType();
+        essaiDto = modelMapper.map(essais, listType);
+        return essaiDto;
     }
 
     //============================
 
-    public Position genererStucturePosition(@Valid EssaiDto essai) {
+    public Position genererStucturePosition(@Valid EssaiDto essaiDto) {
         
         GeometryFactory geometryFactory = new GeometryFactory();
-        Coordinate coordinate = new Coordinate(essai.getPosition().getLatitude(), essai.getPosition().getLongitude());
+        Coordinate coordinate = new Coordinate(essaiDto.getPosition().getLatitude(), essaiDto.getPosition().getLongitude());
         Point point = geometryFactory.createPoint(coordinate);
         point.setSRID(3857);//Nous devons choisir un SRID (old 4326) WGS84
-        Position position = essai.getPosition();
+        Position position = essaiDto.getPosition();
         position.setGeom(point);
-        position.setLatitude(essai.getPosition().getLatitude());
-        position.setLongitude(essai.getPosition().getLongitude());
-        position.setAltitude(essai.getPosition().getAltitude());
-        position.setDepartement(essai.getPosition().getDepartement());
-        position.setCommune(essai.getPosition().getCommune());
-        position.setSectionCommunale(essai.getPosition().getSectionCommunale());
+        position.setLatitude(essaiDto.getPosition().getLatitude());
+        position.setLongitude(essaiDto.getPosition().getLongitude());
+        position.setAltitude(essaiDto.getPosition().getAltitude());
+        position.setDepartement(essaiDto.getPosition().getDepartement());
+        position.setCommune(essaiDto.getPosition().getCommune());
+        position.setSectionCommunale(essaiDto.getPosition().getSectionCommunale());
         return position;
         
     }

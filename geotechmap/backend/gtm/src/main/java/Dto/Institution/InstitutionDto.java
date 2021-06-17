@@ -1,8 +1,10 @@
 package Dto.Institution;
+import com.example.gtm.Entities.Auditable;
+
 import lombok.Data;
 
 @Data
-public class InstitutionDto {
+public class InstitutionDto extends Auditable<String>{
     private Long id;
     private String nom;
     private String sigle;

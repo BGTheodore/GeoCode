@@ -36,11 +36,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import Dto.Essai.EssaiDto;
+import Dto.Fichier.FichierDto;
+import Dto.Position.PositionDto;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,11 +71,9 @@ public class EssaiController {
     //Create a test
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public
-    // void
-    ResponseEntity<EssaiDto> 
-    createNewEssai(
-        @RequestBody @Valid EssaiDto essai
+    @ResponseBody
+    public ResponseEntity<EssaiDto> createNewEssai(
+        @RequestBody @Valid EssaiDto essaiDto
         // @RequestPart("file") MultipartFile fichier
         // @RequestParam("file") MultipartFile fichier
         // ,
@@ -80,23 +81,22 @@ public class EssaiController {
         
         ) throws ParseException{    
             //__creation du fichier dans la BD apres l'avire enregistré sur le file server
-                Fichier fichier = fichierService.genererStuctureFichier(essai);
-                fichierRepository.save(fichier);
+                Fichier fichier = fichierService.genererStuctureFichier(essaiDto);
+                fichierService.createNewFichier(fichier);
             //__fin creation du fichier dans la BD
 
             //__création de positiion géographique:
-                Position position = essai.getPosition(); service.genererStucturePosition(essai);
-                positionRepository.save(position);
+                // Position position = essaiDto.getPosition(); 
+                Position position = service.genererStucturePosition(essaiDto);
+                positionService.createNewPosition(position);
             //__fin création de positiion géographique:
-            
-
 
             // fichierService.telechargementFichier(fichier);
           
 
-            essai.setPosition(position);
-            essai.setFichier(fichier);
-            EssaiDto createdEssai = service.createNewEssai(essai);
+            essaiDto.setPosition(position);
+            essaiDto.setFichier(fichier);
+            EssaiDto createdEssai = service.createNewEssai(essaiDto);
             return new ResponseEntity<>(createdEssai, HttpStatus.CREATED);
     }
 
@@ -107,14 +107,14 @@ public class EssaiController {
     }
 
     //cette route est pour retourner les essai dans le webmap tout en les regroupant par categorie pour générer les ovelay dynamiquent
-    @GetMapping(path = "/webmap")
-    @ResponseStatus(HttpStatus.OK)
-    public  ResponseEntity<List<EssaiDto>>  getAllEssaisRegroupeParCategorie(){
-        return ResponseEntity.ok().body(service.listAllEssais());
-    }
+    // @GetMapping(path = "/webmap")
+    // @ResponseStatus(HttpStatus.OK)
+    // public  ResponseEntity<List<EssaiDto>>  getAllEssaisRegroupeParCategorie(){
+    //     return ResponseEntity.ok().body(service.listAllEssais());
+    // }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Essai> getEssai(@PathVariable Long id){
+    public ResponseEntity<EssaiDto> getEssai(@PathVariable Long id){
         return ResponseEntity.ok().body(service.getEssai(id));
     }
 
@@ -142,7 +142,7 @@ public class EssaiController {
     }
 
     @GetMapping(path = "/search")
-    public  ResponseEntity<List<Essai>>  rechercheParmotsCles(@RequestParam String mot_cle){
+    public  ResponseEntity<List<EssaiDto>>  rechercheParmotsCles(@RequestParam String mot_cle) throws ParseException {
         //trim mot_cle
         return ResponseEntity.ok().body(service.rechercheParmotsCles(mot_cle));
     }

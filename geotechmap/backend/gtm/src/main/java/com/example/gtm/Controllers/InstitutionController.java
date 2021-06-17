@@ -1,16 +1,9 @@
 package com.example.gtm.Controllers;
-
 import java.text.ParseException;
 import java.util.List;
-import java.util.Optional;
-
 import javax.validation.Valid;
-
-import com.example.gtm.Entities.Institution;
 import com.example.gtm.Repositories.InstitutionRepository;
 import com.example.gtm.Services.InstitutionService;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,29 +29,12 @@ public class InstitutionController {
     InstitutionService service;
     InstitutionRepository repository;
 
-    final ModelMapper modelMapper = new ModelMapper();
-
     
-    private InstitutionDto convertToDto(Institution institution) {
-        InstitutionDto institutionDto = modelMapper.map(institution, InstitutionDto.class);
-        // InstitutionDto.setSubmissionDate(Institution.getSubmissionDate(), 
-        //     userService.getCurrentUser().getPreference().getTimezone());
-        return institutionDto;
-    }
-
-    private Institution convertToEntity(InstitutionDto institutionDto) throws ParseException {
-        Institution institution = modelMapper.map(institutionDto, Institution.class);
-        return institution;
-    }
-    
-
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public InstitutionDto createNewInstitution(@Valid @RequestBody InstitutionDto institutionDto) throws ParseException{
-        Institution institution = convertToEntity(institutionDto);
-        Institution intitutionCreated = service.createNewInstitution(institution);
-        return convertToDto(intitutionCreated);
+    public InstitutionDto createNewInstitution(@Valid @RequestBody InstitutionDto institutionDto) throws ParseException {
+        return service.createNewInstitution(institutionDto);
     }
 
     @GetMapping
@@ -71,14 +47,13 @@ public class InstitutionController {
     @GetMapping("/{id}")
     @ResponseBody
     public InstitutionDto getInstitution(@PathVariable Long id){
-        return convertToDto(service.getInstitution(id));
+        return service.getInstitution(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Institution> updateInstitution(@RequestBody InstitutionDto institutionDto, @PathVariable Long id) throws ParseException {
-        Institution institution = convertToEntity(institutionDto);
-        return ResponseEntity.ok().body(service.updateInstitution(id, institution));
+    public ResponseEntity<InstitutionDto> updateInstitution(@RequestBody InstitutionDto institutionDto, @PathVariable Long id) throws ParseException {
+        return ResponseEntity.ok().body(service.updateInstitution(id, institutionDto));
     }
 
     @DeleteMapping("/{id}")
