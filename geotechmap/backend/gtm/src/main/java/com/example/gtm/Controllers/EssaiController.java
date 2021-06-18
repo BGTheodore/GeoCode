@@ -72,7 +72,7 @@ public class EssaiController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public ResponseEntity<EssaiDto> createNewEssai(
+    public EssaiDto createNewEssai(
         @RequestBody @Valid EssaiDto essaiDto
         // @RequestPart("file") MultipartFile fichier
         // @RequestParam("file") MultipartFile fichier
@@ -97,7 +97,7 @@ public class EssaiController {
             essaiDto.setPosition(position);
             essaiDto.setFichier(fichier);
             EssaiDto createdEssai = service.createNewEssai(essaiDto);
-            return new ResponseEntity<>(createdEssai, HttpStatus.CREATED);
+            return createdEssai;
     }
 
     @GetMapping
